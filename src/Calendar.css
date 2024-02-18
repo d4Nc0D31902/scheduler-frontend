@@ -1,0 +1,299 @@
+.center-request {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btn-primary.request {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary.request:hover {
+  background-color: #0056b3;
+}
+
+.fc-header-toolbar {
+  margin-bottom: 20px;
+}
+
+.custom-event-dot {
+  background-color: gray;
+}
+
+.event-content {
+  display: flex;
+  align-items: center;
+}
+
+.event-dot {
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.event-title {
+  margin: 0;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+  animation: slideIn 0.5s ease-in-out;
+  /* Apply slide-in animation */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  animation: slideOut 0.5s ease-in-out;
+  /* Apply slide-in animation */
+}
+
+.modal h2 {
+  margin-bottom: 15px;
+}
+
+.modal p {
+  margin: 5px 0;
+}
+
+.modal ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.modal ul li {
+  margin-bottom: 5px;
+}
+
+.button-join,
+.button-cancel {
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.button-join {
+  background-color: #007bff;
+  color: #fff;
+  margin-right: 10px;
+  transition: background-color 0.3s;
+  /* Added transition for button color */
+}
+
+.button-join:hover {
+  background-color: #0056b3;
+}
+
+.button-cancel {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.button-cancel:hover {
+  background-color: #c82333;
+}
+
+.modal-content p {
+  margin: 5px 0;
+}
+
+.modal-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.modal-content ul li {
+  margin-bottom: 5px;
+}
+
+.key-input-container {
+  border-radius: 5px;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.key-input-container label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #495057;
+}
+
+.key-input-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.key-input-container .btn-join {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* Added transition for button color */
+}
+
+.key-input-container .btn-join:hover {
+  background-color: #218838;
+}
+
+.key-error {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Add this style for responsiveness */
+@media (max-width: 576px) {
+  .btn-primary.request {
+    display: block;
+    width: 100%;
+  }
+
+  .key-input-container .btn-join {
+    display: block;
+    width: 100%;
+  }
+
+  .event-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .event-dot {
+    margin-top: 5px;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@media print {
+  .center-request {
+    display: none;
+  }
+
+  .fc-header-toolbar {
+    display: none;
+  }
+
+  .fc-header-toolbar .fc-button {
+    display: none;
+  }
+
+  Header {
+    display: none;
+  }
+
+  nav.navbar {
+    display: none;
+  }
+
+
+
+}
+
+@media print {
+  .hide-on-print {
+    display: none;
+  }
+}
+
+.center-div {
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+
+  height: 100vh;
+
+}
+
+
+@media screen {
+  .print-only {
+    display: none;
+  }
+}
+
+@media print {
+  .hide-on-print {
+    display: none !important;
+  }
+}
+
+.letter-info {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.attendees {
+  margin-top: 40px;
+}
+
+.location-time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.location,
+.time {
+  flex: 1;
+}
+
+@media screen {
+  .printableHeader {
+    display: none !important;
+  }
+}

@@ -1,0 +1,57 @@
+.sidebar {
+  background-color: maroon;
+  /* Adjust the background color as needed */
+  color: white;
+  padding: 10px;
+  width: 15%;
+  border-radius: 10px;
+  /* Increase border-radius for a smoother look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Adjust the box-shadow for a subtle effect */
+  margin-bottom: 20px;
+  /* Add some bottom margin to create space between the sidebar and content */
+  height: 100%;
+  /* Make the sidebar take the full height */
+  overflow-y: auto;
+  /* Allow vertical scrolling if content exceeds the height */
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+  /* Apply border-radius to each list item for a rounded appearance */
+}
+
+.sidebar li:hover {
+  background-color: gray;
+  /* Adjust the hover background color as needed */
+}
+
+/* Optionally, you can add a selected style for the active sport */
+.sidebar li.selected {
+  background-color: gray;
+  /* Adjust the selected background color as needed */
+}
+
+.card-text {
+  font-size: small;
+}
+
+.card-stock {
+  font-size: medium;
+}

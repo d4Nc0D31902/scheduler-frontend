@@ -1,0 +1,72 @@
+/* Container for the form */
+/* div {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 400px;
+} */
+
+/* Title style */
+h2 {
+  color: black;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Label styles */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* Input and select styles */
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Dropdown (select) styles */
+select {
+  background-color: #f7f7f7;
+}
+
+/* Button style */
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Add this style for responsiveness */
+@media (max-width: 576px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  select {
+    margin-right: 0;
+  }
+
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+  }
+}

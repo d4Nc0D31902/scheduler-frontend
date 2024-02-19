@@ -137,18 +137,54 @@ const Register = () => {
     }
   };
 
+  // const departments = [
+  //   "BS Engineering Program",
+  //   "BS Degree Program",
+  //   "BTVTED Program",
+  //   "BET Program",
+  // ];
+
   const departments = [
+    "N/A",
     "BS Engineering Program",
     "BS Degree Program",
     "BTVTED Program",
     "BET Program",
   ];
 
+  // const coursesByDepartment = {
+  //   "BS Engineering Program": ["BSCE", "BSEE", "BSEcE", "BSME"],
+  //   "BS Degree Program": ["BSIT", "BSES"],
+  //   "BTVTED Program": ["BTVTEDET", "BTVTEDELXT", "BETVTEDICT", "BTVTEDICT-CH"],
+  //   "BET Program": [
+  //     "BETAT",
+  //     "BETCHT",
+  //     "BETCT",
+  //     "BETET",
+  //     "BETELXT",
+  //     "BETHVAC/RT",
+  //     "BETMT",
+  //     "BETMECT",
+  //     "BETNDT",
+  //     "BETDMT",
+  //     "BETEMT",
+  //     "BETICT",
+  //   ],
+  // };
+
   const coursesByDepartment = {
-    "BS Engineering Program": ["BSCE", "BSEE", "BSEcE", "BSME"],
-    "BS Degree Program": ["BSIT", "BSES"],
-    "BTVTED Program": ["BTVTEDET", "BTVTEDELXT", "BETVTEDICT", "BTVTEDICT-CH"],
+    "N/A": [],
+    "BS Engineering Program": ["N/A", "BSCE", "BSEE", "BSEcE", "BSME"],
+    "BS Degree Program": ["N/A", "BSIT", "BSES"],
+    "BTVTED Program": [
+      "N/A",
+      "BTVTEDET",
+      "BTVTEDELXT",
+      "BETVTEDICT",
+      "BTVTEDICT-CH",
+    ],
     "BET Program": [
+      "N/A",
       "BETAT",
       "BETCHT",
       "BETCT",
@@ -166,7 +202,16 @@ const Register = () => {
 
   const courses = coursesByDepartment[department] || [];
 
-  const years = ["1st Year", " 2nd Year", "3rd Year", "4th Year", "Alumni"];
+  // const years = ["1st Year", " 2nd Year", "3rd Year", "4th Year", "Alumni"];
+
+  const years = [
+    "N/A",
+    "1st Year",
+    "2nd Year",
+    "3rd Year",
+    "4th Year",
+    "Alumni",
+  ];
 
   return (
     <Fragment>

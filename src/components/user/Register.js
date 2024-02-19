@@ -50,6 +50,19 @@ const Register = () => {
       isValid = false;
     }
 
+    // Email validation
+    const emailPattern = /^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*$/;
+    if (!email.trim()) {
+      newErrors = { ...newErrors, email: "Email is required" };
+      isValid = false;
+    } else if (!emailPattern.test(email)) {
+      newErrors = {
+        ...newErrors,
+        email: "Email must be in the format firstname.lastname",
+      };
+      isValid = false;
+    }
+
     // Password validation
     if (password.length < 6) {
       newErrors = {
@@ -80,25 +93,6 @@ const Register = () => {
     }
   };
 
-  // const onChange = (e) => {
-  //   setErrors({ ...errors, [e.target.name]: "" });
-
-  //   if (e.target.name === "avatar") {
-  //     const reader = new FileReader();
-
-  //     reader.onload = () => {
-  //       if (reader.readyState === 2) {
-  //         setAvatarPreview(reader.result);
-  //         setAvatar(reader.result);
-  //       }
-  //     };
-
-  //     reader.readAsDataURL(e.target.files[0]);
-  //   } else {
-  //     setUser({ ...user, [e.target.name]: e.target.value });
-  //   }
-  // };
-
   const onChange = (e) => {
     setErrors({ ...errors, [e.target.name]: "" });
 
@@ -113,18 +107,6 @@ const Register = () => {
       };
 
       reader.readAsDataURL(e.target.files[0]);
-    } else if (e.target.name === "email") {
-      const enteredEmail = e.target.value;
-      const emailPattern = /^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*$/;
-
-      if (!emailPattern.test(enteredEmail)) {
-        setErrors({
-          ...errors,
-          email: "Email must be in the format firstname.lastname",
-        });
-      } else {
-        setUser({ ...user, [e.target.name]: enteredEmail });
-      }
     } else {
       setUser({ ...user, [e.target.name]: e.target.value });
     }

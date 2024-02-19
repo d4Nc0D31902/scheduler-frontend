@@ -44,10 +44,10 @@ export const getProducts =
       dispatch({
         type: ALL_PRODUCTS_REQUEST,
       });
-      let link = `${process.env.REACT_APP_API}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}`;
+      let link = `${process.env.VERCEL_APP_API}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}`;
 
       if (category) {
-        link = `${process.env.REACT_APP_API}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&category=${category}`;
+        link = `${process.env.VERCEL_APP_API}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&category=${category}`;
       }
 
       const response = await axios.get(link);
@@ -68,7 +68,7 @@ export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/product/${id}`
+      `${process.env.VERCEL_APP_API}/api/v1/product/${id}`
     );
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -92,7 +92,7 @@ export const newReview = (reviewData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/review`,
+      `${process.env.VERCEL_APP_API}/api/v1/review`,
       reviewData,
       config
     );
@@ -112,7 +112,7 @@ export const getAdminProducts = () => async (dispatch) => {
   try {
     dispatch({ type: ADMIN_PRODUCTS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/admin/products`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/products`,
       {
         withCredentials: true, 
       }
@@ -139,7 +139,7 @@ export const newProduct = (productData) => async (dispatch) => {
       withCredentials: true, //correct
     };
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API}/api/v1/admin/product/new`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/product/new`,
       productData,
       config
     );
@@ -159,7 +159,7 @@ export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.REACT_APP_API}/api/v1/admin/product/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/product/${id}`,
       {
         withCredentials: true, //correct
       }
@@ -186,7 +186,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/product/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/product/${id}`,
       productData,
       config
     );
@@ -211,7 +211,7 @@ export const getProductReviews = (id) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/reviews?id=${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/reviews?id=${id}`,
       config
     );
     dispatch({
@@ -230,7 +230,7 @@ export const deleteReview = (id, productId) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_REVIEW_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.REACT_APP_API}/api/v1/reviews?id=${id}&productId=${productId}`,
+      `${process.env.VERCEL_APP_API}/api/v1/reviews?id=${id}&productId=${productId}`,
       { withCredentials: true }
     );
     dispatch({
@@ -250,7 +250,7 @@ export const deactivateProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DEACTIVATE_PRODUCT_REQUEST });
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/product/deactivate/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/product/deactivate/${id}`,
       null,
       { withCredentials: true }
     );
@@ -270,7 +270,7 @@ export const reactivateProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: REACTIVATE_PRODUCT_REQUEST });
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/product/reactivate/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/product/reactivate/${id}`,
       null,
       { withCredentials: true }
     );
@@ -301,7 +301,7 @@ export const submitProductReview = (reviewData) => async (dispatch) => {
     console.log("Submitting product review:", reviewData); // Add console log
 
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/review`,
+      `${process.env.VERCEL_APP_API}/api/v1/review`,
       reviewData,
       config
     );

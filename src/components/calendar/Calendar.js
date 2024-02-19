@@ -24,7 +24,7 @@ function MyCalendar() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API}/api/v1/appointments`
+          `${process.env.VERCEL_APP_API}/api/v1/appointments`
         );
         if (response.ok) {
           const data = await response.json();
@@ -83,7 +83,7 @@ function MyCalendar() {
   const confirmJoinAppointment = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API}/api/v1/appointment/join/${selectedAppointment._id}`,
+        `${process.env.VERCEL_APP_API}/api/v1/appointment/join/${selectedAppointment._id}`,
         {
           method: "POST",
           headers: {

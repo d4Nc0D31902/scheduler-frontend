@@ -43,7 +43,7 @@ export const newEquipment = (equipment) => async (dispatch, getState) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API}/api/v1/equipment/new`,
+      `${process.env.VERCEL_APP_API}/api/v1/equipment/new`,
       equipment,
       config
     );
@@ -65,7 +65,7 @@ export const myEquipments = () => async (dispatch) => {
   try {
     dispatch({ type: MY_EQUIPMENTS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/equipments/me`,
+      `${process.env.VERCEL_APP_API}/api/v1/equipments/me`,
       { withCredentials: true }
     );
     dispatch({
@@ -84,7 +84,7 @@ export const getEquipmentDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: EQUIPMENT_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/equipment/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/equipment/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -104,7 +104,7 @@ export const allEquipments = () => async (dispatch) => {
     dispatch({ type: ALL_EQUIPMENTS_REQUEST });
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/equipments`,
+      `${process.env.VERCEL_APP_API}/api/v1/equipments`,
       {
         withCredentials: true,
       }
@@ -132,7 +132,7 @@ export const updateEquipment = (id, equipmentData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/equipment/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/equipment/${id}`,
       equipmentData,
       config
     );
@@ -152,7 +152,7 @@ export const deleteEquipment = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_EQUIPMENT_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.REACT_APP_API}/api/v1/admin/equipment/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/equipment/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -171,7 +171,7 @@ export const deactivateEquipment = (id) => async (dispatch) => {
   try {
     dispatch({ type: DEACTIVATE_EQUIPMENT_REQUEST });
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/equipment/deactivate/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/equipment/deactivate/${id}`,
       null,
       { withCredentials: true }
     );
@@ -191,7 +191,7 @@ export const reactivateEquipment = (id) => async (dispatch) => {
   try {
     dispatch({ type: REACTIVATE_EQUIPMENT_REQUEST });
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/equipment/reactivate/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/equipment/reactivate/${id}`,
       null,
       { withCredentials: true }
     );

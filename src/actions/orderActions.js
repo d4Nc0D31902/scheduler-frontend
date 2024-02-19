@@ -34,7 +34,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API}/api/v1/order/new`,
+      `${process.env.VERCEL_APP_API}/api/v1/order/new`,
       order,
       config
     );
@@ -54,7 +54,7 @@ export const myOrders = () => async (dispatch) => {
   try {
     dispatch({ type: MY_ORDERS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/orders/me`,
+      `${process.env.VERCEL_APP_API}/api/v1/orders/me`,
       { withCredentials: true }
     );
     dispatch({
@@ -73,7 +73,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/order/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/order/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -92,7 +92,7 @@ export const allOrders = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/admin/orders`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/orders`,
       {
         //AxiosRequestConfig parameter
         withCredentials: true, //correct
@@ -120,7 +120,7 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/order/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/order/${id}`,
       orderData,
       config
     );
@@ -139,7 +139,7 @@ export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.REACT_APP_API}/api/v1/admin/order/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/order/${id}`,
       { withCredentials: true }
     );
     dispatch({

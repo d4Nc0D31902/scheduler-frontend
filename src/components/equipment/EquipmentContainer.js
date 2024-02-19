@@ -19,7 +19,7 @@ const EquipmentContainer = () => {
     const fetchSports = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/sports`
+          `${process.env.VERCEL_APP_API}/api/v1/sports`
         );
 
         console.log("Fetched sports data:", response.data);

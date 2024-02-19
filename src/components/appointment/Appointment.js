@@ -52,7 +52,7 @@ const NewAppointment = () => {
     const fetchSettings = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/settings/6581a5b1466cfcabab4cc84f`
+          `${process.env.VERCEL_APP_API}/api/v1/settings/6581a5b1466cfcabab4cc84f`
         );
         setSettingsData(response.data);
       } catch (error) {
@@ -79,7 +79,7 @@ const NewAppointment = () => {
     const fetchLocations = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/locations`
+          `${process.env.VERCEL_APP_API}/api/v1/locations`
         );
         setLocations(response.data.locations);
       } catch (error) {
@@ -94,7 +94,7 @@ const NewAppointment = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/users`
+          `${process.env.VERCEL_APP_API}/api/v1/users`
         );
         setUsers(response.data.users);
       } catch (error) {

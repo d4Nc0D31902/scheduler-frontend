@@ -13,7 +13,7 @@ export const updateSettings = (settingsData) => async (dispatch) => {
     try {
       dispatch({ type: UPDATE_SETTINGS_REQUEST });
   
-      const url = `${process.env.REACT_APP_API}/api/v1/settings/6581a5b1466cfcabab4cc84f`;
+      const url = `${process.env.VERCEL_APP_API}/api/v1/settings/6581a5b1466cfcabab4cc84f`;
   
       const { data } = await axios.put(url, settingsData, {
         withCredentials: true, //correct
@@ -36,7 +36,7 @@ export const getSettings = () => async (dispatch) => {
     dispatch({ type: GET_SETTINGS_REQUEST });
 
     // Make API request to fetch settings
-    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/settings/6581a5b1466cfcabab4cc84f`);
+    const { data } = await axios.get(`${process.env.VERCEL_APP_API}/api/v1/settings/6581a5b1466cfcabab4cc84f`);
 
     dispatch({
       type: GET_SETTINGS_SUCCESS,

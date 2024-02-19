@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ADD_TO_CART, REMOVE_ITEM_CART, SAVE_SHIPPING_INFO, CLEAR_CART  } from '../constants/cartConstants'
 
 export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
-    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/${id}`)
+    const { data } = await axios.get(`${process.env.VERCEL_APP_API}/api/v1/product/${id}`)
     dispatch({
         type: ADD_TO_CART,
         payload: {

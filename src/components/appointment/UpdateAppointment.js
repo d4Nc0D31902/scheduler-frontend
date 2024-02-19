@@ -52,7 +52,7 @@ const UpdateAppointment = () => {
     const fetchLocations = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/locations`
+          `${process.env.VERCEL_APP_API}/api/v1/locations`
         );
         setLocations(response.data.locations);
       } catch (error) {

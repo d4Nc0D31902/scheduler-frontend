@@ -39,7 +39,7 @@ export const newSport = (sport) => async (dispatch, getState) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API}/api/v1/sport/new`,
+      `${process.env.VERCEL_APP_API}/api/v1/sport/new`,
       sport,
       config
     );
@@ -59,7 +59,7 @@ export const mySports = () => async (dispatch) => {
   try {
     dispatch({ type: MY_SPORTS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/sports/me`,
+      `${process.env.VERCEL_APP_API}/api/v1/sports/me`,
       { withCredentials: true }
     );
     dispatch({
@@ -78,7 +78,7 @@ export const getSportDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: SPORT_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/sport/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/sport/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -97,7 +97,7 @@ export const allSports = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_SPORTS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/admin/sports`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/sports`,
       {
         withCredentials: true,
       }
@@ -124,7 +124,7 @@ export const updateSport = (id, sportData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/sport/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/sport/${id}`,
       sportData,
       config
     );
@@ -144,7 +144,7 @@ export const deactivateSport = (id) => async (dispatch) => {
   try {
     dispatch({ type: DEACTIVATE_SPORT_REQUEST });
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/sport/deactivate/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/sport/deactivate/${id}`,
       null,
       { withCredentials: true }
     );
@@ -164,7 +164,7 @@ export const reactivateSport = (id) => async (dispatch) => {
   try {
     dispatch({ type: REACTIVATE_SPORT_REQUEST });
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/sport/reactivate/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/sport/reactivate/${id}`,
       null,
       { withCredentials: true }
     );
@@ -184,7 +184,7 @@ export const deleteSport = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_SPORT_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.REACT_APP_API}/api/v1/admin/sport/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/sport/${id}`,
       { withCredentials: true }
     );
     dispatch({

@@ -38,7 +38,7 @@ const Home = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/categories`
+          `${process.env.VERCEL_APP_API}/api/v1/categories`
         );
         const allCategory = { _id: "", name: "All" }; // Manually include the "All" category
         const filteredCategories = response.data.categories.filter(

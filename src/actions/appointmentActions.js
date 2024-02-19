@@ -38,7 +38,7 @@ export const createAppointment =
         withCredentials: true,
       };
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/appointment/new`,
+        `${process.env.VERCEL_APP_API}/api/v1/appointment/new`,
         appointment,
         config
       );
@@ -61,7 +61,7 @@ export const myAppointments = () => async (dispatch) => {
   try {
     dispatch({ type: MY_APPOINTMENTS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/appointments/me`,
+      `${process.env.VERCEL_APP_API}/api/v1/appointments/me`,
       { withCredentials: true }
     );
     dispatch({
@@ -80,7 +80,7 @@ export const getAppointmentDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: APPOINTMENT_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/appointment/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/appointment/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -99,7 +99,7 @@ export const allAppointments = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_APPOINTMENTS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/admin/appointments`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/appointments`,
       {
         withCredentials: true,
       }
@@ -126,7 +126,7 @@ export const updateAppointment = (id, appointmentData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/api/v1/admin/appointment/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/appointment/${id}`,
       appointmentData,
       config
     );
@@ -146,7 +146,7 @@ export const deleteAppointment = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_APPOINTMENT_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.REACT_APP_API}/api/v1/admin/appointment/${id}`,
+      `${process.env.VERCEL_APP_API}/api/v1/admin/appointment/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -171,7 +171,7 @@ export const joinAppointment = (appointmentId) => async (dispatch) => {
   try {
 
     const response = await fetch(
-      `${process.env.REACT_APP_API}/api/v1/appointments/${appointmentId}/join`,
+      `${process.env.VERCEL_APP_API}/api/v1/appointments/${appointmentId}/join`,
       {
         method: "POST",
         headers: {

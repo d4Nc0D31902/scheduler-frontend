@@ -396,7 +396,7 @@ const Register = () => {
                     name="avatar"
                     className="custom-file-input"
                     id="customFile"
-                    accept="images/user.png"
+                    accept="C:\Codes\capstone\deployed\frontend\public\images\tupt_logo.png"
                     onChange={onChange}
                   />
                   <label className="custom-file-label" htmlFor="customFile">

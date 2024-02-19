@@ -297,7 +297,7 @@ const Register = () => {
                 className={`form-control ${errors.password && "is-invalid"}`}
                 name="password"
                 value={password}
-                placeholder="Input Password Here"
+                placeholder="Enter Password"
                 onChange={onChange}
               />
               {errors.password && (

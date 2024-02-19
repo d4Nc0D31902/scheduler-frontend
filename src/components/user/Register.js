@@ -396,7 +396,7 @@ const Register = () => {
                     name="avatar"
                     className="custom-file-input"
                     id="customFile"
-                    accept="images/*"
+                    accept="images/user.png"
                     onChange={onChange}
                   />
                   <label className="custom-file-label" htmlFor="customFile">

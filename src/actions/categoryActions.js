@@ -41,7 +41,7 @@ export const newCategory = (category) => async (dispatch, getState) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `${process.env.VERCEL_APP_API}/api/v1/category/new`,
+      `${process.env.REACT_APP_API}/api/v1/category/new`,
       category,
       config
     );
@@ -63,7 +63,7 @@ export const myCategories = () => async (dispatch) => {
   try {
     dispatch({ type: MY_CATEGORIES_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/categories/me`,
+      `${process.env.REACT_APP_API}/api/v1/categories/me`,
       { withCredentials: true }
     );
     dispatch({
@@ -82,7 +82,7 @@ export const getCategoryDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/category/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/category/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -101,7 +101,7 @@ export const allCategories = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_CATEGORIES_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/categories`,
+      `${process.env.REACT_APP_API}/api/v1/admin/categories`,
       { withCredentials: true }
     );
     dispatch({
@@ -126,7 +126,7 @@ export const updateCategory = (id, categoryData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/category/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/category/${id}`,
       categoryData,
       config
     );
@@ -146,7 +146,7 @@ export const deleteCategory = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_CATEGORY_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/category/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/category/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -165,7 +165,7 @@ export const deactivateCategory = (id) => async (dispatch) => {
   try {
     dispatch({ type: DEACTIVATE_CATEGORY_REQUEST });
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/category/deactivate/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/category/deactivate/${id}`,
       null,
       { withCredentials: true }
     );
@@ -185,7 +185,7 @@ export const reactivateCategory = (id) => async (dispatch) => {
   try {
     dispatch({ type: REACTIVATE_CATEGORY_REQUEST });
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/category/reactivate/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/category/reactivate/${id}`,
       null,
       { withCredentials: true }
     );

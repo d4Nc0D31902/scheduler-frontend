@@ -12,7 +12,7 @@ export const addItemToBorrowCart =
   (id, quantity) => async (dispatch, getState) => {
     try {
       const { data } = await axios.get(
-        `${process.env.VERCEL_APP_API}/api/v1/equipment/${id}`
+        `${process.env.REACT_APP_API}/api/v1/equipment/${id}`
       );
       dispatch({
         type: ADD_TO_BORROW_CART,

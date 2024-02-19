@@ -60,7 +60,7 @@ export const login = (email, password) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `${process.env.VERCEL_APP_API}/api/v1/login`,
+      `${process.env.REACT_APP_API}/api/v1/login`,
       { email, password },
       config
     );
@@ -86,7 +86,7 @@ export const register = (userData) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `${process.env.VERCEL_APP_API}/api/v1/register`,
+      `${process.env.REACT_APP_API}/api/v1/register`,
       userData,
       config
     );
@@ -112,7 +112,7 @@ export const loadUser = () => async (dispatch) => {
     };
     dispatch({ type: LOAD_USER_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/me`,
+      `${process.env.REACT_APP_API}/api/v1/me`,
       config
     );
     dispatch({
@@ -135,7 +135,7 @@ export const logout = () => async (dispatch) => {
       },
       withCredentials: true,
     };
-    await axios.get(`${process.env.VERCEL_APP_API}/api/v1/logout`, config);
+    await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`, config);
     dispatch({
       type: LOGOUT_SUCCESS,
     });
@@ -157,7 +157,7 @@ export const updateProfile = (userData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/me/update`,
+      `${process.env.REACT_APP_API}/api/v1/me/update`,
       userData,
       config
     );
@@ -183,7 +183,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/password/update`,
+      `${process.env.REACT_APP_API}/api/v1/password/update`,
       passwords,
       config
     );
@@ -229,7 +229,7 @@ export const forgotPassword = (email) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `${process.env.VERCEL_APP_API}/api/v1/password/forgot`,
+      `${process.env.REACT_APP_API}/api/v1/password/forgot`,
       email,
       config
     );
@@ -279,7 +279,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
       },
     };
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/password/reset/${token}`,
+      `${process.env.REACT_APP_API}/api/v1/password/reset/${token}`,
       passwords,
       config
     );
@@ -299,7 +299,7 @@ export const allUsers = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_USERS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/users`,
+      `${process.env.REACT_APP_API}/api/v1/admin/users`,
       {
         withCredentials: true,
       }
@@ -326,7 +326,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/user/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/user/${id}`,
       userData,
       config
     );
@@ -352,7 +352,7 @@ export const getUserDetails = (id) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/user/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/user/${id}`,
       config
     );
     dispatch({
@@ -371,7 +371,7 @@ export const deleteUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_USER_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/user/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/user/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -390,7 +390,7 @@ export const deactivateUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: DEACTIVATE_USER_REQUEST });
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/user/deactivate/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/user/deactivate/${id}`,
       null,
       { withCredentials: true }
     );
@@ -410,7 +410,7 @@ export const reactivateUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: REACTIVATE_USER_REQUEST });
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/user/reactivate/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/user/reactivate/${id}`,
       null,
       { withCredentials: true }
     );
@@ -436,7 +436,7 @@ export const userSales = () => async (dispatch) => {
     };
     dispatch({ type: USER_SALES_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/orders/customer-sales`,
+      `${process.env.REACT_APP_API}/api/v1/orders/customer-sales`,
       config
     );
     dispatch({
@@ -468,7 +468,7 @@ export const loginWithGoogle = (tokenId) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${process.env.VERCEL_APP_API}/api/v1/login/google`,
+      `${process.env.REACT_APP_API}/api/v1/login/google`,
       { tokenId },
       config
     );

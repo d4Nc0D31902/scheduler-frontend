@@ -52,7 +52,7 @@ const UpdateEquipment = () => {
     const fetchSports = async () => {
       try {
         const response = await axios.get(
-          `${process.env.VERCEL_APP_API}/api/v1/sports`
+          `${process.env.REACT_APP_API}/api/v1/sports`
         );
         setSports(response.data.sports);
       } catch (error) {

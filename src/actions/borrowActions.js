@@ -34,7 +34,7 @@ export const createBorrow = (borrow) => async (dispatch, getState) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `${process.env.VERCEL_APP_API}/api/v1/borrow/new`,
+      `${process.env.REACT_APP_API}/api/v1/borrow/new`,
       borrow,
       config
     );
@@ -54,7 +54,7 @@ export const myBorrows = () => async (dispatch) => {
   try {
     dispatch({ type: MY_BORROWS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/borrows/me`,
+      `${process.env.REACT_APP_API}/api/v1/borrows/me`,
       { withCredentials: true }
     );
     console.log("Response:", data); // Add this line to log the response
@@ -74,7 +74,7 @@ export const getBorrowDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: BORROW_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/borrow/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/borrow/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -93,7 +93,7 @@ export const allBorrows = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_BORROWS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/borrows`,
+      `${process.env.REACT_APP_API}/api/v1/admin/borrows`,
       {
         //AxiosRequestConfig parameter
         withCredentials: true, //correct
@@ -121,7 +121,7 @@ export const updateBorrow = (id, borrowData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/borrow/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/borrow/${id}`,
       borrowData,
       config
     );
@@ -140,7 +140,7 @@ export const deleteBorrow = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_BORROW_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/borrow/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/borrow/${id}`,
       { withCredentials: true }
     );
     dispatch({

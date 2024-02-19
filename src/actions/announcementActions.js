@@ -33,7 +33,7 @@ export const newAnnouncement = (announcement) => async (dispatch, getState) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `${process.env.VERCEL_APP_API}/api/v1/announcement/new`,
+      `${process.env.REACT_APP_API}/api/v1/announcement/new`,
       announcement,
       config
     );
@@ -56,7 +56,7 @@ export const myAnnouncements = () => async (dispatch) => {
   try {
     dispatch({ type: MY_ANNOUNCEMENTS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/announcements/me`,
+      `${process.env.REACT_APP_API}/api/v1/announcements/me`,
       { withCredentials: true }
     );
     dispatch({
@@ -75,7 +75,7 @@ export const getAnnouncementDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ANNOUNCEMENT_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/announcement/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/announcement/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -94,7 +94,7 @@ export const allAnnouncements = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ANNOUNCEMENTS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/announcements`,
+      `${process.env.REACT_APP_API}/api/v1/announcements`,
       {
         withCredentials: true,
       }
@@ -122,7 +122,7 @@ export const updateAnnouncement =
         withCredentials: true,
       };
       const { data } = await axios.put(
-        `${process.env.VERCEL_APP_API}/api/v1/admin/announcement/${id}`,
+        `${process.env.REACT_APP_API}/api/v1/admin/announcement/${id}`,
         announcementData,
         config
       );
@@ -142,7 +142,7 @@ export const deleteAnnouncement = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ANNOUNCEMENT_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/announcement/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/announcement/${id}`,
       { withCredentials: true }
     );
     dispatch({

@@ -44,7 +44,7 @@ const UpdateProduct = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          `${process.env.VERCEL_APP_API}/api/v1/categories`
+          `${process.env.REACT_APP_API}/api/v1/categories`
         );
         setCategories(response.data.categories);
       } catch (error) {

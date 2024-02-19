@@ -9,7 +9,7 @@ export const monthlySalesChart = () => async (dispatch) => {
             withCredentials: true,
         }
         dispatch({ type: MONTHLY_SALES_REQUEST })
-        const { data } = await axios.get(`${process.env.VERCEL_APP_API}/api/v1/orders/sales-per-month`, config)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/orders/sales-per-month`, config)
         dispatch({
             type: MONTHLY_SALES_SUCCESS,
             payload: data.salesPerMonth,
@@ -31,7 +31,7 @@ export const productSalesChart = () => async (dispatch) => {
             withCredentials: true,
         }
         dispatch({ type: PRODUCT_SALES_REQUEST })
-        const { data } = await axios.get(`${process.env.VERCEL_APP_API}/api/v1/admin/products/sales`, config)
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/products/sales`, config)
         dispatch({
             type: PRODUCT_SALES_SUCCESS,
             payload: data.totalPercentage,

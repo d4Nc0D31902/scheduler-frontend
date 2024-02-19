@@ -39,7 +39,7 @@ export const newLocation = (location) => async (dispatch, getState) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `${process.env.VERCEL_APP_API}/api/v1/location/new`,
+      `${process.env.REACT_APP_API}/api/v1/location/new`,
       location,
       config
     );
@@ -61,7 +61,7 @@ export const myLocations = () => async (dispatch) => {
   try {
     dispatch({ type: MY_LOCATIONS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/locations/me`,
+      `${process.env.REACT_APP_API}/api/v1/locations/me`,
       { withCredentials: true }
     );
     dispatch({
@@ -80,7 +80,7 @@ export const getLocationDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: LOCATION_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/location/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/location/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -99,7 +99,7 @@ export const allLocations = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_LOCATIONS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/locations`,
+      `${process.env.REACT_APP_API}/api/v1/admin/locations`,
       {
         withCredentials: true,
       }
@@ -126,7 +126,7 @@ export const updateLocation = (id, locationData) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/location/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/location/${id}`,
       locationData,
       config
     );
@@ -146,7 +146,7 @@ export const deleteLocation = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_LOCATION_REQUEST });
     const { data } = await axios.delete(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/location/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/location/${id}`,
       { withCredentials: true }
     );
     dispatch({
@@ -165,7 +165,7 @@ export const deactivateLocation = (id) => async (dispatch) => {
   try {
     dispatch({ type: DEACTIVATE_LOCATION_REQUEST });
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/location/deactivate/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/location/deactivate/${id}`,
       null,
       { withCredentials: true }
     );
@@ -185,7 +185,7 @@ export const reactivateLocation = (id) => async (dispatch) => {
   try {
     dispatch({ type: REACTIVATE_LOCATION_REQUEST });
     const { data } = await axios.put(
-      `${process.env.VERCEL_APP_API}/api/v1/admin/location/reactivate/${id}`,
+      `${process.env.REACT_APP_API}/api/v1/admin/location/reactivate/${id}`,
       null,
       { withCredentials: true }
     );

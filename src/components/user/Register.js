@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { register, clearErrors } from "../../actions/userActions";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -76,6 +78,23 @@ const Register = () => {
     return isValid;
   };
 
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+
+  //   if (validateForm()) {
+  //     const formData = new FormData();
+  //     formData.set("name", name);
+  //     formData.set("email", email + "@tup.edu.ph");
+  //     formData.set("password", password);
+  //     formData.set("avatar", avatar);
+  //     formData.set("department", department);
+  //     formData.set("course", course);
+  //     formData.set("year", year);
+
+  //     dispatch(register(formData));
+  //   }
+  // };
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -89,7 +108,13 @@ const Register = () => {
       formData.set("course", course);
       formData.set("year", year);
 
-      dispatch(register(formData));
+      dispatch(register(formData))
+        .then((response) => {
+          toast.success("Registration Successful");
+        })
+        .catch((error) => {
+          toast.error("Registration Failed");
+        });
     }
   };
 

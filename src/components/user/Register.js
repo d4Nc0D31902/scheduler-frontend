@@ -173,7 +173,7 @@ const Register = () => {
   // };
 
   const coursesByDepartment = {
-    "N/A": [],
+    "N/A": ["N/A"],
     "BS Engineering Program": ["N/A", "BSCE", "BSEE", "BSEcE", "BSME"],
     "BS Degree Program": ["N/A", "BSIT", "BSES"],
     "BTVTED Program": [

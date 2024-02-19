@@ -390,7 +390,7 @@ const Register = () => {
                     />
                   </figure>
                 </div>
-                {/* <div className="custom-file">
+                <div className="custom-file">
                   <input
                     type="file"
                     name="avatar"
@@ -400,25 +400,6 @@ const Register = () => {
                     onChange={onChange}
                   />
                   <label className="custom-file-label" htmlFor="customFile">
-                    Choose Avatar
-                  </label>
-                </div> */}
-
-                <div className="custom-file">
-                  <input
-                    type="file"
-                    name="avatar"
-                    className="custom-file-input"
-                    id="customFile"
-                    accept="image/*"
-                    onChange={onChange}
-                  />
-                  <label className="custom-file-label" htmlFor="customFile">
-                    <img
-                      src="C:\Codes\capstone\deployed\frontend\public\images\tupt_logo.png"
-                      alt="TUP Logo"
-                      style={{ width: "30px", marginRight: "10px" }}
-                    />
                     Choose Avatar
                   </label>
                 </div>

@@ -50,16 +50,6 @@ const Register = () => {
       isValid = false;
     }
 
-    // Email validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.trim()) {
-      newErrors = { ...newErrors, email: "Email is required" };
-      isValid = false;
-    } else if (!emailPattern.test(email)) {
-      newErrors = { ...newErrors, email: "Invalid email format" };
-      isValid = false;
-    }
-
     // Password validation
     if (password.length < 6) {
       newErrors = {
@@ -150,12 +140,30 @@ const Register = () => {
             className=""
             onSubmit={submitHandler}
             encType="multipart/form-data"
-            style={{ margin: "20px", boxShadow: "2px 2px 12px 2px " }}>
-            <h3 className="card-title" style={{ fontFamily: "sans-serif", textAlign: "center", marginBottom: "20px", margin: "0px" }}>
-
+            style={{ margin: "20px", boxShadow: "2px 2px 12px 2px " }}
+          >
+            <h3
+              className="card-title"
+              style={{
+                fontFamily: "sans-serif",
+                textAlign: "center",
+                marginBottom: "20px",
+                margin: "0px",
+              }}
+            >
               TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES
             </h3>
-            <h1 className="mb-4 text-center" style={{ backgroundColor: "maroon", padding: "10px", borderRadius: "2px", color: "white" }}>Registration form</h1>
+            <h1
+              className="mb-4 text-center"
+              style={{
+                backgroundColor: "maroon",
+                padding: "10px",
+                borderRadius: "2px",
+                color: "white",
+              }}
+            >
+              Registration form
+            </h1>
 
             <div className="form-group">
               <label htmlFor="name_field">Full Name:</label>
@@ -224,7 +232,9 @@ const Register = () => {
                 value={department}
                 onChange={onChange}
               >
-                <option value="" disabled selected>Select Department</option>
+                <option value="" disabled selected>
+                  Select Department
+                </option>
                 {departments.map((dep) => (
                   <option key={dep} value={dep}>
                     {dep}
@@ -246,7 +256,9 @@ const Register = () => {
                 value={course}
                 onChange={onChange}
               >
-                <option value="" disabled selected>Select Course</option>
+                <option value="" disabled selected>
+                  Select Course
+                </option>
                 {courses.map((crs) => (
                   <option key={crs} value={crs}>
                     {crs}
@@ -268,7 +280,9 @@ const Register = () => {
                 value={year}
                 onChange={onChange}
               >
-                <option value="" disabled selected>Select Year</option>
+                <option value="" disabled selected>
+                  Select Year
+                </option>
                 {years.map((yr) => (
                   <option key={yr} value={yr}>
                     {yr}

@@ -44,10 +44,6 @@ const UpdateEquipment = () => {
       position: toast.POSITION.BOTTOM_CENTER,
     });
 
-  const reloadPage = () => {
-    window.location.reload();
-  };
-
   useEffect(() => {
     const fetchSports = async () => {
       try {
@@ -109,7 +105,6 @@ const UpdateEquipment = () => {
 
       setTimeout(() => {
         navigate("/admin/equipments");
-        reloadPage();
       }, 1000);
     } catch (error) {
       errMsg("Error updating equipment");
@@ -137,7 +132,6 @@ const UpdateEquipment = () => {
     <Fragment>
       <MetaData title={"Update Equipment"} />
       <div className="container">
-
         <div className="row">
           <div className="col-12 col-md-2">
             <Sidebar />
@@ -150,11 +144,37 @@ const UpdateEquipment = () => {
                   onSubmit={submitHandler}
                   encType="multipart/form-data"
                 >
-                  <h3 className="card-title" style={{ fontFamily: "sans-serif", textAlign: "center", marginBottom: "10px", margin: "20px" }}>
-                    <img src="/images/tupt_logo.png" style={{ width: "100px", height: "100px", marginRight: "25px" }} alt="Logo" />
+                  <h3
+                    className="card-title"
+                    style={{
+                      fontFamily: "sans-serif",
+                      textAlign: "center",
+                      marginBottom: "10px",
+                      margin: "20px",
+                    }}
+                  >
+                    <img
+                      src="/images/tupt_logo.png"
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        marginRight: "25px",
+                      }}
+                      alt="Logo"
+                    />
                     TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES
                   </h3>
-                  <h1 className="mb-4 text-center" style={{ backgroundColor: "maroon", padding: "20px", borderRadius: "20px", color: "white" }}>Update Equipment</h1>
+                  <h1
+                    className="mb-4 text-center"
+                    style={{
+                      backgroundColor: "maroon",
+                      padding: "20px",
+                      borderRadius: "20px",
+                      color: "white",
+                    }}
+                  >
+                    Update Equipment
+                  </h1>
                   <div className="form-group">
                     <label htmlFor="name_field">Equipment:</label>
                     <input
@@ -179,7 +199,7 @@ const UpdateEquipment = () => {
 
                   <div className="form-group">
                     <label htmlFor="sport_field">Sport Category:</label>
-                    <select
+                    {/* <select
                       id="sport_field"
                       className="form-control"
                       value={sport}
@@ -190,6 +210,21 @@ const UpdateEquipment = () => {
                           {sport.name}
                         </option>
                       ))}
+                    </select> */}
+                    <select
+                      id="sport_field"
+                      className="form-control"
+                      value={sport}
+                      onChange={(e) => setSport(e.target.value)}
+                    >
+                      {sports.map(
+                        (sport) =>
+                          sport.status === "active" && (
+                            <option key={sport._id} value={sport.name}>
+                              {sport.name}
+                            </option>
+                          )
+                      )}
                     </select>
                   </div>
 

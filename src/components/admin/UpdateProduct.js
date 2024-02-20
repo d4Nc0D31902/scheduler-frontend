@@ -144,11 +144,37 @@ const UpdateProduct = () => {
                 onSubmit={submitHandler}
                 encType="multipart/form-data"
               >
-                <h3 className="card-title" style={{ fontFamily: "sans-serif", textAlign: "center", marginBottom: "10px", margin: "20px" }}>
-                  <img src="/images/tupt_logo.png" style={{ width: "100px", height: "100px", marginRight: "25px" }} alt="Logo" />
+                <h3
+                  className="card-title"
+                  style={{
+                    fontFamily: "sans-serif",
+                    textAlign: "center",
+                    marginBottom: "10px",
+                    margin: "20px",
+                  }}
+                >
+                  <img
+                    src="/images/tupt_logo.png"
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      marginRight: "25px",
+                    }}
+                    alt="Logo"
+                  />
                   TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES
                 </h3>
-                <h1 className="mb-4 text-center" style={{ backgroundColor: "maroon", padding: "20px", borderRadius: "20px", color: "white" }}>Update Product</h1>
+                <h1
+                  className="mb-4 text-center"
+                  style={{
+                    backgroundColor: "maroon",
+                    padding: "20px",
+                    borderRadius: "20px",
+                    color: "white",
+                  }}
+                >
+                  Update Product
+                </h1>
                 <div className="form-group">
                   <label htmlFor="name_field">Product:</label>
                   <input
@@ -186,7 +212,7 @@ const UpdateProduct = () => {
 
                 <div className="form-group">
                   <label htmlFor="category_field">Category:</label>
-                  <select
+                  {/* <select
                     id="category_field"
                     className="form-control"
                     value={category}
@@ -198,6 +224,22 @@ const UpdateProduct = () => {
                         {cat.name}
                       </option>
                     ))}
+                  </select> */}
+                  <select
+                    id="category_field"
+                    className="form-control"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map(
+                      (cat) =>
+                        cat.status === "active" && (
+                          <option key={cat._id} value={cat.name}>
+                            {cat.name}
+                          </option>
+                        )
+                    )}
                   </select>
                 </div>
 

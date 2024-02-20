@@ -130,7 +130,7 @@ const UpdateEquipment = () => {
         return;
       }
 
-      const newStock = parseInt(stock) - parseInt(stockToAdd);
+      const newStock = parseInt(stock) + parseInt(stockToAdd);
       formData.set("stock", newStock);
       images.forEach((image) => {
         formData.append("images", image);

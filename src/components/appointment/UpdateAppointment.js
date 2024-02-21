@@ -26,6 +26,7 @@ const UpdateAppointment = () => {
   const [locations, setLocations] = useState([]);
   const [moveSelected, setMoveSelected] = useState(false);
   const [professor, setProfessor] = useState("");
+  const [screenShot, setScreenShot] = useState("");
 
   const dispatch = useDispatch();
   const { error, appointment } = useSelector(
@@ -77,6 +78,7 @@ const UpdateAppointment = () => {
       setAttendees(appointment.attendees || []);
       setReason(appointment.reason);
       setKey(appointment.key);
+      setScreenShot(appointment.screenShot);
     }
 
     if (error) {
@@ -121,6 +123,7 @@ const UpdateAppointment = () => {
       reason,
       key,
       professor,
+      screenShot,
     };
     dispatch(updateAppointment(appointment._id, updatedAppointment));
   };
@@ -321,6 +324,37 @@ const UpdateAppointment = () => {
                   <option value="Reason 3">Reason 3</option>
                 </select>
               </div>
+
+              <p>
+                <b>Waiver & Letter: </b>
+              </p>
+              {appointment &&
+              appointment.screenShot &&
+              appointment.screenShot.length > 0 ? (
+                <Fragment>
+                  {appointment.screenShot.map((image, index) => (
+                    <div key={index} className="row">
+                      <div className="col-3">
+                        <a
+                          href={image.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <img
+                            src={image.url}
+                            alt={`Screenshot ${index + 1}`}
+                            className="img-fluid"
+                            value={screenShot}
+                            onChange={(e) => setScreenShot(e.target.value)}
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </Fragment>
+              ) : (
+                <p>No screenshots uploaded</p>
+              )}
 
               <div className="form-group">
                 <label htmlFor="key_field">Key ID:</label>

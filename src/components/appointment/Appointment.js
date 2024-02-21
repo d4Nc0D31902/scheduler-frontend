@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
+import ReactToPrint from "react-to-print";
+import PrintableLetter from "./PrintableLetter";
 import {
   createAppointment,
   clearErrors,
@@ -22,6 +24,9 @@ const NewAppointment = () => {
   const [users, setUsers] = useState([]);
   const [settingsData, setSettingsData] = useState(null);
   const [selectedRadio, setSelectedRadio] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [characterCount, setCharacterCount] = useState(0);
+  const [screenShot, setScreenShot] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -140,101 +145,87 @@ const NewAppointment = () => {
     return isValid;
   };
 
-  // const submitHandler = async (e) => {
-  //   e.preventDefault();
+  const handleDescriptionChange = (e) => {
+    const value = e.target.value;
+    if (value.length > 50) {
+      setDescriptionError("Description should be 50 characters or less");
+    } else {
+      setDescriptionError("");
+      setDescription(value);
+      setCharacterCount(value.length);
+    }
+  };
 
-  //   if (validateForm()) {
-  //     const isDateValid = isDateAvailable(timeStart, timeEnd);
-  //     const isTimeValid = isTimeAvailable(timeStart, timeEnd);
+  const handleScreenshotChange = (e) => {
+    const files = Array.from(e.target.files);
+    setScreenShot([]);
 
-  //     if (!isDateValid) {
-  //       toast.error("Selected date is not available");
-  //       return;
-  //     }
+    files.forEach((file) => {
+      const reader = new FileReader();
 
-  //     if (!isTimeValid) {
-  //       toast.error("Selected time is not available");
-  //       return;
-  //     }
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setScreenShot((oldArray) => [...oldArray, reader.result]);
+        }
+      };
 
-  //     const status = "Pending";
-  //     const reason = "N/A";
-  //     const key = " ";
-
-  //     const appointmentData = {
-  //       userId: user._id,
-  //       attendees: attendees,
-  //       location: location,
-  //       title: title,
-  //       description: description,
-  //       timeStart: timeStart,
-  //       timeEnd: timeEnd,
-  //       professor: professor,
-  //       status: status,
-  //       reason: reason,
-  //       key: key,
-  //       appointmentType: selectedRadio, // Add appointment type to data
-  //     };
-
-  //     try {
-  //       await dispatch(createAppointment(appointmentData));
-  //       navigate("/calendar");
-  //       toast.success("Appointment requested successfully");
-  //     } catch (error) {
-  //       console.error("Error creating appointment:", error);
-  //       toast.error("Failed to request appointment");
-  //     }
-  //   }
-  // };
+      reader.readAsDataURL(file);
+    });
+  };
 
   const submitHandler = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (validateForm()) {
-    const isDateValid = isDateAvailable(timeStart, timeEnd);
-    const isTimeValid = isTimeAvailable(timeStart, timeEnd);
+    if (validateForm()) {
+      if (screenShot.length === 0) {
+        // Check if any file has been selected
+        toast.error("Please select a file.");
+        return;
+      }
+      const isDateValid = isDateAvailable(timeStart, timeEnd);
+      const isTimeValid = isTimeAvailable(timeStart, timeEnd);
 
-    if (!isDateValid) {
-      toast.error("Selected date is not available");
-      return;
+      if (!isDateValid) {
+        toast.error("Selected date is not available");
+        return;
+      }
+
+      if (!isTimeValid) {
+        toast.error("Selected time is not available");
+        return;
+      }
+
+      // Set appointment status based on radio button selection
+      const status = selectedRadio === "PE Class" ? "PE Class" : "Pending";
+      const reason = "N/A";
+      const key = " ";
+
+      const appointmentData = {
+        userId: user._id,
+        attendees: attendees,
+        location: location,
+        title: title,
+        description: description,
+        timeStart: timeStart,
+        timeEnd: timeEnd,
+        professor: professor,
+        status: status,
+        reason: reason,
+        key: key,
+        appointmentType: selectedRadio, // Add appointment type to data
+        screenShot: screenShot,
+      };
+
+      try {
+        await dispatch(createAppointment(appointmentData));
+        navigate("/calendar");
+        toast.success("Appointment requested successfully");
+      } catch (error) {
+        console.error("Error creating appointment:", error);
+        toast.error("Failed to request appointment");
+      }
     }
-
-    if (!isTimeValid) {
-      toast.error("Selected time is not available");
-      return;
-    }
-
-    // Set appointment status based on radio button selection
-    const status = selectedRadio === "PE Class" ? "PE Class" : "Pending";
-    const reason = "N/A";
-    const key = " ";
-
-    const appointmentData = {
-      userId: user._id,
-      attendees: attendees,
-      location: location,
-      title: title,
-      description: description,
-      timeStart: timeStart,
-      timeEnd: timeEnd,
-      professor: professor,
-      status: status,
-      reason: reason,
-      key: key,
-      appointmentType: selectedRadio, // Add appointment type to data
-    };
-
-    try {
-      await dispatch(createAppointment(appointmentData));
-      navigate("/calendar");
-      toast.success("Appointment requested successfully");
-    } catch (error) {
-      console.error("Error creating appointment:", error);
-      toast.error("Failed to request appointment");
-    }
-  }
-};
-
+  };
 
   const isDateAvailable = (startTime, endTime) => {
     const startDay = new Date(startTime).toLocaleDateString("en-US", {
@@ -290,7 +281,6 @@ const NewAppointment = () => {
 
     return isStartValid && isEndValid;
   };
-
   return (
     <Fragment>
       <div className="wrapper my-5">
@@ -344,15 +334,16 @@ const NewAppointment = () => {
           <div className="form-group">
             <label htmlFor="body_field">Description</label>
             <textarea
-              className={`form-control ${errors.description && "is-invalid"}`}
+              className={`form-control ${descriptionError && "is-invalid"}`}
               id="body_field"
               placeholder="Describe the event..."
               rows="8"
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={handleDescriptionChange}
             ></textarea>
-            {errors.description && (
-              <div className="invalid-feedback">{errors.description}</div>
+            <small className="form-text text-muted">{characterCount}/50</small>
+            {descriptionError && (
+              <div className="invalid-feedback">{descriptionError}</div>
             )}
           </div>
 
@@ -442,22 +433,6 @@ const NewAppointment = () => {
             )}
           </div>
 
-          {/* <div className="form-group">
-            <label>Appointment Type:</label>
-            <div>
-              <input
-                type="radio"
-                id="pe_class"
-                value="PE Class"
-                checked={selectedRadio === "PE Class"}
-                onChange={(e) => setSelectedRadio(e.target.value)}
-              />
-              <label htmlFor="pe_class" style={{ marginRight: "10px" }}>
-                PE Class
-              </label>
-            </div>
-          </div> */}
-
           {user.role === "professor" && (
             <div className="form-group">
               <label>Appointment Type:</label>
@@ -476,12 +451,63 @@ const NewAppointment = () => {
             </div>
           )}
 
+          <div className="form-group">
+            <label className="form-label mt-3">Upload Waiver & Letter:</label>
+            <div className="custom-file">
+              <input
+                type="file"
+                className="custom-file-input"
+                id="customFile"
+                accept="image/*"
+                multiple
+                onChange={handleScreenshotChange}
+                required // Add the required attribute here
+              />
+              <label className="custom-file-label" htmlFor="customFile">
+                Choose file
+              </label>
+            </div>
+            {screenShot.length > 0 && (
+              <div className="mt-3">
+                {screenShot.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Screenshot ${index + 1}`}
+                    style={{
+                      maxWidth: "100px",
+                      maxHeight: "100px",
+                      marginRight: "10px",
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="text-center">
+            <button
+              className="btn btn-secondary ml-3"
+              onClick={() => window.print()}
+              style={{ padding: "12px 24px" }}
+            >
+              Print Letter and Waiver
+            </button>
+          </div>
+
+          {/* Render PrintableLetter only if appointment exists and timeStart is valid */}
+          <div className="print-only">
+            <PrintableLetter appointment />
+          </div>
+
           <button
+            id="login_button"
             type="submit"
             className="btn btn-block py-3"
-            disabled={loading ? true : false}
+            disabled={loading}
+            style={{ backgroundColor: "maroon", color: "white" }}
           >
-            REQUEST
+            REQUEST APPOINTMENT
           </button>
         </form>
       </div>

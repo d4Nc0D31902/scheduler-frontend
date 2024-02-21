@@ -147,6 +147,7 @@ const AppointmentView = () => {
                           day: "numeric",
                           year: "numeric",
                         })}{" "}
+                        at{" "}
                         {new Date(timeStart).toLocaleTimeString("en-US", {
                           hour: "numeric",
                           minute: "numeric",
@@ -162,6 +163,7 @@ const AppointmentView = () => {
                           day: "numeric",
                           year: "numeric",
                         })}{" "}
+                        at{" "}
                         {new Date(timeEnd).toLocaleTimeString("en-US", {
                           hour: "numeric",
                           minute: "numeric",
@@ -187,19 +189,21 @@ const AppointmentView = () => {
             <button
               className="btn btn-primary"
               style={{ padding: "12px 45px" }}
+              disabled={appointment && appointment.status !== "Approved"}
             >
               Print
             </button>
           )}
           content={() => componentRef.current}
         />
+        {/* 
         <button
           className="btn btn-secondary ml-3"
           onClick={() => window.print()}
           style={{ padding: "12px 24px" }}
         >
           Print Letter
-        </button>
+        </button> */}
       </div>
 
       {/* Render PrintableLetter only if appointment exists and timeStart is valid */}

@@ -5,7 +5,7 @@ import Sidebar from "../admin/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Calendar from "../calendar/Calendar"
+import Calendar from "../calendar/AdminCalendar"
 import "react-toastify/dist/ReactToastify.css";
 import {
   updateAppointment,

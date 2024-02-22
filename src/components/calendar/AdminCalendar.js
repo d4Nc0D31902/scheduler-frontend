@@ -241,13 +241,13 @@ function MyCalendar() {
                 {isAuthenticated && (
                   <>
                     <div className="key-input-container">
-                      <label htmlFor="keyInput">Enter Key:</label>
+                      {/* <label htmlFor="keyInput">Enter Key:</label>
                       <input
                         type="text"
                         id="keyInput"
                         value={keyInput}
                         onChange={handleKeyInputChange}
-                      />
+                      /> */}
                       {/* <button
                         className="btn btn-primary button-join"
                         onClick={handleKeySubmit}

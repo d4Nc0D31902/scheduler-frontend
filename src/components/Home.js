@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../actions/productActions";
 import Product from "./product/Product";
 import Loader from "./layout/Loader";
+import "../Product.css";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -117,7 +118,15 @@ const Home = () => {
               MERCHANDISE
             </h4>
           </h6></div> */}
-
+          <header className="text-center my-5 header-design">
+            <h1 className="display-4 text-uppercase font-weight-bold text-dark">
+              MERCHANDISE
+            </h1>
+            <p className="lead text-muted">
+              Explore our latest collection of merchandise and find your
+              favorites
+            </p>
+          </header>
           <section id="products" className="container ">
             <div className="row">
               <div className="col-6 col-md-3 mt-5 mb-5">
@@ -149,11 +158,9 @@ const Home = () => {
 
               <div className="col-6 col-md-9">
                 <div className="row">
-                  {products
-
-                    .map((product) => (
-                      <Product key={product._id} product={product} col={2} />
-                    ))}
+                  {products.map((product) => (
+                    <Product key={product._id} product={product} col={2} />
+                  ))}
                 </div>
                 {resPerPage <= count && (
                   <div className="d-flex justify-content-center mt-5">
@@ -172,11 +179,8 @@ const Home = () => {
                   </div>
                 )}
               </div>
-
             </div>
-
           </section>
-
         </Fragment>
       )}
     </Fragment>

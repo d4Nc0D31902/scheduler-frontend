@@ -2,24 +2,30 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
-
   if (product.status === "inactive") {
     return null;
   }
 
   return (
-    <div className="col-sm-12 col-md-2 col-lg-4 mb-4">
-      <div className="card h-100 border-0 shadow-lg" style={{}}>
+    <div className="col-sm-1 col-md- col-lg-4 " style={{ marginTop: "45px" }}>
+      <div className="card h-100 border-0 " style={{ boxShadow: "maroon" }}>
         <Link to={`/product/${product._id}`}>
           <img
             className="card-img-top"
-            src={product.images && product.images.length > 0 ? product.images[0].url : "placeholder.jpg"}
+            src={
+              product.images && product.images.length > 0
+                ? product.images[0].url
+                : "placeholder.jpg"
+            }
             alt={product.name}
           />
         </Link>
         <div className="card-body">
           <h5 className="card-title mb-2">
-            <Link to={`/product/${product._id}`} className="text-decoration-none text-dark">
+            <Link
+              to={`/product/${product._id}`}
+              className="text-decoration-none text-dark"
+            >
               {product.name}
             </Link>
           </h5>
@@ -31,7 +37,9 @@ const Product = ({ product }) => {
                   style={{ width: `${(product.ratings / 5) * 100}%` }}
                 ></div>
               </div>
-              <span className="text-muted ms-1">({product.numOfReviews} reviews)</span>
+              <span className="text-muted ms-1">
+                ({product.numOfReviews} reviews)
+              </span>
             </div>
             <h6 className="mb-0">₱{product.price}</h6>
           </div>

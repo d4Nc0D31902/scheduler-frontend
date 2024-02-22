@@ -5,6 +5,7 @@ import Sidebar from "../admin/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Calendar from "../calendar/Calendar"
 import "react-toastify/dist/ReactToastify.css";
 import {
   updateAppointment,
@@ -144,6 +145,7 @@ const UpdateAppointment = () => {
     <Fragment>
       <MetaData title={"Update Schedules"} />
       <div className="row">
+        <Calendar />
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>

@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allEquipments } from "../../actions/equipmentActions";
 import Equipment from "./Equipment";
+import Loader from "../layout/Loader"
 import axios from "axios"; // Import axios for making API requests
 import "../../Equipment.css";
 
@@ -67,7 +68,7 @@ const EquipmentContainer = () => {
                   Available Equipments
                 </h2>
                 {loading ? (
-                  <p>Loading...</p>
+                  <Loader />
                 ) : error ? (
                   <p>Error: {error}</p>
                 ) : (

@@ -27,6 +27,7 @@ const Header = () => {
 
   const isHomePage = location.pathname === "/";
   const isStore = location.pathname === "/store";
+  // const isSearch = location.pathname === "/search/";
 
   return (
     <Fragment>

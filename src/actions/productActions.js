@@ -114,7 +114,7 @@ export const getAdminProducts = () => async (dispatch) => {
     const { data } = await axios.get(
       `${process.env.REACT_APP_API}/api/v1/admin/products`,
       {
-        withCredentials: true, 
+        withCredentials: true,
       }
     );
     dispatch({
@@ -212,6 +212,31 @@ export const getProductReviews = (id) => async (dispatch) => {
     };
     const { data } = await axios.get(
       `${process.env.REACT_APP_API}/api/v1/reviews?id=${id}`,
+      config
+    );
+    dispatch({
+      type: GET_REVIEWS_SUCCESS,
+      payload: data.reviews,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_REVIEWS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getAllProductReviews = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_REVIEWS_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/api/v1/reviews`,
       config
     );
     dispatch({

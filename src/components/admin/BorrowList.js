@@ -147,7 +147,7 @@ const BorrowList = () => {
         </div>
         <div className="col-12 col-md-10">
           <Fragment>
-            <h1 className="my-5">All Borrowings</h1>
+            <h1 className="my-5">All Borrow Requests</h1>
             <div className="mb-3">
               <label htmlFor="statusFilter">Filter by Status:</label>
               <select

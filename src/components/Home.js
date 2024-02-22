@@ -83,41 +83,6 @@ const Home = () => {
       ) : (
         <Fragment>
           <MetaData title={"Schedule Now!"} />
-          {/* <div className="text-center" style={{ marginTop: "50px" }}><h6
-            className="card-title"
-            style={{
-              fontFamily: "sans-serif",
-              textAlign: "center",
-              marginBottom: "10px",
-              margin: "20px",
-              backgroundColor: "maroon",
-              color: "white",
-              padding: "20px",
-            }}
-          >
-            <img
-              src="/images/tupt_logo.png"
-              style={{
-                width: "100px",
-                height: "100px",
-                marginRight: "25px",
-              }}
-              alt="Logo"
-            />
-            TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES TAGUIG CITY
-            <p style={{ fontSize: "12px", marginTop: "14px" }}>
-              The Technological University of the Philippines shall be premier
-              state university with recognized excellence in engineering and
-              technology education at per with the leading university in the ASEAN
-              region.
-            </p>
-            <h4
-              className="my-4 text-center"
-              style={{ textDecoration: "underline" }}
-            >
-              MERCHANDISE
-            </h4>
-          </h6></div> */}
           <header className="text-center my-5 header-design">
             <h1 className="display-4 text-uppercase font-weight-bold text-dark">
               MERCHANDISE

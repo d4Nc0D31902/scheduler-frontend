@@ -378,7 +378,7 @@ const Register = () => {
             </div>
             {/* End of Dropdowns */}
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="avatar_upload">Profile:</label>
               <div className="d-flex align-items-center">
                 <div>
@@ -404,7 +404,7 @@ const Register = () => {
                   </label>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <button
               id="register_button"

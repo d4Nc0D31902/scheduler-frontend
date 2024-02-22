@@ -50,7 +50,7 @@ const Homepage = () => {
       <header className="header-section py-5">
         <div className="container text-center">
           <h1 className="display-4 text-uppercase font-weight-bold text-dark mb-4">
-            Welcome to Our Gym Scheduler
+            Welcome to TUP-T Scheduler
           </h1>
           <p className="lead">
             Effortlessly manage your sports and activities with our
@@ -72,7 +72,7 @@ const Homepage = () => {
                 style={{ height: "300px", objectFit: "cover" }}
               />
               <div className="card-body text-center">
-                <h5 className="card-title">GYM </h5>
+                <h5 className="card-title">GYMNASIUM </h5>
                 <p>
                   {" "}
                   The university gym is a bustling hub for sports enthusiasts.
@@ -536,7 +536,7 @@ const Homepage = () => {
                       textTransform: "uppercase",
                     }}
                   >
-                    SEE MERCH DESIGN
+                    SEE MERCHANDISE
                   </button>
                 </Link>
               </div>

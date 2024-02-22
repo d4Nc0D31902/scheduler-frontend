@@ -145,7 +145,6 @@ const Register = () => {
   // ];
 
   const departments = [
-    "N/A",
     "BS Engineering Program",
     "BS Degree Program",
     "BTVTED Program",

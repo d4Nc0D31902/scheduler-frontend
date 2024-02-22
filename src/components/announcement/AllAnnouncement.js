@@ -6,6 +6,7 @@ import {
 } from "../../actions/announcementActions";
 import AnnouncementCard from "./AnnouncementCard";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Loader from "../layout/Loader";
 import "../../App.css";
 
 const AllAnnouncement = () => {
@@ -43,7 +44,7 @@ const AllAnnouncement = () => {
       dataLength={announcements.length}
       next={fetchMoreData}
       hasMore={hasMore}
-      loader={<h4>Loading...</h4>}
+      loader={<Loader />} // Using Loader component as the loader
     >
       {announcements
         .slice()

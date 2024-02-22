@@ -7,26 +7,132 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import SchedulerModal from "./SchedulerModal";
+
 const Homepage = () => {
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+    ],
   };
+
+  const images = [
+    "/images/gym.jpg",
+    "/images/2.jpg",
+    "/images/3.jpg",
+    "/images/4.jpg",
+    "/images/5.jpg",
+  ];
 
   return (
     <Fragment>
-      <div className="wave" style={{ backgroundColor: "maroon" }}>
-        {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-          <path fill="rgb(233, 22, 22)" fill-opacity="1" d="M0,160L40,138.7C80,117,160,75,240,58.7C320,43,400,53,480,80C560,107,640,149,720,160C800,171,880,149,960,133.3C1040,117,1120,107,1200,122.7C1280,139,1360,181,1400,202.7L1440,224L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
-        </svg> */}
-        {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                    <path fill=" #FFFFFF" fill-opacity="1" d="M0,160L60,176C120,192,240,224,360,218.7C480,213,600,171,720,181.3C840,192,960,256,1080,272C1200,288,1320,256,1380,240L1440,224L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
-                </svg> */}
+      <header className="header-section py-5">
+        <div className="container text-center">
+          <h1 className="display-4 text-uppercase font-weight-bold text-dark mb-4">
+            Welcome to Our Gym Scheduler
+          </h1>
+          <p className="lead">
+            Effortlessly manage your sports and activities with our
+            user-friendly scheduler. Stay organized, stay active!
+          </p>
+          <div className="mt-5 text-center">
+            <SchedulerModal />
+          </div>
+        </div>
+      </header>
+      <div className="locations" style={{ margin: "5px" }}>
+        <div className="row" style={{ marginBottom: "0px" }}>
+          <div className="col-lg-4 col-md-6 mb-4">
+            <div className="card h-100 border-0">
+              <img
+                src="/images/gym.jpg"
+                alt="Outdoor Court"
+                className="card-img-top"
+                style={{ height: "300px", objectFit: "cover" }}
+              />
+              <div className="card-body text-center">
+                <h5 className="card-title">GYM </h5>
+                <p>
+                  {" "}
+                  The university gym is a bustling hub for sports enthusiasts.
+                  From basketball courts to soccer fields, it offers
+                  state-of-the-art facilities for diverse activities. With
+                  modern equipment and a sense of community, it's not just a
+                  workout space but a place to connect, compete, and prioritize
+                  holistic wellness.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-lg-4 col-md-6 mb-4">
+            <div className="card h-100 border-0">
+              <img
+                src="/images/gym.jpg"
+                alt="Outdoor Court"
+                className="card-img-top"
+                style={{ height: "300px", objectFit: "cover" }}
+              />
+              <div className="card-body text-center">
+                <h5 className="card-title">OUTDOOR COURT</h5>
+                <p className="card-text">
+                  The university outer court serves as an open space for various
+                  outdoor sports and activities. Whether it's casual games of
+                  basketball or impromptu soccer matches, this area provides
+                  students with a dynamic environment to engage in physical
+                  activities, fostering a sense of community and promoting an
+                  active lifestyle.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-lg-4 col-md-6 mb-4">
+            <div className="card h-100 border-0">
+              <img
+                src="/images/gym.jpg"
+                alt="Outdoor Court"
+                className="card-img-top"
+                style={{ height: "300px", objectFit: "cover" }}
+              />
+              <div className="card-body text-center">
+                <h5 className="card-title">MULTIPURPOSE HALL</h5>
+                <p style={{ fontSize: "13px" }}>
+                  {" "}
+                  The university's multipurpose hall is a versatile space
+                  designed to accommodate a variety of activities. From sports
+                  events and fitness classes to cultural performances and
+                  academic gatherings, this hall serves as a central hub for
+                  diverse campus activities. Equipped with flexible seating
+                  arrangements and modern amenities, it provides a dynamic and
+                  inclusive environment for the university community to come
+                  together for a wide range of purposes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div
@@ -36,83 +142,29 @@ const Homepage = () => {
         <div className="row">
           <div className="col-lg-6 col-md-6 mb-4 animation-effect-top">
             <Slider {...settings}>
-              <div className="card-body" style={{ textAlign: "center" }}>
-                <img
-                  src="/images/gym.jpg"
-                  alt="Slide 1"
-                  style={{
-                    width: "100%",
-                    height: "400px",
-                    margin: "10px",
-                    boxShadow: "3px 3px 3px red",
-                  }}
-                />
-              </div>
-
-              <div className="card-body" style={{ textAlign: "center" }}>
-                <img
-                  src="/images/2.jpg"
-                  alt="Slide 2"
-                  style={{
-                    width: "100%",
-                    height: "400px",
-                    margin: "10px",
-                    boxShadow: "3px 3px 3px red",
-                  }}
-                />
-              </div>
-
-              <div className="card-body" style={{ textAlign: "center" }}>
-                <img
-                  src="/images/3.jpg"
-                  alt="Slide 2"
-                  style={{
-                    width: "100%",
-                    height: "400px",
-                    margin: "10px",
-                    boxShadow: "3px 3px 3px red",
-                  }}
-                />
-              </div>
-              <div className="card-body" style={{ textAlign: "center" }}>
-                <img
-                  src="/images/4.jpg"
-                  alt="Slide 2"
-                  style={{
-                    width: "100%",
-                    height: "400px",
-                    margin: "10px",
-                    boxShadow: "3px 3px 3px red",
-                  }}
-                />
-              </div>
-              <div
-                className="card-body"
-                style={{ textAlign: "center", borderRadius: "50%" }}
-              >
-                <img
-                  src="/images/5.jpg"
-                  alt="Slide 2"
-                  style={{
-                    width: "100%",
-                    height: "400px",
-                    margin: "10px",
-                    boxShadow: "3px 3px 3px red",
-                  }}
-                />
-              </div>
+              {images.map((image, index) => (
+                <div key={index} className="slider-image">
+                  <img src={image} alt={`Slide ${index + 1}`} />
+                </div>
+              ))}
             </Slider>
           </div>
 
           <div className="col-lg-6 col-md-6 mb-4 animation-effect-top">
-            <div className="card-body" style={{ textAlign: "center" }}>
+            <div
+              className="card-body"
+              style={{
+                textAlign: "center",
+                fontFamily: "Arial, sans-serif",
+                marginBottom: "20px",
+              }}
+            >
               <h3
                 className="card-title"
                 style={{
-                  fontFamily: "sans-serif",
-                  textAlign: "center",
-                  marginBottom: "10px",
-                  margin: "20px",
+                  fontSize: "24px",
+                  fontWeight: "bold",
+                  marginBottom: "20px",
                 }}
               >
                 <img
@@ -120,7 +172,8 @@ const Homepage = () => {
                   style={{
                     width: "100px",
                     height: "100px",
-                    marginRight: "25px",
+                    marginRight: "15px",
+                    verticalAlign: "middle",
                   }}
                   alt="Logo"
                 />
@@ -129,11 +182,11 @@ const Homepage = () => {
               <p
                 className="card-text"
                 style={{
-                  textAlign: "center",
-                  fontSize: "17px",
-                  alignItems: "center",
+                  fontSize: "16px",
+                  lineHeight: "1.6",
                   textAlign: "justify",
-                  marginRight: "10px",
+                  margin: "0 auto",
+                  maxWidth: "700px",
                 }}
               >
                 The Gym Scheduler facilitates effortless coordination and
@@ -167,133 +220,6 @@ const Homepage = () => {
         ></path>
       </svg>
       <div
-        className="Designs"
-        style={{ backgroundColor: "maroon", padding: "10px 0px" }}
-      >
-        <p
-          style={{
-            color: "white",
-            fontSize: "80px",
-            textAlign: "center",
-            fontFamily: "calibri",
-          }}
-        >
-          LOCATIONS
-        </p>
-      </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="maroon"
-          fill-opacity="1"
-          d="M0,32L6.5,64C13,96,26,160,39,170.7C51.9,181,65,139,78,154.7C90.8,171,104,245,117,245.3C129.7,245,143,171,156,133.3C168.6,96,182,96,195,85.3C207.6,75,221,53,234,69.3C246.5,85,259,139,272,149.3C285.4,160,298,128,311,128C324.3,128,337,160,350,149.3C363.2,139,376,85,389,90.7C402.2,96,415,160,428,186.7C441.1,213,454,203,467,181.3C480,160,493,128,506,112C518.9,96,532,96,545,96C557.8,96,571,96,584,96C596.8,96,610,96,623,117.3C635.7,139,649,181,662,181.3C674.6,181,688,139,701,128C713.5,117,726,139,739,133.3C752.4,128,765,96,778,96C791.4,96,804,128,817,128C830.3,128,843,96,856,106.7C869.2,117,882,171,895,202.7C908.1,235,921,245,934,250.7C947,256,960,256,973,250.7C985.9,245,999,235,1012,224C1024.9,213,1038,203,1051,176C1063.8,149,1077,107,1090,117.3C1102.7,128,1116,192,1129,186.7C1141.6,181,1155,107,1168,117.3C1180.5,128,1194,224,1206,256C1219.5,288,1232,256,1245,250.7C1258.4,245,1271,267,1284,277.3C1297.3,288,1310,288,1323,266.7C1336.2,245,1349,203,1362,192C1375.1,181,1388,203,1401,186.7C1414.1,171,1427,117,1434,90.7L1440,64L1440,0L1433.5,0C1427,0,1414,0,1401,0C1388.1,0,1375,0,1362,0C1349.2,0,1336,0,1323,0C1310.3,0,1297,0,1284,0C1271.4,0,1258,0,1245,0C1232.4,0,1219,0,1206,0C1193.5,0,1181,0,1168,0C1154.6,0,1142,0,1129,0C1115.7,0,1103,0,1090,0C1076.8,0,1064,0,1051,0C1037.8,0,1025,0,1012,0C998.9,0,986,0,973,0C960,0,947,0,934,0C921.1,0,908,0,895,0C882.2,0,869,0,856,0C843.2,0,830,0,817,0C804.3,0,791,0,778,0C765.4,0,752,0,739,0C726.5,0,714,0,701,0C687.6,0,675,0,662,0C648.6,0,636,0,623,0C609.7,0,597,0,584,0C570.8,0,558,0,545,0C531.9,0,519,0,506,0C493,0,480,0,467,0C454.1,0,441,0,428,0C415.1,0,402,0,389,0C376.2,0,363,0,350,0C337.3,0,324,0,311,0C298.4,0,285,0,272,0C259.5,0,246,0,234,0C220.5,0,208,0,195,0C181.6,0,169,0,156,0C142.7,0,130,0,117,0C103.8,0,91,0,78,0C64.9,0,52,0,39,0C25.9,0,13,0,6,0L0,0Z"
-        ></path>
-      </svg>
-
-      <div className="locations">
-        <div className="row" style={{ marginBottom: "0px" }}>
-          <div className="col-lg-4 col-md-6 mb-4">
-            <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
-            >
-              <div className="card-body" style={{ textAlign: "center" }}>
-                <img
-                  src="/images/gym.jpg"
-                  alt="Schedule Icon"
-                  style={{
-                    width: "300px",
-                    height: "300px",
-                    marginBottom: "10px",
-                  }}
-                />
-                <h5 className="card-title">GYM </h5>
-                <p>
-                  {" "}
-                  The university gym is a bustling hub for sports enthusiasts.
-                  From basketball courts to soccer fields, it offers
-                  state-of-the-art facilities for diverse activities. With
-                  modern equipment and a sense of community, it's not just a
-                  workout space but a place to connect, compete, and prioritize
-                  holistic wellness.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 col-md-6 mb-4">
-            <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
-            >
-              <div className="card-body" style={{ textAlign: "center" }}>
-                <img
-                  src="/images/gym.jpg"
-                  alt="Schedule Icon"
-                  style={{
-                    width: "300px",
-                    height: "300px",
-                    marginBottom: "10px",
-                  }}
-                />
-                <h5 className="card-title">OUTDOOR COURT</h5>
-                <p style={{ fontSize: "15px" }}>
-                  {" "}
-                  The university outer court serves as an open space for various
-                  outdoor sports and activities. Whether it's casual games of
-                  basketball or impromptu soccer matches, this area provides
-                  students with a dynamic environment to engage in physical
-                  activities, fostering a sense of community and promoting an
-                  active lifestyle.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 col-md-6 mb-4">
-            <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
-            >
-              <div className="card-body" style={{ textAlign: "center" }}>
-                <img
-                  src="/images/gym.jpg"
-                  alt="Schedule Icon"
-                  style={{
-                    width: "300px",
-                    height: "300px",
-                    marginBottom: "10px",
-                  }}
-                />
-                <h5 className="card-title">MULTIPURPOSE HALL</h5>
-                <p style={{ fontSize: "13px" }}>
-                  {" "}
-                  The university's multipurpose hall is a versatile space
-                  designed to accommodate a variety of activities. From sports
-                  events and fitness classes to cultural performances and
-                  academic gatherings, this hall serves as a central hub for
-                  diverse campus activities. Equipped with flexible seating
-                  arrangements and modern amenities, it provides a dynamic and
-                  inclusive environment for the university community to come
-                  together for a wide range of purposes.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 320"
-        style={{ backgroundColor: "maroon" }}
-      >
-        <path
-          fill=" #FFFFFF"
-          fill-opacity="1"
-          d="M0,160L60,176C120,192,240,224,360,218.7C480,213,600,171,720,181.3C840,192,960,256,1080,272C1200,288,1320,256,1380,240L1440,224L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
-        ></path>
-      </svg>
-      <div
         className="how-to-use-scheduler"
         style={{
           padding: "100px",
@@ -309,81 +235,23 @@ const Homepage = () => {
             marginBottom: "50px",
             fontWeight: "bold",
             fontFamily: "Arial Black",
+            fontSize: "3rem", // Adjust font size as needed
+            color: "white", // Text color
+            textShadow: "2px 2px 4px rgba(0,0,0,0.3)", // Dark shadow
+            WebkitTextStroke: "1px black", // Text stroke for 3D effect
+            WebkitTextFillColor: "white", // Fallback for browsers that don't support text-stroke
+            textStrokePosition: "0.3em", // Adjust to move the stroke to the left
+            letterSpacing: "2px", // Optional: Adjust letter spacing for better visibility
           }}
+          className="text-center"
         >
           HAVE FUN USING THE SCHEDULER
         </h2>
         <div className="row">
           <div className="col-lg-4 col-md-4 mb-4">
             <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
-            >
-              <div className="card-body text-center">
-                <img
-                  src="/images/register.png"
-                  alt="Schedule Icon"
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    marginBottom: "10px",
-                  }}
-                />
-                <h5 className="card-title">Login or Register</h5>
-                <p
-                  className="card-text"
-                  style={{ fontSize: "14px", textAlign: "justify" }}
-                >
-                  To access the full suite of scheduler features, log in with
-                  your existing account or register for a new account. Enjoy a
-                  personalized experience and make scheduling easier than ever
-                  before.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 col-md-4 mb-4">
-            <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
-            >
-              <div className="card-body text-center">
-                <img
-                  src="/images/annouce.png"
-                  alt="Schedule Icon"
-                  style={{
-                    width: "100px",
-                    height: "120px",
-                    marginBottom: "10px",
-                  }}
-                />
-                <h5 className="card-title">Annoucements</h5>
-                <p
-                  className="card-text"
-                  style={{ fontSize: "14px", textAlign: "justify" }}
-                >
-                  Stay informed with our latest announcements, event updates,
-                  and important information. Whether it's news about upcoming
-                  features or changes, you'll find it all here.
-                </p>
-                <Link to="/announcements">
-                  <button
-                    className="button-request"
-                    style={{ padding: "5px 10px" }}
-                  >
-                    {" "}
-                    See Announcements
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-4 col-md-4 mb-4">
-            <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
+              className="card h-100 border-0 shadow-sm"
+              style={{ borderRadius: "15px" }}
             >
               <div className="card-body text-center">
                 <img
@@ -393,12 +261,31 @@ const Homepage = () => {
                     width: "100px",
                     height: "100px",
                     marginBottom: "10px",
+                    borderRadius: "5%",
+                    boxShadow: "0 4px 6px rgba(4, 2, 2, 8)",
                   }}
                 />
-                <h5 className="card-title">friendly interface</h5>
+                <h5
+                  className="card-title"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    marginBottom: "15px",
+                    color: "#333",
+                    fontFamily: "Arial, sans-serif",
+                  }}
+                >
+                  Friendly Interface
+                </h5>
                 <p
                   className="card-text"
-                  style={{ fontSize: "14px", textAlign: "justify" }}
+                  style={{
+                    fontSize: "16px",
+                    lineHeight: "1.6",
+                    textAlign: "justify",
+                    color: "#666",
+                    fontFamily: "Arial, sans-serif",
+                  }}
                 >
                   A friendly user interface (UI) prioritizes ease of use with
                   intuitive navigation and clear visuals. It ensures a positive
@@ -408,12 +295,126 @@ const Homepage = () => {
               </div>
             </div>
           </div>
+
+          <div className="col-lg-4 col-md-4 mb-4">
+            <div
+              className="card h-100 border-0 shadow-sm"
+              style={{ borderRadius: "15px" }}
+            >
+              <div className="card-body text-center">
+                <img
+                  src="/images/annouce.png"
+                  alt="Schedule Icon"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    marginBottom: "10px",
+                    borderRadius: "5%",
+                    boxShadow: "0 4px 6px rgba(4, 2, 2, 8)",
+                  }}
+                />
+                <h5
+                  className="card-title"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    marginBottom: "15px",
+                    color: "#333",
+                    fontFamily: "Arial, sans-serif",
+                  }}
+                >
+                  Annoucements
+                </h5>
+                <p
+                  className="card-text"
+                  style={{
+                    fontSize: "16px",
+                    lineHeight: "1.6",
+                    textAlign: "justify",
+                    color: "#666",
+                    fontFamily: "Arial, sans-serif",
+                  }}
+                >
+                  Stay informed with our latest announcements, event updates,
+                  and important information. Whether it's news about upcoming
+                  features or changes, you'll find it all here.
+                </p>
+                <Link to="/announcements">
+                  <button
+                    className="button-request"
+                    style={{
+                      padding: "12px 24px",
+                      backgroundColor: "#4CAF50",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                      transition: "background-color 0.3s",
+                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                      fontFamily: "Arial, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    See Announcements
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-lg-4 col-md-4 mb-4">
+            <div
+              className="card h-100 border-0 shadow-sm"
+              style={{ borderRadius: "15px" }}
+            >
+              <div className="card-body text-center">
+                <img
+                  src="/images/register.png"
+                  alt="Schedule Icon"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    marginBottom: "10px",
+                    borderRadius: "5%",
+                    boxShadow: "0 4px 6px rgba(4, 2, 2, 8)",
+                  }}
+                />
+                <h5
+                  className="card-title"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    marginBottom: "15px",
+                    color: "#333",
+                  }}
+                >
+                  Friendly Interface
+                </h5>
+                <p
+                  className="card-text"
+                  style={{
+                    fontSize: "16px",
+                    lineHeight: "1.6",
+                    textAlign: "justify",
+                    color: "#666",
+                  }}
+                >
+                  To access the full suite of scheduler features, log in with
+                  your existing account or register for a new account. Enjoy a
+                  personalized experience and make scheduling easier than ever
+                  before.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="row">
           <div className="col-lg-4 col-md-4 mb-4">
             <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
+              className="card h-100 border-0 shadow-sm"
+              style={{ borderRadius: "15px" }}
             >
               <div className="card-body text-center">
                 <img
@@ -423,12 +424,29 @@ const Homepage = () => {
                     width: "100px",
                     height: "100px",
                     marginBottom: "10px",
+                    borderRadius: "5%",
+                    boxShadow: "0 4px 6px rgba(4, 2, 2, 8)",
                   }}
                 />
-                <h5 className="card-title">Make a funtime Schedule</h5>
+                <h5
+                  className="card-title"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    marginBottom: "15px",
+                    color: "#333",
+                  }}
+                >
+                  Make a funtime Schedule
+                </h5>
                 <p
                   className="card-text"
-                  style={{ fontSize: "14px", textAlign: "justify" }}
+                  style={{
+                    fontSize: "16px",
+                    lineHeight: "1.6",
+                    textAlign: "justify",
+                    color: "#666",
+                  }}
                 >
                   Create a comprehensive and enjoyable schedule tailored to your
                   preferences and daily commitments. Our intuitive scheduler
@@ -437,9 +455,22 @@ const Homepage = () => {
                 <Link to="/calendar">
                   <button
                     className="button-request"
-                    style={{ padding: "5px 10px" }}
+                    style={{
+                      padding: "12px 24px",
+                      backgroundColor: "#4CAF50",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                      transition: "background-color 0.3s",
+                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                      fontFamily: "Arial, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      textTransform: "uppercase",
+                    }}
                   >
-                    Request Schedule
+                    REQUEST SCHEDULE
                   </button>
                 </Link>
               </div>
@@ -447,8 +478,8 @@ const Homepage = () => {
           </div>
           <div className="col-lg-4 col-md-4 mb-4">
             <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
+              className="card h-100 border-0 shadow-sm"
+              style={{ borderRadius: "15px" }}
             >
               <div className="card-body text-center">
                 <img
@@ -458,12 +489,29 @@ const Homepage = () => {
                     width: "100px",
                     height: "100px",
                     marginBottom: "10px",
+                    borderRadius: "5%",
+                    boxShadow: "0 4px 6px rgba(4, 2, 2, 8)",
                   }}
                 />
-                <h5 className="card-title">Purchase merchandise</h5>
+                <h5
+                  className="card-title"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    marginBottom: "15px",
+                    color: "#333",
+                  }}
+                >
+                  Purchase merchandise
+                </h5>
                 <p
                   className="card-text"
-                  style={{ fontSize: "14px", textAlign: "justify" }}
+                  style={{
+                    fontSize: "16px",
+                    lineHeight: "1.6",
+                    textAlign: "justify",
+                    color: "#666",
+                  }}
                 >
                   Explore our online store to discover a wide range of
                   merchandise, from apparel to accessories. Purchase your
@@ -473,9 +521,22 @@ const Homepage = () => {
                 <Link to="/store" style={{ textDecoration: "none" }}>
                   <button
                     className="button-request"
-                    style={{ padding: "5px 10px" }}
+                    style={{
+                      padding: "12px 24px",
+                      backgroundColor: "#4CAF50",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                      transition: "background-color 0.3s",
+                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                      fontFamily: "Arial, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      textTransform: "uppercase",
+                    }}
                   >
-                    Buy Merch
+                    SEE MERCH DESIGN
                   </button>
                 </Link>
               </div>
@@ -484,8 +545,8 @@ const Homepage = () => {
 
           <div className="col-lg-4 col-md-4 mb-4">
             <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
+              className="card h-100 border-0 shadow-sm"
+              style={{ borderRadius: "15px" }}
             >
               <div className="card-body text-center">
                 <img
@@ -495,12 +556,29 @@ const Homepage = () => {
                     width: "100px",
                     height: "100px",
                     marginBottom: "10px",
+                    borderRadius: "5%",
+                    boxShadow: "0 4px 6px rgba(4, 2, 2, 8)",
                   }}
                 />
-                <h5 className="card-title">Borrow Equipment</h5>
+                <h5
+                  className="card-title"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    marginBottom: "15px",
+                    color: "#333",
+                  }}
+                >
+                  Borrow Equipment
+                </h5>
                 <p
                   className="card-text"
-                  style={{ fontSize: "13px", textAlign: "justify" }}
+                  style={{
+                    fontSize: "16px",
+                    lineHeight: "1.6",
+                    textAlign: "justify",
+                    color: "#666",
+                  }}
                 >
                   Explore our equipment borrowing service, designed to provide
                   you with the tools you need for your activities. From
@@ -510,10 +588,22 @@ const Homepage = () => {
                 <Link to="/equipmentz">
                   <button
                     className="button-request"
-                    style={{ padding: "5px 10px" }}
+                    style={{
+                      padding: "12px 24px",
+                      backgroundColor: "#4CAF50",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                      transition: "background-color 0.3s",
+                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                      fontFamily: "Arial, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      textTransform: "uppercase",
+                    }}
                   >
-                    {" "}
-                    Borrow Equipment
+                    SEE AVAILABLE ITEMS
                   </button>
                 </Link>
               </div>
@@ -525,92 +615,235 @@ const Homepage = () => {
       <div
         className="AboutMaam"
         style={{
-          padding: "20px 40px",
-          backgroundColor: "white",
+          padding: "20px",
+          backgroundColor: "#fff",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          marginBottom: "250px",
+          marginBottom: "100px",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h1 style={{ color: "black", marginBottom: "85px" }}>
+        <h1
+          style={{
+            color: "#333",
+            marginBottom: "30px",
+            textAlign: "center",
+            fontFamily: "Arial, sans-serif",
+            fontWeight: "bold",
+            fontSize: "2.5rem",
+            textTransform: "uppercase",
+            letterSpacing: "2px",
+            borderBottom: "3px solid #333",
+            paddingBottom: "10px",
+          }}
+        >
           MEET OUR COORDINATORS
         </h1>
-        <h4 style={{ color: "black" }}>THE ADMIN</h4>
-        <div className="col-lg-3 col-md-6 mb-4">
+        <p
+          style={{
+            color: "#666",
+            fontSize: "16px",
+            textAlign: "center",
+            maxWidth: "600px",
+            margin: "0 auto",
+          }}
+        >
+          Meet the dedicated individuals who work tirelessly behind the scenes
+          to ensure the smooth operation and success of our organization. Each
+          coordinator brings a unique set of skills and experiences to their
+          role, contributing to our collective achievements. Get to know them
+          and discover the faces behind the success of our team.
+        </p>
+        <br></br>
+        <div className="head-admin">
           <div
-            className="card"
-            style={{ boxShadow: "1px 2px 8px gray", cursor: "pointer" }}
+            className="card shadow"
+            style={{ borderRadius: "10px", overflow: "hidden", border: "none" }}
           >
-            <div className="card-body" style={{ textAlign: "center" }}>
+            <div className="card-body text-center">
               <img
                 src="/images/f.png"
-                alt="Schedule Icon"
+                alt="Head Admin"
                 style={{
-                  width: "300px",
-                  height: "300px",
-                  marginBottom: "10px",
+                  width: "250px",
+                  height: "250px",
+                  borderRadius: "50%",
+                  marginBottom: "20px",
                 }}
               />
-              <h5 className="card-title">Imelda Laya </h5>
+              <h5
+                className="card-title"
+                style={{
+                  color: "#333",
+                  fontFamily: "Arial, sans-serif",
+                  fontWeight: "bold",
+                  marginBottom: "0",
+                }}
+              >
+                Head Admin
+              </h5>
+              <p
+                style={{
+                  color: "#666",
+                  fontFamily: "Arial, sans-serif",
+                  fontSize: "14px",
+                  margin: "5px 0",
+                }}
+              >
+                Full Name
+              </p>
             </div>
           </div>
         </div>
-        <div className="row">
+        <h4
+          style={{
+            color: "#333",
+            marginBottom: "20px",
+            marginTop: "50px",
+            fontFamily: "Arial, sans-serif",
+            fontWeight: "bold",
+          }}
+        >
+          OFFICERS
+        </h4>
+        <div className="row officers">
           <div className="col-lg-4 col-md-6 mb-4">
             <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
+              className="card shadow"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+              }}
             >
               <div className="card-body text-center">
                 <img
                   src="/images/m.jpg"
-                  alt="Schedule Icon"
+                  alt="Officer"
                   style={{
-                    width: "300px",
-                    height: "300px",
-                    marginBottom: "10px",
+                    width: "225px",
+                    height: "225px",
+                    borderRadius: "50%",
+                    marginBottom: "20px",
                   }}
                 />
-                <h5 className="card-title">Admin1</h5>
+                <h5
+                  className="card-title"
+                  style={{
+                    color: "#333",
+                    fontFamily: "Arial, sans-serif",
+                    fontWeight: "bold",
+                    marginBottom: "0",
+                  }}
+                >
+                  Officer 1
+                </h5>
+                <p
+                  style={{
+                    color: "#666",
+                    fontFamily: "Arial, sans-serif",
+                    fontSize: "14px",
+                    margin: "5px 0",
+                  }}
+                >
+                  Full Name
+                  <br />
+                  Year - Position
+                </p>
               </div>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
             <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
+              className="card shadow"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+              }}
             >
               <div className="card-body text-center">
                 <img
                   src="/images/m.jpg"
-                  alt="Schedule Icon"
+                  alt="Officer"
                   style={{
-                    width: "300px",
-                    height: "300px",
-                    marginBottom: "10px",
+                    width: "225px",
+                    height: "225px",
+                    borderRadius: "50%",
+                    marginBottom: "20px",
                   }}
                 />
-                <h5 className="card-title">Admin2</h5>
+                <h5
+                  className="card-title"
+                  style={{
+                    color: "#333",
+                    fontFamily: "Arial, sans-serif",
+                    fontWeight: "bold",
+                    marginBottom: "0",
+                  }}
+                >
+                  Officer 2
+                </h5>
+                <p
+                  style={{
+                    color: "#666",
+                    fontFamily: "Arial, sans-serif",
+                    fontSize: "14px",
+                    margin: "5px 0",
+                  }}
+                >
+                  Full Name
+                  <br />
+                  Year - Position
+                </p>
               </div>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
             <div
-              className="card"
-              style={{ boxShadow: "1px 2px 8px red", cursor: "pointer" }}
+              className="card shadow"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+              }}
             >
               <div className="card-body text-center">
                 <img
                   src="/images/m.jpg"
-                  alt="Schedule Icon"
+                  alt="Officer"
                   style={{
-                    width: "300px",
-                    height: "300px",
-                    marginBottom: "10px",
+                    width: "225px",
+                    height: "225px",
+                    borderRadius: "50%",
+                    marginBottom: "20px",
                   }}
                 />
-                <h5 className="card-title">Admin3</h5>
+                <h5
+                  className="card-title"
+                  style={{
+                    color: "#333",
+                    fontFamily: "Arial, sans-serif",
+                    fontWeight: "bold",
+                    marginBottom: "0",
+                  }}
+                >
+                  Officer 3
+                </h5>
+                <p
+                  style={{
+                    color: "#666",
+                    fontFamily: "Arial, sans-serif",
+                    fontSize: "14px",
+                    margin: "5px 0",
+                  }}
+                >
+                  Full Name
+                  <br />
+                  Year - Position
+                </p>
               </div>
             </div>
           </div>

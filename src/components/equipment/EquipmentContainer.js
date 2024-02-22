@@ -1,9 +1,9 @@
-// EquipmentContainer.js
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allEquipments } from "../../actions/equipmentActions";
 import Equipment from "./Equipment";
-import axios from "axios"; // Import axios for making API requests
+import axios from "axios";
+import Loader from "../layout/Loader"; // Import Loader component
 import "../../Equipment.css";
 
 const EquipmentContainer = () => {
@@ -12,7 +12,7 @@ const EquipmentContainer = () => {
     (state) => state.allEquipments
   );
 
-  const [sports, setSports] = useState([]); // State to store sports
+  const [sports, setSports] = useState([]);
   const [selectedSport, setSelectedSport] = useState(null);
 
   useEffect(() => {
@@ -63,11 +63,11 @@ const EquipmentContainer = () => {
           <div className="row">
             <div className="col-lg-12 col-md-12">
               <div className="main-content" style={{ marginTop: "30px" }}>
-                <h2 style={{ fontFamily: "monospace", fontWeight: "bold" }}>
+                <h2 style={{ fontFamily: "Calibri", fontWeight: "bold" }}>
                   Available Equipments
                 </h2>
                 {loading ? (
-                  <p>Loading...</p>
+                  <Loader /> // Replace the loading message with the Loader component
                 ) : error ? (
                   <p>Error: {error}</p>
                 ) : (

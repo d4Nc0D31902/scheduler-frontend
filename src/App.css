@@ -112,6 +112,7 @@ nav {
   font-weight: bold;
   font-size: 0.9rem;
 }
+
 .merch-card {
   background-color: maroon;
   border-radius: 10px;
@@ -606,7 +607,7 @@ footer {
   margin-right: 0.3rem;
 }
 
-#sidebar ul li.active>a,
+#sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #fff;
   background: gray;
@@ -708,7 +709,6 @@ ul.CTAs a {
   /* Green background color */
 }
 
-
 .center-request {
   display: flex;
   justify-content: center;
@@ -746,16 +746,15 @@ ul.CTAs a {
 }
 
 /* Add this style to center the input and button in the form group */
-.input-group>input,
-.input-group>.input-group-append {
+.input-group > input,
+.input-group > .input-group-append {
   display: inline-block;
 }
 
 /* Add this style for responsiveness */
 @media (max-width: 576px) {
-
-  .input-group>input,
-  .input-group>.input-group-append {
+  .input-group > input,
+  .input-group > .input-group-append {
     display: block;
     width: 100%;
   }
@@ -835,27 +834,22 @@ ul.CTAs a {
   .burger-icon {
     display: flex;
     color: #fffdfd;
-
   }
 
   .nav-links {
     display: none;
-
   }
 
   .nav-links a {
     padding: 10px;
     margin: 5px;
-
   }
 
   .nav-links a:hover {
     background-color: gray;
-
-
   }
 
-  .burger-icon.active+.nav-links {
+  .burger-icon.active + .nav-links {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -868,14 +862,7 @@ ul.CTAs a {
 
     border-radius: 5px;
     z-index: 1000;
-
-
   }
-
-
-
-
-
 }
 
 @media (min-width: 1290px) {
@@ -886,8 +873,6 @@ ul.CTAs a {
   .nav-links {
     display: flex;
   }
-
-
 }
 
 /* 
@@ -947,11 +932,52 @@ ul.CTAs a {
 
 } */
 
-
 @media (max-width: 992px) {
-
   .logoto {
     display: none;
   }
+}
 
+.styled-div {
+  margin-top: 2px;
+  width: 95%;
+  height: 500px;
+  background-color: #c2afb1;
+  border-bottom-right-radius: 500px;
+  color: #fff;
+  text-align: center;
+  line-height: 200px;
+  cursor: pointer;
+}
+
+.slider-image {
+  text-align: center;
+  cursor: pointer;
+}
+
+.slider-image img {
+  width: 95%;
+  height: 400px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.slider-image img:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.header-section {
+  background-color: #f8f9fa;
+}
+
+.header-section h1 {
+  color: #343a40;
+}
+
+.header-section p {
+  color: #6c757d;
 }

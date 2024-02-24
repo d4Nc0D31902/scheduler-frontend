@@ -54,6 +54,8 @@ const AppointmentsList = () => {
         return "orange";
       case "Denied":
         return "red";
+      case "Overdued":
+        return "red";
       default:
         return "";
     }
@@ -224,6 +226,7 @@ const AppointmentsList = () => {
                 <option value="All">All</option>
                 <option value="Approved">Approved</option>
                 <option value="Denied">Denied</option>
+                <option value="Overdued">Overdued</option>
                 <option value="Pending">Pending</option>
               </select>
             </div>

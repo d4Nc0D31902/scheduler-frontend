@@ -31,9 +31,19 @@ const BorrowList = () => {
     if (selectedStatus === "All") {
       return borrows.borrowings;
     }
-    return borrows.borrowings.filter(
-      (borrow) => borrow.status === selectedStatus
-    );
+
+    return borrows.borrowings
+      .filter((borrow) =>
+        borrow.history.some(
+          (historyLog) => historyLog.status === selectedStatus
+        )
+      )
+      .map((borrow) => ({
+        ...borrow,
+        history: borrow.history.filter(
+          (historyLog) => historyLog.status === selectedStatus
+        ),
+      }));
   };
 
   const handleStatusChange = (event) => {
@@ -47,6 +57,8 @@ const BorrowList = () => {
       case "Pending":
         return "orange";
       case "Denied":
+        return "red";
+      case "Overdued":
         return "red";
       case "Borrowed":
         return "orange";
@@ -99,11 +111,9 @@ const BorrowList = () => {
       rows: [],
     };
 
-    // Populate rows with borrow history
     if (borrows && borrows.borrowings && borrows.borrowings.length > 0) {
       filteredBorrows().forEach((borrow) => {
         borrow.history.forEach((historyLog) => {
-          // Generate a bullet list of items with quantities
           const itemsList = (
             <ul>
               {historyLog.borrowItems.map((item, index) => (
@@ -116,7 +126,7 @@ const BorrowList = () => {
 
           data.rows.push({
             user: borrow.user,
-            numofItems: itemsList, // Display items and quantities in bullet form
+            numofItems: itemsList,
             borrowDate: new Date(historyLog.date_borrow).toLocaleString(
               "en-US",
               {
@@ -157,7 +167,6 @@ const BorrowList = () => {
       });
     }
 
-    // Reverse the order of rows to display latest borrows first
     data.rows.reverse();
 
     return data;
@@ -184,6 +193,7 @@ const BorrowList = () => {
                 <option value="All">All</option>
                 <option value="Approved">Approved</option>
                 <option value="Denied">Denied</option>
+                <option value="Overdued">Overdued</option>
                 <option value="Pending">Pending</option>
                 <option value="Borrowed">Borrowed</option>
                 <option value="Returned">Returned</option>

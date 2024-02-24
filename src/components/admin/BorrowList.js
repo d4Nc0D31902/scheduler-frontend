@@ -59,6 +59,8 @@ const BorrowList = () => {
         return "orange";
       case "Denied":
         return "red";
+      case "Overdued":
+        return "red";
       case "Borrowed":
         return "orange";
       case "Returned":
@@ -159,6 +161,7 @@ const BorrowList = () => {
                 <option value="All">All</option>
                 <option value="Approved">Approved</option>
                 <option value="Denied">Denied</option>
+                <option value="Overdued">Overdued</option>
                 <option value="Pending">Pending</option>
                 <option value="Borrowed">Borrowed</option>
                 <option value="Returned">Returned</option>

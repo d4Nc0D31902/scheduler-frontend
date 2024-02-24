@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MDBDataTable } from "mdbreact";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
@@ -54,6 +54,8 @@ const AppointmentsList = () => {
         return "orange";
       case "Denied":
         return "red";
+      case "Overdued":
+        return "red";
       default:
         return "";
     }
@@ -67,8 +69,10 @@ const AppointmentsList = () => {
     if (selectedStatus === "All") {
       return appointments;
     }
-    return appointments.filter(
-      (appointment) => appointment.status === selectedStatus
+    return appointments.filter((appointment) =>
+      appointment.history.some(
+        (historyRecord) => historyRecord.status === selectedStatus
+      )
     );
   };
 
@@ -134,47 +138,54 @@ const AppointmentsList = () => {
     if (filteredData) {
       filteredData.forEach((appointment) => {
         appointment.history.forEach((historyRecord, index) => {
-          const statusColor = getStatusColor(historyRecord.status);
+          if (
+            historyRecord.status === selectedStatus ||
+            selectedStatus === "All"
+          ) {
+            const statusColor = getStatusColor(historyRecord.status);
 
-          data.rows.push({
-            schedTitle: historyRecord.schedTitle,
-            requester: historyRecord.requester,
-            description: historyRecord.description,
-            location: historyRecord.location,
-            professor: historyRecord.professor,
-            timeStart: new Date(historyRecord.timeStart).toLocaleString(
-              "en-US",
-              {
+            data.rows.push({
+              schedTitle: historyRecord.schedTitle,
+              requester: historyRecord.requester,
+              description: historyRecord.description,
+              location: historyRecord.location,
+              professor: historyRecord.professor,
+              timeStart: new Date(historyRecord.timeStart).toLocaleString(
+                "en-US",
+                {
+                  year: "numeric",
+                  month: "short",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }
+              ),
+              timeEnd: new Date(historyRecord.timeEnd).toLocaleString("en-US", {
                 year: "numeric",
                 month: "short",
                 day: "2-digit",
                 hour: "2-digit",
                 minute: "2-digit",
-              }
-            ),
-            timeEnd: new Date(historyRecord.timeEnd).toLocaleString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-            }),
-            status: (
-              <span style={{ color: statusColor }}>{historyRecord.status}</span>
-            ),
-            by: historyRecord.by,
-            createdAt: new Date(historyRecord.createdAt).toLocaleString(
-              "en-US",
-              {
-                year: "numeric",
-                month: "short",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-              }
-            ),
-          });
+              }),
+              status: (
+                <span style={{ color: statusColor }}>
+                  {historyRecord.status}
+                </span>
+              ),
+              by: historyRecord.by,
+              createdAt: new Date(historyRecord.createdAt).toLocaleString(
+                "en-US",
+                {
+                  year: "numeric",
+                  month: "short",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                }
+              ),
+            });
+          }
         });
       });
 
@@ -206,6 +217,7 @@ const AppointmentsList = () => {
                 <option value="All">All</option>
                 <option value="Approved">Approved</option>
                 <option value="Denied">Denied</option>
+                <option value="Overdued">Overdued</option>
                 <option value="Pending">Pending</option>
               </select>
             </div>

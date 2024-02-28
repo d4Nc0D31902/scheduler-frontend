@@ -225,6 +225,8 @@ const ProcessOrder = () => {
                         order.orderStatus &&
                         String(order.orderStatus).includes("Sold")
                           ? "greenColor"
+                          : order.orderStatus === "Paid"
+                          ? "greenColor"
                           : "redColor"
                       }
                     >
@@ -252,6 +254,9 @@ const ProcessOrder = () => {
                       <option value="For Pickup">For Pickup</option>
                       <option value="Sold">Sold</option>
                       <option value="Denied">Denied</option>
+                      {order.paymentMeth === "Walk-In" && (
+                        <option value="Paid">Paid</option>
+                      )}
                     </select>
                   </div>
 
@@ -259,6 +264,11 @@ const ProcessOrder = () => {
                     className="btn btn-primary btn-block"
                     onClick={() => updateOrderHandler(order._id)}
                     style={{ marginBottom: "200px" }}
+                    disabled={
+                      order.orderStatus === "Sold" ||
+                      order.orderStatus === "Denied" ||
+                      order.orderStatus === "Overdued"
+                    }
                   >
                     Update Status
                   </button>

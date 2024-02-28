@@ -35,6 +35,25 @@ const BorrowDetails = () => {
     setReasonStatus(storedReasonStatus || "");
   }, []);
 
+  const getStatusColorClass = (status) => {
+    switch (status) {
+      case "Approved":
+        return "text-success";
+      case "Denied":
+        return "text-danger";
+      case "Borrowed":
+        return "text-info";
+      case "Returned":
+        return "text-primary";
+      case "Pending":
+        return "text-warning";
+      case "Overdued":
+        return "text-danger";
+      default:
+        return "";
+    }
+  };
+
   const {
     loading,
     borrow = {},
@@ -145,20 +164,27 @@ const BorrowDetails = () => {
                       alt="Logo"
                     />
                     TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES TAGUIG CITY
-                    <p style={{ fontSize: "12px", marginTop: "10px" }}>The Technological University of the Philippines shall be premier state university with recognized excellence in
-                      engineering and technology education at per with the leading university in the ASEAN region.</p>
-                    <h4 className="my-4 text-center" style={{ textDecoration: "underline" }}>BORROWER'S SLIP</h4>
+                    <p style={{ fontSize: "12px", marginTop: "10px" }}>
+                      The Technological University of the Philippines shall be
+                      premier state university with recognized excellence in
+                      engineering and technology education at per with the
+                      leading university in the ASEAN region.
+                    </p>
+                    <h4
+                      className="my-4 text-center"
+                      style={{ textDecoration: "underline" }}
+                    >
+                      BORROWER'S SLIP
+                    </h4>
                   </h6>
 
                   <div
                     className="cart-item my-1"
                     style={{ backgroundColor: "" }}
                   >
-
-
-
-                    <h4 className="mb-4 text-center">SPORTS AND CULTURAL DEVELOPMENT OFFICE</h4>
-
+                    <h4 className="mb-4 text-center">
+                      SPORTS AND CULTURAL DEVELOPMENT OFFICE
+                    </h4>
 
                     <p>
                       <b>Requester's Information:</b> {user}
@@ -171,9 +197,7 @@ const BorrowDetails = () => {
                     {borrowItems &&
                       borrowItems.map((item) => (
                         <div key={item._id} className="row my-5">
-
                           <div className="col-4 col-lg-2">
-
                             <img
                               src={item.image}
                               alt={item.name}
@@ -196,23 +220,21 @@ const BorrowDetails = () => {
                       ))}
                   </div>
 
-
-
                   <p>
                     <b>Date Returned:</b>{" "}
                     {date_return
                       ? new Date(date_return).toLocaleString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "2-digit",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })
+                          year: "numeric",
+                          month: "short",
+                          day: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
                       : "Not returned yet"}
                   </p>
                   <div>
-                    <b>Issue/s:</b>{" "}
-                    <div
+                    {/* <b>Issue/s:</b>{" "} */}
+                    {/* <div
                       className="form-group"
                       style={{ display: "inline-block" }}
                     >
@@ -239,11 +261,15 @@ const BorrowDetails = () => {
                         </option>
                         <option value="Overdue">Overdue</option>
                       </select>
-                    </div>
+                    </div> */}
                   </div>
                   <p>
-                    <b>Status:</b> {orderStatus}
+                    <b>Status:</b>{" "}
+                    <span className={getStatusColorClass(orderStatus)}>
+                      {orderStatus}
+                    </span>
                   </p>
+
                   <div>
                     <b>Reason of Status:</b>{" "}
                     <div
@@ -264,7 +290,12 @@ const BorrowDetails = () => {
                     <div style={{ textAlign: "center", margin: "20px 0" }}>
                       <ReactToPrint
                         trigger={() => (
-                          <button className="btn btn-primary" style={{ padding: "12px 24px" }}>PRINT</button>
+                          <button
+                            className="btn btn-primary"
+                            style={{ padding: "12px 24px" }}
+                          >
+                            PRINT
+                          </button>
                         )} // Button to trigger printing
                         content={() => componentRef.current} // Content to be printed
                       />
@@ -300,7 +331,7 @@ const BorrowDetails = () => {
                       name="status"
                       value={status}
                       onChange={(e) => setStatus(e.target.value)}
-                    // disabled={status === "Returned"}
+                      // disabled={status === "Returned"}
                     >
                       <option value="Pending">Pending</option>
                       <option value="Approved">Approved</option>
@@ -314,6 +345,11 @@ const BorrowDetails = () => {
                     className="btn btn-primary btn-block"
                     onClick={() => updateBorrowHandler(borrow._id)}
                     style={{ marginBottom: "200px" }}
+                    disabled={
+                      borrow.status === "Returned" ||
+                      borrow.status === "Denied" ||
+                      borrow.status === "Overdued"
+                    }
                   >
                     UPDATE STATUS
                   </button>

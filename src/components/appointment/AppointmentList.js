@@ -48,6 +48,8 @@ const AppointmentsList = () => {
     switch (status) {
       case "Approved":
         return "green";
+      case "Moved":
+        return "orange";
       case "PE Class":
         return "green";
       case "Pending":
@@ -227,6 +229,7 @@ const AppointmentsList = () => {
                 <option value="Approved">Approved</option>
                 <option value="Denied">Denied</option>
                 <option value="Overdued">Overdued</option>
+                <option value="Moved">Moved</option>
                 <option value="Pending">Pending</option>
               </select>
             </div>

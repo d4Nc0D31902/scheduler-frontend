@@ -33,7 +33,8 @@ function MyCalendar() {
             .filter(
               (appointment) =>
                 appointment.status === "Approved" ||
-                appointment.status === "PE Class"
+                appointment.status === "PE Class" ||
+                appointment.status === "Moved"
             )
             .map((appointment) => ({
               title: appointment.title,

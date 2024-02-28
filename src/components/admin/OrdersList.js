@@ -60,6 +60,12 @@ const OrdersList = () => {
       if (filter === "Sold") {
         return order.orderStatus === "Sold";
       }
+      if (filter === "Denied") {
+        return order.orderStatus === "Denied";
+      }
+      if (filter === "Overdued") {
+        return order.orderStatus === "Overdued";
+      }
       return true;
     });
 
@@ -93,20 +99,22 @@ const OrdersList = () => {
       rows: [],
     };
 
-    
-
     filteredOrders.forEach((order) => {
       data.rows.push({
         numofItems: order.orderItems.length,
         amount: `₱${order.totalPrice}`,
         status:
-          order.orderStatus &&
-          String(order.orderStatus).includes("Sold") ? (
+          order.orderStatus === "Pending" ? (
+            <p style={{ color: "orange" }}>{order.orderStatus}</p>
+          ) : order.orderStatus === "Paid" ? (
+            <p style={{ color: "green" }}>{order.orderStatus}</p>
+          ) : order.orderStatus &&
+            String(order.orderStatus).includes("Sold") ? (
             <p style={{ color: "green" }}>{order.orderStatus}</p>
           ) : (
             <p style={{ color: "red" }}>{order.orderStatus}</p>
           ),
-        customerName: order.customer, 
+        customerName: order.customer,
         actions: (
           <Fragment>
             <Link
@@ -148,6 +156,8 @@ const OrdersList = () => {
                 <option value="Pending">Pending</option>
                 <option value="For Pickup">For Pickup</option>
                 <option value="Sold">Sold</option>
+                <option value="Overdued">Overdued</option>
+                <option value="Denied">Denied</option>
               </select>
             </div>
             {loading ? (

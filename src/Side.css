@@ -1,0 +1,15 @@
+.sidebar {
+    /* Your existing styles */
+    transition: width 0.3s;
+}
+
+.sidebar.minimized {
+    width: 80px;
+    /* Adjust this value as needed */
+}
+
+.toggle-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+}

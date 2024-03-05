@@ -15,6 +15,7 @@ const Header = () => {
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
 
+
   const logoutHandler = () => {
     dispatch(logout())
       .then(() => {
@@ -27,7 +28,6 @@ const Header = () => {
 
   const isHomePage = location.pathname === "/";
   const isStore = location.pathname === "/store";
-  // const isSearch = location.pathname === "/search/";
 
   return (
     <Fragment>
@@ -58,11 +58,9 @@ const Header = () => {
           </div>
         </div>
 
-        {isStore && (
-          <div className="col-lg-3 col-sm-6 col-md-3">
-            <Search />
-          </div>
-        )}
+
+
+
 
         <div className=" col-md-6   text-center">
           <div
@@ -76,6 +74,8 @@ const Header = () => {
             >
               <i className="fa fa-bars"></i>
             </div>
+
+
 
             <div className="nav-links">
               {!isHomePage && (
@@ -143,69 +143,7 @@ const Header = () => {
               )}
             </div>
 
-            {/* {!isHomePage && (
-              <>
-                <Link
-                  to="/cart"
-                  style={{ textDecoration: "none", marginLeft: "10px" }}
-                >
-                  <span id="cart">
-                    <i className="fa fa-shopping-basket"></i> Cart
-                    <span className="ml-1" id="cart_count">
-                      {cartItems.length}
-                    </span>
-                  </span>
-                </Link>
 
-                <Link
-                  to="/borrowCart"
-                  style={{ textDecoration: "none", marginLeft: "10px" }}
-                >
-                  <span id="cart">
-                    <i className="fa fa-briefcase"></i> Borrowed
-                    <span className="ml-1" id="cart_count">
-                      {borrowCartItems.length}
-                    </span>
-                  </span>
-                </Link>
-
-                <Link
-                  to="/calendar"
-                  style={{ textDecoration: "none", marginLeft: "10px" }}
-                >
-                  <span id="cart">
-                    <i className="fa fa-calendar"></i> Calendar
-                  </span>
-                </Link>
-
-                <Link
-                  to="/announcements"
-                  style={{ textDecoration: "none", marginLeft: "10px" }}
-                >
-                  <span id="cart">
-                    <i className="fa fa-bullhorn"></i> Announcements
-                  </span>
-                </Link>
-
-                <Link
-                  to="/store"
-                  style={{ textDecoration: "none", marginLeft: "10px" }}
-                >
-                  <span id="cart">
-                    <i className="fa fa-product-hunt"></i> Merch
-                  </span>
-                </Link>
-
-                <Link
-                  to="/equipmentz"
-                  style={{ textDecoration: "none", marginLeft: "10px" }}
-                >
-                  <span id="cart">
-                    <i className="fa fa-wrench"></i> Equipment
-                  </span>
-                </Link>
-              </>
-            )} */}
 
             {user ? (
               <div className="ml-4 dropdown d-inline">

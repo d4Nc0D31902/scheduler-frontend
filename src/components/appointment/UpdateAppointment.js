@@ -5,7 +5,7 @@ import Sidebar from "../admin/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Calendar from "../calendar/AdminCalendar"
+import Calendar from "../calendar/AdminCalendar";
 import "react-toastify/dist/ReactToastify.css";
 import {
   updateAppointment,
@@ -66,6 +66,7 @@ const UpdateAppointment = () => {
   }, []);
 
   useEffect(() => {
+    console.log("Appointment:", appointment);
     if (!appointment || appointment._id !== id) {
       dispatch(getAppointmentDetails(id));
     } else {
@@ -139,16 +140,25 @@ const UpdateAppointment = () => {
     if (value === "Denied" || value === "Pending") {
       setKey("");
     }
+    if (moveSelected) {
+      setStatus("Moved");
+    }
   };
+
+  const isDisabled = ["Approved", "Denied", "Overdued", "Moved"].includes(
+    status
+  );
 
   return (
     <Fragment>
       <MetaData title={"Update Schedules"} />
       <div className="row">
-        <Calendar />
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>
+        {/* <div style={{ width: "50%", height: "300px" }}>
+          <Calendar />
+        </div> */}
         <div className="col-12 col-md-10">
           <div className="wrapper my-5">
             <form className="shadow-lg" onSubmit={submitHandler}>
@@ -208,18 +218,6 @@ const UpdateAppointment = () => {
                 ></textarea>
               </div>
 
-              {/* <div className="form-group">
-                <label htmlFor="location_field">Location</label>
-                <input
-                  type="text"
-                  id="location_field"
-                  className="form-control"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  disabled={!moveSelected}
-                />
-              </div> */}
-
               <div className="form-group">
                 <label htmlFor="location_field">Location:</label>
                 <select
@@ -246,13 +244,28 @@ const UpdateAppointment = () => {
                 </select>
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="move_field">Move</label>
                 <input
                   type="checkbox"
                   id="move_field"
                   checked={moveSelected}
                   onChange={() => setMoveSelected(!moveSelected)}
+                />
+              </div> */}
+
+              <div className="form-group">
+                <label htmlFor="move_field">Move</label>
+                <input
+                  type="checkbox"
+                  id="move_field"
+                  checked={moveSelected}
+                  onChange={() => {
+                    setMoveSelected(!moveSelected);
+                    if (!moveSelected) {
+                      setStatus("Moved");
+                    }
+                  }}
                 />
               </div>
 
@@ -306,6 +319,9 @@ const UpdateAppointment = () => {
                   <option value="Approved">Approved</option>
                   <option value="Pending">Pending</option>
                   <option value="Denied">Denied</option>
+                  <option value="Moved" disabled={!moveSelected}>
+                    Moved
+                  </option>
                 </select>
               </div>
 
@@ -375,6 +391,7 @@ const UpdateAppointment = () => {
                         className="btn btn-outline-secondary"
                         type="button"
                         onClick={generateRandomKey}
+                        disabled={!moveSelected}
                       >
                         Generate
                       </button>
@@ -383,10 +400,19 @@ const UpdateAppointment = () => {
                 </div>
               </div>
 
+              {/* <button
+                id="login_button"
+                type="submit"
+                className="btn btn-block py-3"
+                disabled={isDisabled}
+              >
+                UPDATE
+              </button> */}
               <button
                 id="login_button"
                 type="submit"
                 className="btn btn-block py-3"
+                disabled={!moveSelected}
               >
                 UPDATE
               </button>

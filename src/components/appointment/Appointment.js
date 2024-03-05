@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import ReactToPrint from "react-to-print";
 import PrintableLetter from "./PrintableLetter";
+import "./appointment.css";
 import {
   createAppointment,
   clearErrors,
@@ -334,7 +335,7 @@ const NewAppointment = () => {
           <div className="form-group">
             <label htmlFor="body_field">Description</label>
             <textarea
-              className={`form-control ${descriptionError && "is-invalid"}`}
+              className={`form-control ${descriptionError && "is-invalid"}hide-on-print`}
               id="body_field"
               placeholder="Describe the event..."
               rows="8"
@@ -347,11 +348,11 @@ const NewAppointment = () => {
             )}
           </div>
 
-          <div className="form-group">
+          <div className="form-group hide-on-print">
             <label htmlFor="location_field">Location:</label>
             <select
               id="location_field"
-              className={`form-control ${errors.location && "is-invalid"}`}
+              className={`form-control ${errors.location && "is-invalid"}hide-on-print`}
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             >
@@ -376,7 +377,7 @@ const NewAppointment = () => {
           </div>
 
           {location === "Outdoor Court" && (
-            <div className="form-group">
+            <div className="form-group hide-on-print">
               <label htmlFor="professor_field">Professor:</label>
               <select
                 id="professor_field"
@@ -403,7 +404,7 @@ const NewAppointment = () => {
             </div>
           )}
 
-          <div className="form-group">
+          <div className="form-group hide-on-print">
             <label htmlFor="timeStart_field">Date & Time Start:</label>
             <input
               type="datetime-local"
@@ -418,7 +419,7 @@ const NewAppointment = () => {
             )}
           </div>
 
-          <div className="form-group">
+          <div className="form-group hide-on-print">
             <label htmlFor="endTime_field">Date & Time End:</label>
             <input
               type="datetime-local"
@@ -434,7 +435,7 @@ const NewAppointment = () => {
           </div>
 
           {user.role === "professor" && (
-            <div className="form-group">
+            <div className="form-group hide-on-print">
               <label>Appointment Type:</label>
               <div>
                 <input
@@ -451,7 +452,7 @@ const NewAppointment = () => {
             </div>
           )}
 
-          <div className="form-group">
+          <div className="form-group hide-on-print">
             <label className="form-label mt-3">Upload Waiver & Letter:</label>
             <div className="custom-file">
               <input
@@ -487,7 +488,7 @@ const NewAppointment = () => {
 
           <div className="text-center">
             <button
-              className="btn btn-secondary ml-3"
+              className="btn btn-secondary ml-3 hide-on-print"
               onClick={() => window.print()}
               style={{ padding: "12px 24px" }}
             >
@@ -503,7 +504,7 @@ const NewAppointment = () => {
           <button
             id="login_button"
             type="submit"
-            className="btn btn-block py-3"
+            className="btn btn-block py-3 hide-on-print"
             disabled={loading}
             style={{ backgroundColor: "maroon", color: "white" }}
           >

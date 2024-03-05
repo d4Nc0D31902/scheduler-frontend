@@ -36,76 +36,60 @@ const ConfirmBorrow = () => {
   return (
     <Fragment>
       <MetaData title={"Confirm Order"} />
-      {/* <BorrowingSteps borrowingInfo confirmBorrow /> */}
-      <BorrowingSteps confirmBorrow />
-      <div className="row d-flex justify-content-between">
-        <div className="col-12 col-lg-8 mt-5 order-confirm">
-          <h4 className="mb-3">Information</h4>
-          <p>
-            <b>Name:</b> {user && user.name}
-          </p>
-          {/* <p>
-            <b>Date of Borrow:</b> {dateOfBorrow}
-          </p> */}
-          {/* <p>
-            <b>Reason for Borrow:</b> {reasonOfBorrow}
-          </p> */}
-          <hr />
-
-          <h4 className="mt-4">Your Items:</h4>
-          {borrowCartItems.map((item) => (
-            <Fragment key={item.equipment}>
-              <hr />
-              <div className="cart-item my-1">
-                <div className="row">
-                  <div className="col-4 col-lg-2">
-                    <img
-                      src={item.image}
-                      alt="Equipment"
-                      height="45"
-                      width="65"
-                    />
-                  </div>
-                  <div className="col-5 col-lg-6">
-                    <Link to={`/product/${item.equipment}`}>{item.name}</Link>
-                  </div>
-
-                  <div className="col-4 col-lg-4 mt-4 mt-lg-0">
-                    <p>
-                      {item.quantity} x {item.name}
-                    </p>
-                  </div>
+      <section class="h-100 gradient-custom">
+        <div class="container py-5">
+          <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-8">
+              <div class="card mb-4">
+                <div class="card-header py-3">
+                  <h5 class="mb-0">EQUIPMENT TO BORROW</h5>
+                </div>
+                <div class="card-body">
+                  {borrowCartItems.map((item, index) => (
+                    <Fragment key={index}>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                          <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                            <img src={item.image} class="w-100" alt={item.name} />
+                            <a href="#!">
+                              <div class="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}></div>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                          <p><strong>{item.name}</strong></p>
+                          <p>Quantity: {item.quantity}</p>
+                          <Link to={`/product/${item.equipment}`} class="btn btn-primary btn-sm me-1 mb-2">View Details</Link>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                          <p class="text-start text-md-center"><strong>{item.price}</strong></p>
+                        </div>
+                      </div>
+                      <hr class="my-4" />
+                    </Fragment>
+                  ))}
                 </div>
               </div>
-
-              <hr />
-            </Fragment>
-          ))}
-        </div>
-
-        <div className="col-12 col-lg-3 my-4">
-          <div id="order_summary">
-            <h4>Item Summary</h4>
-
-            <hr />
-
-            <p>
-              Total Items:{" "}
-              <span className="order-summary-values">{totalItems}</span>
-            </p>
-
-            <hr />
-
-            <button
-              id="checkout_btn"
-              className="btn btn-primary btn-block"
-              onClick={processToPayment}
-            >
-              Proceed to Borrow
-            </button>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h5 class="mb-3">Information</h5>
+                  <p><b>Name:</b> {user && user.name}</p>
+                  <hr />
+                  <h5 class="mt-4">Item Summary</h5>
+                  <p>Total Items: <span class="order-summary-values">{totalItems}</span></p>
+                </div>
+              </div>
+              <div class="card mb-4 mb-lg-0">
+                <div class="card-body">
+                  <button id="checkout_btn" class="btn btn-primary btn-block" onClick={processToPayment}>Proceed to Borrow</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </Fragment>
   );
 };

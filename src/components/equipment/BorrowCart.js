@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
+import "./cartborrow.css";
 import {
   addItemToBorrowCart,
   removeItemFromBorrowCart,
@@ -33,126 +34,97 @@ const BorrowCart = () => {
   };
 
   return (
-    <Fragment>
-      <MetaData title={"Your Borrow Cart"} />
-      {borrowCartItems.length === 0 ? (
-        <h2 className="mt-5">Nothing to Borrow</h2>
-      ) : (
-        <Fragment>
-          <h2 className="mt-5">
-            You are Borrowing: <b>{borrowCartItems.length} items</b>
-          </h2>
-          <div className="row d-flex justify-content-between">
-            <div className="col-12 col-lg-8">
-              {borrowCartItems.map((item) => (
-                <Fragment key={item.equipment}>
-                  <hr />
-                  <div className="cart-item">
-                    <div className="row">
-                      <div className="col-4 col-lg-3">
-                        <img
-                          src={item.image}
-                          alt="Equipment"
-                          height="90"
-                          width="115"
-                        />
+    <section className="h-100 h-custom" style={{ backgroundColor: "white" }}>
+      <div className="container py-5 h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-12">
+            <div className="card card-registration card-registration-2" style={{ borderRadius: "15px" }}>
+              <div className="card-body p-0">
+                <div className="row g-0">
+                  <div className="col-lg-8">
+                    <div className="p-5">
+                      <div className="d-flex justify-content-between align-items-center mb-5">
+                        <h1 className="fw-bold mb-0 text-black">BORROWING LIST</h1>
+                        <h6 className="mb-0 text-muted">{borrowCartItems.length} items to borrow</h6>
                       </div>
-                      <div className="col-5 col-lg-3">
-                        <Link to={`/equipments/${item.equipment}`}>
-                          {item.name}
-                        </Link>
-                      </div>
-                      <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                        {/* <p id="card_item_price">{item.price}</p> */}
-                      </div>
-                      <div className="col-4 col-lg-3 mt-4 mt-lg-0">
-                        <div className="stockCounter d-inline">
-                          <span
-                            className="btn btn-danger minus"
-                            onClick={() =>
-                              decreaseQty(item.equipment, item.quantity)
-                            }
-                          >
-                            -
-                          </span>
+                      <hr className="my-4" />
 
-                          <input
-                            type="number"
-                            className="form-control count d-inline"
-                            value={item.quantity}
-                            readOnly
-                          />
-                          <span
-                            className="btn btn-primary plus"
-                            onClick={() =>
-                              increaseQty(
-                                item.equipment,
-                                item.quantity,
-                                item.stock
-                              )
-                            }
-                          >
-                            +
-                          </span>
-                        </div>
-                      </div>
-                      <div className="col-4 col-lg-1 mt-4 mt-lg-0">
-                        <i
-                          id="delete_cart_item"
-                          className="fa fa-trash btn btn-danger"
-                          onClick={() =>
-                            removeBorrowCartItemHandler(item.equipment)
-                          }
-                        ></i>
+
+                      {borrowCartItems.map((item) => (
+                        <Fragment key={item.equipment}>
+                          <div className="row mb-4 d-flex justify-content-between align-items-center">
+                            <div className="col-md-2 col-lg-2 col-xl-2">
+                              <img
+                                src={item.image}
+                                className="img-fluid rounded-3" alt="Cotton T-shirt"
+                              />
+                            </div>
+                            <div className="col-md-3 col-lg-3 col-xl-3">
+
+                              <h6 className="text-black mb-0"> {item.name}</h6>
+                            </div>
+                            <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
+                              <button className="btn btn-link px-2" onClick={() => decreaseQty(item.equipment, item.quantity)}>
+                                <i className="fas fa-minus"></i>
+                              </button>
+
+                              <input id="form1" min="0" name="quantity" value="1" type="number" className="form-control form-control-sm" />
+
+                              <button className="btn btn-link px-2" onClick={() => increaseQty(item.equipment, item.quantity, item.stock)}>
+                                <i className="fas fa-plus"></i>
+                              </button>
+                            </div>
+
+                            <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                              <a href="#!" className="text-muted"><i className="fas fa-times"></i></a>
+                            </div>
+                          </div>
+                          <hr className="my-4" />
+                        </Fragment>
+                      ))}
+
+
+                      <div className="pt-5">
+                        <h6 className="mb-0"><a href="#!" className="text-body"><i className="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
                       </div>
                     </div>
                   </div>
-                  <hr />
-                </Fragment>
-              ))}
-            </div>
-            <div className="col-12 col-lg-3 my-4">
-              <div id="order_summary">
-                <h4>Item Summary</h4>
-                <hr />
-                <p>
-                  Total of Items:{" "}
-                  <span className="order-summary-values">
-                    {borrowCartItems.reduce(
-                      (acc, item) => acc + Number(item.quantity),
-                      0
-                    )}{" "}
-                    (Items)
-                  </span>
-                </p>
-                {/* <p>
-                  Est. total:{" "}
-                  <span className="order-summary-values">
-                    $
-                    {borrowCartItems
-                      .reduce(
-                        // (acc, item) => acc + item.quantity * item.price,
-                        (acc, item) => acc + item.quantity,
-                        0
-                      )
-                      .toFixed(2)}
-                  </span>
-                </p> */}
-                <hr />
+                  <div className="col-lg-4 bg-grey">
+                    <div className="p-5">
+                      <h3 className="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                      <hr className="my-4" />
 
-                <button
-                  id="checkout_btn"
-                  className="btn btn-primary btn-block"
-                  onClick={checkoutHandler}
-                >
-                  Continue
-                </button>
+
+
+                      <p>
+                        Total of Items:{" "}
+                        <span className="order-summary-values">
+                          {borrowCartItems.reduce(
+                            (acc, item) => acc + Number(item.quantity),
+                            0
+                          )}{" "}
+                          (Items)
+                        </span>
+                      </p>
+
+
+
+
+
+
+                      <button type="button" className="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark" onClick={checkoutHandler}>
+                        Continue
+                      </button>
+
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </Fragment>
-      )}
-    </Fragment>
+        </div>
+      </div>
+    </section>
   );
 };
 

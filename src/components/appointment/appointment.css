@@ -1,0 +1,32 @@
+
+
+@media print {
+    .center-request {
+        display: none;
+    }
+
+    .fc-header-toolbar {
+        display: none;
+    }
+
+    .fc-header-toolbar .fc-button {
+        display: none;
+    }
+
+    Header {
+        display: none;
+    }
+
+    nav.navbar {
+        display: none;
+    }
+
+
+
+}
+
+@media print {
+    .hide-on-print {
+        display: none;
+    }
+}

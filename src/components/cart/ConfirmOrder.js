@@ -8,111 +8,112 @@ const ConfirmOrder = () => {
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   let navigate = useNavigate();
-  // Calculate Order Prices
-  const itemsPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
-  // const shippingPrice = itemsPrice > 200 ? 0 : 25;
-  // const taxPrice = Number((0.05 * itemsPrice).toFixed(2));
-  // const totalPrice = (itemsPrice + shippingPrice + taxPrice).toFixed(2);
-  const totalPrice = (itemsPrice ).toFixed(2);
-
+  const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalPrice = (itemsPrice).toFixed(2);
 
   const processToPayment = () => {
     const data = {
       itemsPrice: itemsPrice.toFixed(2),
-      // shippingPrice,
-      // taxPrice,
       totalPrice,
     };
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
     navigate("/payment");
   };
+
   return (
     <Fragment>
       <MetaData title={"Confirm Order"} />
       <CheckoutSteps shipping confirmOrder />
-      <div className="row d-flex justify-content-between">
-        <div className="col-12 col-lg-8 mt-5 order-confirm">
-          <h4 className="mb-3">Information</h4>
-          <p>
-            <b>Name:</b> {user && user.name}
-          </p>
-          <p>
-            <b>Phone:</b> {shippingInfo.phoneNo}
-          </p>
-          <p className="mb-4">
-            <b>Address:</b>{" "}
-            {`${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.postalCode}, ${shippingInfo.country}`}
-          </p>
-          <hr />
+      <section className="h-100 gradient-custom">
+        <div className="container py-5">
+          <div className="row d-flex justify-content-center my-4">
+            <div className="col-md-8">
+              <div className="card mb-4">
+                <div className="card-header py-3">
+                  <h5 className="mb-0">  <img
+                    src="/images/tupt_logo.png"
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      marginRight: "25px",
+                    }}
+                    alt="Logo"
+                  />
+                    TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES TAGUIG CITY
+                    <p style={{ fontSize: "12px", marginTop: "10px", textAlign: "center" }}>
+                      The Technological University of the Philippines shall be
+                      premier state university with recognized excellence in
+                      engineering and technology education at per with the
+                      leading university in the ASEAN region.
+                    </p></h5>
+                </div>
+                <div className="card-body">
+                  <table className="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">PRE-ORDER LIST</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cartItems.map((item) => (
+                        <tr key={item.product}>
+                          <td>
+                            <img src={item.image} alt={item.name} style={{ width: "80px" }} />
+                            <Link to={`/product/${item.product}`} className="ms-2">{item.name}</Link>
+                          </td>
+                          <td>₱{(item.price * item.quantity).toFixed(2)}</td>
 
-          <h4 className="mt-4">Your Cart Items:</h4>
-          {cartItems.map((item) => (
-            <Fragment key={item.product}>
-              <hr />
-              <div className="cart-item my-1">
-                <div className="row">
-                  <div className="col-4 col-lg-2">
-                    <img src={item.image} alt="Laptop" height="45" width="65" />
-                  </div>
-                  <div className="col-5 col-lg-6">
-                    <Link to={`/product/${item.product}`}>{item.name}</Link>
-                  </div>
+                        </tr>
 
-                  <div className="col-4 col-lg-4 mt-4 mt-lg-0">
-                    <p>
-                      {item.quantity} x ₱{item.price} ={" "}
-                      <b>₱{(item.quantity * item.price).toFixed(2)}</b>
-                    </p>
-                  </div>
+                      ))}
+                      <p><strong>AMOUNT TO PAY:</strong> ₱{totalPrice}</p>
+
+                    </tbody>
+
+                  </table>
                 </div>
               </div>
-
-              <hr />
-            </Fragment>
-          ))}
-        </div>
-
-        <div className="col-12 col-lg-3 my-4">
-          <div id="order_summary">
-            <h4>Order Summary</h4>
-
-            <hr />
-
-            <p>
-              Subtotal:{" "}
-              <span className="order-summary-values">₱{itemsPrice}</span>
-            </p>
-
-            {/* <p>
-              Shipping:{" "}
-              <span className="order-summary-values">${shippingPrice}</span>
-            </p> */}
-
-            {/* <p>
-              Tax: <span className="order-summary-values">${taxPrice}</span>
-            </p> */}
-
-            <hr />
-
-            <p>
-              Total: <span className="order-summary-values">₱{totalPrice}</span>
-            </p>
-
-            <hr />
-
-            <button
-              id="checkout_btn"
-              className="btn btn-primary btn-block"
-              onClick={processToPayment}
-            >
-              Proceed to Payment
-            </button>
+             
+            </div>
+            <div className="col-md-4">
+              <div className="card mb-4">
+                <div className="card-header py-3">
+                  <h5 className="mb-0">PRE-ORDERED SUMMARY</h5>
+                </div>
+                <div className="card-body">
+                  <ul className="list-group list-group-flush">
+                   
+                    <li className="list-group-item d-flex justify-content-between align-items-center">
+                      <strong>Name:</strong>
+                      <span>{user && user.name}</span>
+                    </li>
+                    <li className="list-group-item d-flex justify-content-between align-items-center">
+                      <strong>Email:</strong>
+                      <span>{user && user.email}</span>
+                    </li>
+                    <li className="list-group-item d-flex justify-content-between align-items-center">
+                      <strong>Phone:</strong>
+                      <span>{shippingInfo.phoneNo}</span>
+                    </li>
+                    <li className="list-group-item d-flex justify-content-between align-items-center">
+                      <strong>Address:</strong>
+                      <span>{`${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.postalCode}, ${shippingInfo.country}`}</span>
+                    </li>
+                    <li className="list-group-item d-flex justify-content-between align-items-center">
+                      <strong>Subtotal: </strong>
+                      <span>₱{totalPrice}</span>
+                    </li>
+                    <button className="btn btn-primary btn-block" onClick={processToPayment}>
+                      Proceed to Payment
+                    </button>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </Fragment>
   );
 };

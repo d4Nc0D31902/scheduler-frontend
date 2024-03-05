@@ -171,12 +171,6 @@ const OrderDetails = () => {
                 <b>Reference Number:</b> {order && order.reference_num}
               </p>
               
-              <p>
-                <b>Payment Status: </b>
-                <b className={isPaid ? "greenColor" : "redColor"}>
-                  {isPaid ? "PAID" : "NOT PAID"}
-                </b>
-              </p>
               <p style={{ marginBottom: "100px" }}>
                 <b>Order Status: </b>{" "}
                 <b

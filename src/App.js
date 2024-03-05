@@ -97,6 +97,7 @@ import UpdateCategory from "./components/admin/UpdateCategory.js";
 
 import HomePage from "./components/homepage/HomePage.js";
 
+
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());

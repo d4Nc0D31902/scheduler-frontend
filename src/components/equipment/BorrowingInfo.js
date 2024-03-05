@@ -4,24 +4,23 @@ import MetaData from "../layout/MetaData";
 import BorrowingSteps from "./BorrowingSteps";
 import { useDispatch, useSelector } from "react-redux";
 import { saveBorrowingInfo } from "../../actions/borrowCartActions";
+import { MDBInput, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 
 const BorrowingInfo = () => {
   const { borrowCartItems } = useSelector((state) => state.borrowCart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Load borrowingInfo from sessionStorage or initialize with default values
   const [borrowingInfo, setBorrowingInfo] = useState(() => {
     const savedBorrowingInfo = sessionStorage.getItem("borrowingInfo");
     return savedBorrowingInfo
       ? JSON.parse(savedBorrowingInfo)
       : {
-          date_borrow: new Date().toISOString().slice(0, 16), // Initial value is current datetime
-          reason_borrow: "",
-        };
+        date_borrow: new Date().toISOString().slice(0, 16),
+        reason_borrow: "",
+      };
   });
 
-  // Update sessionStorage whenever borrowingInfo changes
   useEffect(() => {
     sessionStorage.setItem("borrowingInfo", JSON.stringify(borrowingInfo));
   }, [borrowingInfo]);
@@ -29,29 +28,26 @@ const BorrowingInfo = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // Validate other form fields if needed
-
     dispatch(
       saveBorrowingInfo({ borrowItems: borrowCartItems, borrowingInfo })
     );
-    navigate("/confirmBorrow", { state: { borrowingInfo } }); // Pass borrowingInfo as state parameter
+    navigate("/confirmBorrow", { state: { borrowingInfo } });
   };
 
   return (
     <Fragment>
       <MetaData title={"Borrowing Info"} />
       <BorrowingSteps borrowingInfo />
-      <div className="row wrapper">
-        <div className="col-10 col-lg-5">
-          <form className="shadow-lg" onSubmit={submitHandler}>
-            <h1 className="mb-4">Borrowing Information</h1>
+      <div className="container my-4">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <form onSubmit={submitHandler}>
+              <h2 className="mb-4">Borrowing Information</h2>
 
-            <div className="form-group">
-              <label htmlFor="date_borrow_field">Date Borrow</label>
-              <input
+              <MDBInput
+                label="Date Borrow"
                 type="datetime-local"
                 id="date_borrow_field"
-                className="form-control"
                 value={borrowingInfo.date_borrow}
                 onChange={(e) =>
                   setBorrowingInfo({
@@ -61,13 +57,11 @@ const BorrowingInfo = () => {
                 }
                 required
               />
-            </div>
 
-            <div className="form-group">
-              <label htmlFor="reason_borrow_field">Reason for Borrow</label>
-              <select
+              <MDBInput
+                label="Reason for Borrow"
+                type="select"
                 id="reason_borrow_field"
-                className="form-control"
                 value={borrowingInfo.reason_borrow}
                 onChange={(e) =>
                   setBorrowingInfo({
@@ -77,23 +71,22 @@ const BorrowingInfo = () => {
                 }
                 required
               >
-                <option value="" disabled selected>
-                  Select a reason
-                </option>
+                <option value="" disabled>Select a reason</option>
                 <option value="For Play">For Play</option>
                 <option value="PE Class">PE Class</option>
                 <option value="For Event">For Event</option>
-              </select>
-            </div>
+              </MDBInput>
 
-            <button
-              id="shipping_btn"
-              type="submit"
-              className="btn btn-block py-3"
-            >
-              CONTINUE
-            </button>
-          </form>
+              <MDBBtn
+                id="shipping_btn"
+                type="submit"
+                className="btn btn-primary btn-block btn-lg mt-4"
+              >
+                <MDBIcon icon="paper-plane" className="me-2" />
+                CONTINUE
+              </MDBBtn>
+            </form>
+          </div>
         </div>
       </div>
     </Fragment>

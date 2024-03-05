@@ -297,3 +297,25 @@
     display: none !important;
   }
 }
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #8e0e0b;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(142, 14, 11, 1), rgba(153, 153, 153, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(142, 14, 11, 1), rgb(177, 102, 102));
+}
+
+body {
+  background-color: #fbfbfb;
+}
+
+@media (min-width: 991.98px) {
+  main {
+    padding-left: 240px;
+  }
+}
+

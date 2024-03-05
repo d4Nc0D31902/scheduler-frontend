@@ -12,6 +12,7 @@ import { getProducts } from "../actions/productActions";
 import Product from "./product/Product";
 import Loader from "./layout/Loader";
 import "../Product.css";
+import Search from "./layout/Search"; // Adjust the path if necessary
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -91,19 +92,29 @@ const Home = () => {
               Explore our latest collection of merchandise and find your
               favorites
             </p>
+
           </header>
           <section id="products" className="container ">
+            <div className="col-lg-4">
+              <Search /> {/* Place the Search component here */}
+            </div>
             <div className="row">
               <div className="col-6 col-md-3 mt-5 mb-5">
                 <div className="px-4">
+
                   <div className="merch-card p-4">
-                    <h4 className="merch-title mb-3">MERCHANDISE CATEGORIES</h4>
+
+                    <h4 className="merch-title mb-3">
+                      MERCHANDISE CATEGORIES
+                    </h4>
                     <ul className="merch-list pl-0">
                       {categories.map((categoryItem) => (
                         <li
                           key={categoryItem._id}
                           className="merch-item"
-                          onClick={() => handleCategoryClick(categoryItem.name)}
+                          onClick={() =>
+                            handleCategoryClick(categoryItem.name)
+                          }
                         >
                           {categoryItem.name}
                         </li>

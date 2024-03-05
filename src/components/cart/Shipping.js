@@ -13,9 +13,29 @@ const Shipping = () => {
   const [city, setCity] = useState(shippingInfo.city);
   const [postalCode, setPostalCode] = useState(shippingInfo.postalCode);
   const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
+  const [phoneNoError, setPhoneNoError] = useState("");
   const country = "Philippines"; // Set country as constant
   const dispatch = useDispatch();
   let navigate = useNavigate();
+
+  const validatePostalCode = (postalCode) => {
+    // Philippine postal code format validation
+    if (!/^\d{4}$/.test(postalCode)) {
+      alert("Please enter a valid Philippine postal code (4 digits).");
+      return false;
+    }
+    return true;
+  };
+
+  const validatePhoneNumber = (phoneNo) => {
+    // Philippine phone number format validation
+    if (!/^(09|\+639)\d{9}$/.test(phoneNo)) {
+      setPhoneNoError("Please enter a valid phone number.");
+      return false;
+    }
+    setPhoneNoError("");
+    return true;
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -24,12 +44,9 @@ const Shipping = () => {
       return;
     }
 
-    // Additional validation can be added here, such as checking postal code format, phone number format, etc.
-    // For example:
-    // if (!/^\d{5}$/.test(postalCode)) {
-    //   alert("Please enter a valid postal code.");
-    //   return;
-    // }
+    if (!validatePostalCode(postalCode) || !validatePhoneNumber(phoneNo)) {
+      return;
+    }
 
     dispatch(saveShippingInfo({ address, city, phoneNo, postalCode, country }));
     navigate("/confirm");
@@ -39,78 +56,75 @@ const Shipping = () => {
     <Fragment>
       <MetaData title={"Shipping Info"} />
       <CheckoutSteps shipping />
-      <div className="row wrapper">
-        <div className="col-10 col-lg-5">
-          <form className="shadow-lg" onSubmit={submitHandler}>
-            <h1 className="mb-4">Information</h1>
-            <div className="form-group">
-              <label htmlFor="address_field">Address</label>
-              <input
-                type="text"
-                id="address_field"
-                className="form-control"
-                placeholder="Enter your address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
+      <div className="container mt-5">
+        <div className="row justify-content-center">
+          <div className="col-lg-6">
+            <div className="card p-4 shadow border-0 rounded">
+              <h2 className="text-center mb-4">Your Information</h2>
+              <form onSubmit={submitHandler}>
+                <div className="mb-3">
+                  <label htmlFor="address_field" className="form-label">Address</label>
+                  <input
+                    type="text"
+                    id="address_field"
+                    className="form-control"
+                    placeholder="Enter your address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="city_field" className="form-label">City</label>
+                  <input
+                    type="text"
+                    id="city_field"
+                    className="form-control"
+                    placeholder="Enter your city"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="phone_field" className="form-label">Mobile Number</label>
+                  <input
+                    type="tel"
+                    id="phone_field"
+                    className={`form-control ${phoneNoError ? "border border-danger" : ""}`}
+                    placeholder="Enter your phone number (e.g. 09123456789)"
+                    value={phoneNo}
+                    onChange={(e) => setPhoneNo(e.target.value)}
+                    required
+                  />
+                  {phoneNoError && <div className="text-danger">{phoneNoError}</div>}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="postal_code_field" className="form-label">Postal Code</label>
+                  <input
+                    type="text"
+                    id="postal_code_field"
+                    className="form-control"
+                    placeholder="Enter your postal code"
+                    value={postalCode}
+                    onChange={(e) => setPostalCode(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="country_field" className="form-label">Country</label>
+                  <input
+                    type="text"
+                    id="country_field"
+                    className="form-control"
+                    value={country}
+                    readOnly
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary btn-block">CONTINUE</button>
+              </form>
             </div>
-            <div className="form-group">
-              <label htmlFor="city_field">City</label>
-              <input
-                type="text"
-                id="city_field"
-                className="form-control"
-                placeholder="Enter your city"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="phone_field">Phone No</label>
-              <input
-                type="tel"
-                id="phone_field"
-                className="form-control"
-                placeholder="Enter your phone number"
-                value={phoneNo}
-                onChange={(e) => setPhoneNo(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="postal_code_field">Postal Code</label>
-              <input
-                type="text"
-                id="postal_code_field"
-                className="form-control"
-                placeholder="Enter your postal code"
-                value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="country_field">Country</label>
-              <input
-                type="text"
-                id="country_field"
-                className="form-control"
-                value={country}
-                readOnly
-              />
-            </div>
-            <button
-              id="shipping_btn"
-              type="submit"
-              className="btn btn-block py-3"
-            >
-              CONTINUE
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </Fragment>

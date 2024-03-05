@@ -1,11 +1,10 @@
-// EquipmentContainer.js
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allEquipments } from "../../actions/equipmentActions";
 import Equipment from "./Equipment";
-import Loader from "../layout/Loader"
 import axios from "axios"; // Import axios for making API requests
 import "../../Equipment.css";
+import PropTypes from "prop-types";
 
 const EquipmentContainer = () => {
   const dispatch = useDispatch();
@@ -43,53 +42,63 @@ const EquipmentContainer = () => {
 
   return (
     <Fragment>
-      <div className="wrappe" style={{ display: "flex" }}>
-        <div className="sidebar">
-          <h2>Categories</h2>
-          <ul>
-            <li onClick={() => handleSportClick(null)}>All Sports</li>
-            {sports.map((sport) => (
-              <Fragment key={sport._id}>
-                {sport.status === "active" && (
-                  <li onClick={() => handleSportClick(sport.name)}>
-                    {sport.name}
-                  </li>
-                )}
-              </Fragment>
-            ))}
-          </ul>
-        </div>
+      <header className="text-center my-5 header-design">
+        <h1 className="display-4 text-uppercase font-weight-bold text-dark">
+          Available Equipment
+        </h1>
+        <p className="lead text-muted">
+          Explore our Available Equipment and find/borrow what you need
+        </p>
+      </header>
 
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12 col-md-12">
-              <div className="main-content" style={{ marginTop: "30px" }}>
-                <h2 style={{ fontFamily: "Calibri", fontWeight: "bold" }}>
-                  Available Equipments
-                </h2>
-                {loading ? (
-                  <Loader />
-                ) : error ? (
-                  <p>Error: {error}</p>
-                ) : (
-                  <div className="row">
-                    {equipments
-                      .filter((equipment) => {
-                        if (selectedSport === null) {
-                          return true;
-                        }
-                        return equipment.sport === selectedSport;
-                      })
-                      .map((equipment) => (
-                        <div key={equipment._id} className="col-md-3">
-                          <Equipment equipment={equipment} />
-                        </div>
-                      ))}
-                  </div>
-                )}
-              </div>
+      <nav className="navbar navbar-expand-md navbar-light bg-light">
+        <div className="container-fluid">
+          <div className="row align-items-center">
+            <div className="col">
+              <h3 className="navbar-brand mb-0">CATEGORIES</h3>
+            </div>
+            <div className="col-lg-10">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <button className="nav-link btn btn-link" onClick={() => handleSportClick(null)}>
+                    All Sports
+                  </button>
+                </li>
+                {sports.map((sport) => (
+                  <Fragment key={sport._id}>
+                    {sport.status === "active" && (
+                      <li className="nav-item">
+                        <button className="nav-link btn btn-link" onClick={() => handleSportClick(sport.name)}>
+                          {sport.name}
+                        </button>
+                      </li>
+                    )}
+                  </Fragment>
+                ))}
+              </ul>
             </div>
           </div>
+        </div>
+      </nav>
+
+      <div className="container mt-4">
+        <div className="row">
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>Error: {error}</p>
+          ) : (
+            equipments
+              .filter(
+                (equipment) =>
+                  selectedSport === null || equipment.sport === selectedSport
+              )
+              .map((equipment) => (
+                <div key={equipment._id} className="col-md-4 mb-4">
+                  <Equipment equipment={equipment} />
+                </div>
+              ))
+          )}
         </div>
       </div>
     </Fragment>

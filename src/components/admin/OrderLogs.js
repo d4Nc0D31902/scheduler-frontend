@@ -110,7 +110,13 @@ const OrdersList = () => {
               case "Sold":
                 statusColor = "green";
                 break;
+              case "Paid":
+                statusColor = "green";
+                break;
               case "Denied":
+                statusColor = "red";
+                break;
+              case "Overdued":
                 statusColor = "red";
                 break;
               default:
@@ -188,6 +194,8 @@ const OrdersList = () => {
                 <option value="For Pickup">For Pickup</option>
                 <option value="Sold">Sold</option>
                 <option value="Denied">Denied</option>
+                <option value="Overdued">Overdued</option>
+                <option value="Paid">Paid</option>
               </select>
             </div>
             {loading ? (

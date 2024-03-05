@@ -131,12 +131,12 @@ const UpdateEquipment = () => {
   return (
     <Fragment>
       <MetaData title={"Update Equipment"} />
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
-          <div className="col-12 col-md-2">
+          <div className="col-lg-2">
             <Sidebar />
           </div>
-          <div className="col-12 col-md-8 m-auto">
+          <div className="col-md-10">
             <Fragment>
               <div className="wrapper my-5">
                 <form
@@ -199,18 +199,6 @@ const UpdateEquipment = () => {
 
                   <div className="form-group">
                     <label htmlFor="sport_field">Sport Category:</label>
-                    {/* <select
-                      id="sport_field"
-                      className="form-control"
-                      value={sport}
-                      onChange={(e) => setSport(e.target.value)}
-                    >
-                      {sports.map((sport) => (
-                        <option key={sport._id} value={sport.name}>
-                          {sport.name}
-                        </option>
-                      ))}
-                    </select> */}
                     <select
                       id="sport_field"
                       className="form-control"
@@ -231,13 +219,6 @@ const UpdateEquipment = () => {
                   <div className="form-group">
                     <label htmlFor="stock_field">Remaining Stocks:</label>
                     <div className="input-group">
-                      {/* <button
-                        type="button"
-                        className="btn btn-outline-secondary"
-                        onClick={() => setStock(stock - 1 >= 0 ? stock - 1 : 0)}
-                      >
-                        -
-                      </button> */}
                       <input
                         type="number"
                         id="stock_field"
@@ -246,13 +227,6 @@ const UpdateEquipment = () => {
                         onChange={(e) => setStock(e.target.value)}
                         disabled
                       />
-                      {/* <button
-                        type="button"
-                        className="btn btn-outline-secondary"
-                        onClick={() => setStock(stock + 1)}
-                      >
-                        +
-                      </button> */}
                     </div>
                   </div>
 

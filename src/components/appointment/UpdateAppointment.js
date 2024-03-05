@@ -5,7 +5,6 @@ import Sidebar from "../admin/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Calendar from "../calendar/AdminCalendar";
 import "react-toastify/dist/ReactToastify.css";
 import {
   updateAppointment,
@@ -27,7 +26,6 @@ const UpdateAppointment = () => {
   const [locations, setLocations] = useState([]);
   const [moveSelected, setMoveSelected] = useState(false);
   const [professor, setProfessor] = useState("");
-  const [screenShot, setScreenShot] = useState("");
 
   const dispatch = useDispatch();
   const { error, appointment } = useSelector(
@@ -66,7 +64,6 @@ const UpdateAppointment = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Appointment:", appointment);
     if (!appointment || appointment._id !== id) {
       dispatch(getAppointmentDetails(id));
     } else {
@@ -80,7 +77,6 @@ const UpdateAppointment = () => {
       setAttendees(appointment.attendees || []);
       setReason(appointment.reason);
       setKey(appointment.key);
-      setScreenShot(appointment.screenShot);
     }
 
     if (error) {
@@ -125,7 +121,6 @@ const UpdateAppointment = () => {
       reason,
       key,
       professor,
-      screenShot,
     };
     dispatch(updateAppointment(appointment._id, updatedAppointment));
   };
@@ -140,14 +135,7 @@ const UpdateAppointment = () => {
     if (value === "Denied" || value === "Pending") {
       setKey("");
     }
-    if (moveSelected) {
-      setStatus("Moved");
-    }
   };
-
-  const isDisabled = ["Approved", "Denied", "Overdued", "Moved"].includes(
-    status
-  );
 
   return (
     <Fragment>
@@ -156,9 +144,6 @@ const UpdateAppointment = () => {
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>
-        {/* <div style={{ width: "50%", height: "300px" }}>
-          <Calendar />
-        </div> */}
         <div className="col-12 col-md-10">
           <div className="wrapper my-5">
             <form className="shadow-lg" onSubmit={submitHandler}>
@@ -218,6 +203,18 @@ const UpdateAppointment = () => {
                 ></textarea>
               </div>
 
+              {/* <div className="form-group">
+                <label htmlFor="location_field">Location</label>
+                <input
+                  type="text"
+                  id="location_field"
+                  className="form-control"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  disabled={!moveSelected}
+                />
+              </div> */}
+
               <div className="form-group">
                 <label htmlFor="location_field">Location:</label>
                 <select
@@ -253,21 +250,6 @@ const UpdateAppointment = () => {
                   onChange={() => setMoveSelected(!moveSelected)}
                 />
               </div> */}
-
-              <div className="form-group">
-                <label htmlFor="move_field">Move</label>
-                <input
-                  type="checkbox"
-                  id="move_field"
-                  checked={moveSelected}
-                  onChange={() => {
-                    setMoveSelected(!moveSelected);
-                    if (!moveSelected) {
-                      setStatus("Moved");
-                    }
-                  }}
-                />
-              </div>
 
               <div className="form-group">
                 <label htmlFor="professor_field">Professor:</label>
@@ -311,6 +293,11 @@ const UpdateAppointment = () => {
                   id="status_field"
                   className="form-control"
                   value={status}
+                  disabled={
+                    status === "Approved" ||
+                    status === "Denied" ||
+                    status === "Overdued"
+                  }
                   onChange={(e) => {
                     setStatus(e.target.value);
                     handleStatusChange(e.target.value);
@@ -319,9 +306,6 @@ const UpdateAppointment = () => {
                   <option value="Approved">Approved</option>
                   <option value="Pending">Pending</option>
                   <option value="Denied">Denied</option>
-                  <option value="Moved" disabled={!moveSelected}>
-                    Moved
-                  </option>
                 </select>
               </div>
 
@@ -331,6 +315,11 @@ const UpdateAppointment = () => {
                   id="reason_field"
                   className="form-control"
                   value={reason}
+                  disabled={
+                    status === "Approved" ||
+                    status === "Denied" ||
+                    status === "Overdued"
+                  }
                   onChange={(e) => setReason(e.target.value)}
                 >
                   <option value="" disabled selected>
@@ -362,8 +351,6 @@ const UpdateAppointment = () => {
                             src={image.url}
                             alt={`Screenshot ${index + 1}`}
                             className="img-fluid"
-                            value={screenShot}
-                            onChange={(e) => setScreenShot(e.target.value)}
                           />
                         </a>
                       </div>
@@ -391,7 +378,11 @@ const UpdateAppointment = () => {
                         className="btn btn-outline-secondary"
                         type="button"
                         onClick={generateRandomKey}
-                        disabled={!moveSelected}
+                        disabled={
+                          status === "Approved" ||
+                          status === "Denied" ||
+                          status === "Overdued"
+                        }
                       >
                         Generate
                       </button>
@@ -400,19 +391,15 @@ const UpdateAppointment = () => {
                 </div>
               </div>
 
-              {/* <button
-                id="login_button"
-                type="submit"
-                className="btn btn-block py-3"
-                disabled={isDisabled}
-              >
-                UPDATE
-              </button> */}
               <button
                 id="login_button"
                 type="submit"
                 className="btn btn-block py-3"
-                disabled={!moveSelected}
+                disabled={
+                  status === "Approved" ||
+                  status === "Denied" ||
+                  status === "Overdued"
+                }
               >
                 UPDATE
               </button>

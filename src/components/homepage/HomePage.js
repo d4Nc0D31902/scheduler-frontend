@@ -42,7 +42,10 @@ const Homepage = () => {
     "/images/2.jpg",
     "/images/3.jpg",
     "/images/4.jpg",
-    "/images/5.jpg",
+   
+    "/images/6.jpg",
+    "/images/9.jpg",
+    
   ];
 
   return (
@@ -89,7 +92,7 @@ const Homepage = () => {
           <div className="col-lg-4 col-md-6 mb-4">
             <div className="card h-100 border-0">
               <img
-                src="/images/gym.jpg"
+                src="/images/7.jpg"
                 alt="Outdoor Court"
                 className="card-img-top"
                 style={{ height: "300px", objectFit: "cover" }}
@@ -111,7 +114,7 @@ const Homepage = () => {
           <div className="col-lg-4 col-md-6 mb-4">
             <div className="card h-100 border-0">
               <img
-                src="/images/gym.jpg"
+                src="/images/9.jpg"
                 alt="Outdoor Court"
                 className="card-img-top"
                 style={{ height: "300px", objectFit: "cover" }}

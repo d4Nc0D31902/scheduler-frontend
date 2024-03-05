@@ -7,7 +7,7 @@ const Product = ({ product }) => {
   }
 
   return (
-    <div className="col-sm-1 col-md- col-lg-4 " style={{ marginTop: "45px" }}>
+    <div className="col-sm-12 col-md-4 col-lg-4 " style={{ marginTop: "45px" }}>
       <div className="card h-100 border-0 " style={{ boxShadow: "maroon" }}>
         <Link to={`/product/${product._id}`}>
           <img

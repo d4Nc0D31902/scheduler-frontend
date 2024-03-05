@@ -69,6 +69,7 @@ const NewAppointment = () => {
     fetchSettings();
   }, []);
 
+  
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
@@ -196,8 +197,12 @@ const NewAppointment = () => {
         return;
       }
 
-      // Set appointment status based on radio button selection
-      const status = selectedRadio === "PE Class" ? "PE Class" : "Pending";
+      // Set appointment status based on user role
+      let status = selectedRadio === "PE Class" ? "PE Class" : "Pending";
+      if (user.role === "admin") {
+        status = "Approved";
+      }
+
       const reason = "N/A";
       const key = " ";
 
@@ -210,7 +215,7 @@ const NewAppointment = () => {
         timeStart: timeStart,
         timeEnd: timeEnd,
         professor: professor,
-        status: status,
+        status: status, // Update appointment status here
         reason: reason,
         key: key,
         appointmentType: selectedRadio, // Add appointment type to data
@@ -229,6 +234,10 @@ const NewAppointment = () => {
   };
 
   const isDateAvailable = (startTime, endTime) => {
+    if (user.role === "admin") {
+      return true; // All dates are available for admin
+    }
+
     const startDay = new Date(startTime).toLocaleDateString("en-US", {
       weekday: "long",
     });
@@ -236,10 +245,13 @@ const NewAppointment = () => {
       weekday: "long",
     });
 
-    return startDay === endDay && settingsData.day_schedule.includes(startDay);
+    return settingsData.day_schedule.includes(startDay);
   };
 
   const isTimeAvailable = (startTime, endTime) => {
+    if (user.role === "admin") {
+      return true; // All times are available for admin
+    }
     const parseTimeString = (timeString) => {
       const [time, meridiem] = timeString.split(" ");
       const [hours, minutes] = time.split(":");
@@ -335,7 +347,9 @@ const NewAppointment = () => {
           <div className="form-group">
             <label htmlFor="body_field">Description</label>
             <textarea
-              className={`form-control ${descriptionError && "is-invalid"}hide-on-print`}
+              className={`form-control ${
+                descriptionError && "is-invalid"
+              }hide-on-print`}
               id="body_field"
               placeholder="Describe the event..."
               rows="8"
@@ -352,7 +366,9 @@ const NewAppointment = () => {
             <label htmlFor="location_field">Location:</label>
             <select
               id="location_field"
-              className={`form-control ${errors.location && "is-invalid"}hide-on-print`}
+              className={`form-control ${
+                errors.location && "is-invalid"
+              }hide-on-print`}
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             >

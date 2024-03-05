@@ -26,6 +26,8 @@ const UpdateAppointment = () => {
   const [locations, setLocations] = useState([]);
   const [moveSelected, setMoveSelected] = useState(false);
   const [professor, setProfessor] = useState("");
+  const [override, setOverride] = useState(false);
+  const { role } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const { error, appointment } = useSelector(
@@ -110,19 +112,26 @@ const UpdateAppointment = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const updatedAppointment = {
-      title,
-      description,
-      location,
-      timeStart,
-      timeEnd,
-      status,
-      attendees,
-      reason,
-      key,
-      professor,
-    };
-    dispatch(updateAppointment(appointment._id, updatedAppointment));
+    if (
+      !override &&
+      (status === "Approved" || status === "Denied" || status === "Overdued")
+    ) {
+      errMsg("Cannot update appointment with status: " + status);
+    } else {
+      const updatedAppointment = {
+        title,
+        description,
+        location,
+        timeStart,
+        timeEnd,
+        status,
+        attendees,
+        reason,
+        key,
+        professor,
+      };
+      dispatch(updateAppointment(appointment._id, updatedAppointment));
+    }
   };
 
   const generateRandomKey = () => {
@@ -187,7 +196,7 @@ const UpdateAppointment = () => {
                   className="form-control"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  disabled
+                  disabled={!override}
                 />
               </div>
 
@@ -199,21 +208,9 @@ const UpdateAppointment = () => {
                   rows="8"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  disabled
+                  disabled={!override}
                 ></textarea>
               </div>
-
-              {/* <div className="form-group">
-                <label htmlFor="location_field">Location</label>
-                <input
-                  type="text"
-                  id="location_field"
-                  className="form-control"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  disabled={!moveSelected}
-                />
-              </div> */}
 
               <div className="form-group">
                 <label htmlFor="location_field">Location:</label>
@@ -222,7 +219,7 @@ const UpdateAppointment = () => {
                   className="form-control"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  disabled={!moveSelected}
+                  disabled={!override}
                 >
                   <option value="" disabled selected>
                     Select a Location
@@ -241,16 +238,6 @@ const UpdateAppointment = () => {
                 </select>
               </div>
 
-              {/* <div className="form-group">
-                <label htmlFor="move_field">Move</label>
-                <input
-                  type="checkbox"
-                  id="move_field"
-                  checked={moveSelected}
-                  onChange={() => setMoveSelected(!moveSelected)}
-                />
-              </div> */}
-
               <div className="form-group">
                 <label htmlFor="professor_field">Professor:</label>
                 <input
@@ -259,7 +246,7 @@ const UpdateAppointment = () => {
                   className="form-control"
                   value={professor}
                   onChange={(e) => setProfessor(e.target.value)}
-                  disabled
+                  disabled={!override}
                 />
               </div>
 
@@ -271,7 +258,7 @@ const UpdateAppointment = () => {
                   className="form-control"
                   value={timeStart}
                   onChange={(e) => setTimeStart(e.target.value)}
-                  disabled
+                  disabled={!override}
                 />
               </div>
 
@@ -283,7 +270,7 @@ const UpdateAppointment = () => {
                   className="form-control"
                   value={timeEnd}
                   onChange={(e) => setTimeEnd(e.target.value)}
-                  disabled
+                  disabled={!override}
                 />
               </div>
 
@@ -294,9 +281,11 @@ const UpdateAppointment = () => {
                   className="form-control"
                   value={status}
                   disabled={
-                    status === "Approved" ||
-                    status === "Denied" ||
-                    status === "Overdued"
+                    (status === "Approved" ||
+                      status === "Denied" ||
+                      status === "Overdued" ||
+                      status === "Moved") &&
+                    !override
                   }
                   onChange={(e) => {
                     setStatus(e.target.value);
@@ -306,6 +295,7 @@ const UpdateAppointment = () => {
                   <option value="Approved">Approved</option>
                   <option value="Pending">Pending</option>
                   <option value="Denied">Denied</option>
+                  <option value="Moved">Moved</option>
                 </select>
               </div>
 
@@ -316,9 +306,11 @@ const UpdateAppointment = () => {
                   className="form-control"
                   value={reason}
                   disabled={
-                    status === "Approved" ||
-                    status === "Denied" ||
-                    status === "Overdued"
+                    (status === "Approved" ||
+                      status === "Denied" ||
+                      status === "Overdued" ||
+                      status === "Moved") &&
+                    !override
                   }
                   onChange={(e) => setReason(e.target.value)}
                 >
@@ -330,6 +322,16 @@ const UpdateAppointment = () => {
                   <option value="Reason 2">Reason 2</option>
                   <option value="Reason 3">Reason 3</option>
                 </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="override_checkbox">Override:</label>
+                <input
+                  type="checkbox"
+                  id="override_checkbox"
+                  checked={override}
+                  onChange={() => setOverride(!override)}
+                />
               </div>
 
               <p>
@@ -370,23 +372,30 @@ const UpdateAppointment = () => {
                     className="form-control"
                     value={key}
                     onChange={(e) => setKey(e.target.value)}
+                    // disabled={!override}
                     disabled
                   />
                   <div className="input-group-append">
-                    {status !== "Pending" && status !== "Denied" && (
-                      <button
-                        className="btn btn-outline-secondary"
-                        type="button"
-                        onClick={generateRandomKey}
-                        disabled={
-                          status === "Approved" ||
-                          status === "Denied" ||
-                          status === "Overdued"
-                        }
-                      >
-                        Generate
-                      </button>
-                    )}
+                    {!override &&
+                      (status === "Approved" ||
+                        status === "Denied" ||
+                        status === "Overdued" ||
+                        status === "Moved") && (
+                        <button
+                          className="btn btn-outline-secondary"
+                          type="button"
+                          onClick={generateRandomKey}
+                          disabled={
+                            (status === "Approved" ||
+                              status === "Denied" ||
+                              status === "Overdued" ||
+                              status === "Moved") &&
+                            !override
+                          }
+                        >
+                          Generate
+                        </button>
+                      )}
                   </div>
                 </div>
               </div>
@@ -396,9 +405,11 @@ const UpdateAppointment = () => {
                 type="submit"
                 className="btn btn-block py-3"
                 disabled={
-                  status === "Approved" ||
-                  status === "Denied" ||
-                  status === "Overdued"
+                  (status === "Approved" ||
+                    status === "Denied" ||
+                    status === "Overdued" ||
+                    status === "Moved") &&
+                  !override
                 }
               >
                 UPDATE

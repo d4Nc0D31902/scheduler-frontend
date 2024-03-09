@@ -347,9 +347,8 @@ const NewAppointment = () => {
           <div className="form-group">
             <label htmlFor="body_field">Description</label>
             <textarea
-              className={`form-control ${
-                descriptionError && "is-invalid"
-              }hide-on-print`}
+              className={`form-control ${descriptionError && "is-invalid"
+                }hide-on-print`}
               id="body_field"
               placeholder="Describe the event..."
               rows="8"
@@ -366,9 +365,8 @@ const NewAppointment = () => {
             <label htmlFor="location_field">Location:</label>
             <select
               id="location_field"
-              className={`form-control ${
-                errors.location && "is-invalid"
-              }hide-on-print`}
+              className={`form-control ${errors.location && "is-invalid"
+                }hide-on-print`}
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             >

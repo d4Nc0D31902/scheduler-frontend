@@ -6,7 +6,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { Link } from "react-router-dom";
 import "../../Calendar.css";
-
+import { TextField, Button } from "@mui/material";
 function MyCalendar() {
   const [appointments, setAppointments] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -106,6 +106,34 @@ function MyCalendar() {
     } catch (error) {
       console.error("Error confirming join appointment: ", error);
     }
+  };
+  const inputStyle = {
+    marginRight: "10px",
+    fontFamily: "Verdana, sans-serif",
+    fontSize: "26px",
+    color: "#333",
+    width: "100%",
+    padding: "5px",
+
+  };
+
+  const buttonStyle = {
+    fontFamily: "Arial, sans-serif",
+    fontSize: "16px",
+    color: "#fff",
+    backgroundColor: "#333",
+    border: "none",
+    borderRadius: "5px",
+    padding: "5px 20px",
+    cursor: "pointer",
+  };
+
+  const errorTextStyle = {
+    color: "red",
+    textAlign: "center",
+    marginTop: "10px",
+    fontFamily: "Verdana, sans-serif",
+    fontSize: "16px",
   };
 
   const handleCloseConfirmationModal = () => {
@@ -217,24 +245,24 @@ function MyCalendar() {
 
       {selectedAppointment && (
         <div className="modal active">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <h2>{selectedAppointment.title}</h2>
-            <p>
-              {selectedAppointment.status === "PE Class"
-                ? "Professor"
-                : "Requester"}
-              : {selectedAppointment.requester}
-            </p>
-            <p>Location: {selectedAppointment.location}</p>
-            <p>Start Time: {formatTime(selectedAppointment.timeStart)}</p>
-            <p>End Time: {formatTime(selectedAppointment.timeEnd)}</p>
+          <div className="modal-content" style={{ backgroundColor: "#800000" }}>
+            <span className="close" onClick={handleCloseModal}>&times;</span>
+            <h3 className="card-title text-center" style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px", marginTop: "20px", color: "#fff", textTransform: "uppercase" }}>
+              <img src="/images/tupt_logo.png" style={{ width: "60px", height: "60px", marginRight: "10px", verticalAlign: "middle" }} alt="Logo" />
+              TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES
+            </h3>
+            <hr style={{ borderColor: "white" }} />
+            <h2 style={{ fontFamily: "Georgia, serif", fontSize: "24px", fontWeight: "bold", color: "#fff", textAlign: "center", textTransform: "uppercase" }}>{selectedAppointment.title}</h2>
+            <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", }}>{selectedAppointment.status === "PE Class" ? "Professor" : "Requester"}: {selectedAppointment.requester}</p>
+            <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", }}>Location: {selectedAppointment.location}</p>
+            <div className="time-container " style={{ display: "flex" }}>
+              <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", marginRight: "5px" }}>Scheduled time: {formatTime(selectedAppointment.timeStart)}</p>
+              <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", }}>to {formatTime(selectedAppointment.timeEnd)}</p>
+            </div>
             {selectedAppointment.status !== "PE Class" && (
               <>
-                <p>Attendees:</p>
-                <ul>
+                <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff" }}>Attendees:</p>
+                <ul className="attendees-list" style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", textAlign: "center", listStyle: "none", padding: "0" }}>
                   {selectedAppointment.attendees.map((attendee, index) => (
                     <li key={index}>{attendee}</li>
                   ))}
@@ -242,21 +270,29 @@ function MyCalendar() {
                 {isAuthenticated && (
                   <>
                     <div className="key-input-container">
-                      <label htmlFor="keyInput">Enter Key:</label>
-                      <input
-                        type="text"
+                      <TextField
                         id="keyInput"
+                        label="Enter Key"
+                        variant="outlined"
                         value={keyInput}
                         onChange={handleKeyInputChange}
+                        placeholder="Enter here the key (e.g. ASDA123)"
+                        style={inputStyle}
                       />
-                      <button
-                        className="btn btn-primary button-join"
+                      <Button
+                        variant="contained"
+                        color="primary"
                         onClick={handleKeySubmit}
+                        style={buttonStyle}
                       >
                         Join
-                      </button>
+                      </Button>
+                      {keyError && (
+                        <p className="key-error" style={errorTextStyle}>
+                          {keyError}
+                        </p>
+                      )}
                     </div>
-                    {keyError && <p className="key-error">{keyError}</p>}
                   </>
                 )}
               </>
@@ -264,6 +300,7 @@ function MyCalendar() {
           </div>
         </div>
       )}
+
 
       {showConfirmationModal && (
         <div className="modal active">

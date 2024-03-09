@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MetaData from '../layout/MetaData'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Typography, Grid, Paper, TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux'
 import { updatePassword, clearErrors } from '../../actions/userActions'
 
@@ -46,73 +46,52 @@ const UpdatePassword = () => {
     return (
 
         <Fragment>
-
             <MetaData title={'Change Password'} />
 
-
-
             <div className="row wrapper">
-
                 <div className="col-10 col-lg-5">
-
                     <form className="shadow-lg" onSubmit={submitHandler}>
-
                         <h1 className="mt-2 mb-5">Update Password</h1>
 
                         <div className="form-group">
-
-                            <label htmlFor="old_password_field">Old Password</label>
-
-                            <input
-
-                                type="password"
-
+                            <TextField
                                 id="old_password_field"
-
+                                label="Old Password"
+                                type="password"
+                                variant="outlined"
                                 className="form-control"
-
                                 value={oldPassword}
-
                                 onChange={(e) => setOldPassword(e.target.value)}
-
+                                fullWidth
                             />
-
                         </div>
-
-
 
                         <div className="form-group">
-
-                            <label htmlFor="new_password_field">New Password</label>
-
-                            <input
-
-                                type="password"
-
+                            <TextField
                                 id="new_password_field"
-
+                                label="New Password"
+                                type="password"
+                                variant="outlined"
                                 className="form-control"
-
                                 value={password}
-
                                 onChange={(e) => setPassword(e.target.value)}
-
+                                fullWidth
                             />
-
                         </div>
 
-
-
-                        <button type="submit" className="btn update-btn btn-block mt-4 mb-3" disabled={loading ? true : false} >Update Password</button>
-
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            className="update-btn mt-4 mb-3"
+                            disabled={loading ? true : false}
+                        >
+                            Update Password
+                        </Button>
                     </form>
-
                 </div>
-
             </div>
-
-
-
         </Fragment>
 
     )

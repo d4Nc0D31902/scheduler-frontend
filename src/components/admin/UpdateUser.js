@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
+import { TextField } from "@mui/material";
 import {
   updateUser,
   getUserDetails,
@@ -106,7 +107,10 @@ const UpdateUser = () => {
   const courses = coursesByDepartment[department] || [];
 
   const years = ["1st Year", " 2nd Year", "3rd Year", "4th Year", "Alumni"];
-
+  const inputStyle = {
+    marginBottom: "10px",
+    width: "100%",
+  };
   return (
     <Fragment>
       <MetaData title={`Update User`} />
@@ -131,26 +135,25 @@ const UpdateUser = () => {
                 </h1>
 
                 <div className="form-group">
-                  <label htmlFor="name_field">Name:</label>
-                  <input
-                    type="name"
+                  <TextField
                     id="name_field"
-                    className="form-control"
-                    name="name"
+                    label="Name"
+                    variant="outlined"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    style={inputStyle}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email_field">Email:</label>
-                  <input
-                    type="email"
+                  <TextField
                     id="email_field"
-                    className="form-control"
-                    name="email"
+                    label="Email"
+                    variant="outlined"
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    style={inputStyle}
                   />
                 </div>
 

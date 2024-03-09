@@ -6,6 +6,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import {
   updateProduct,
   getProductDetails,
@@ -54,6 +56,10 @@ const UpdateProduct = () => {
 
     fetchCategories();
   }, []);
+  const inputStyle = {
+    marginBottom: "10px",
+    width: "100%",
+  };
 
   const dispatch = useDispatch();
   const { error, product } = useSelector((state) => state.productDetails);
@@ -173,30 +179,33 @@ const UpdateProduct = () => {
                     color: "white",
                   }}
                 >
-                  Update Product
+                  Update Merchandise Information
                 </h1>
-                <div className="form-group">
-                  <label htmlFor="name_field">Product:</label>
-                  <input
-                    type="text"
-                    id="name_field"
-                    className="form-control"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
+                <Box>
+                  <div className="form-group">
+                    <label htmlFor="name_field">Product:</label>
+                    <TextField
+                      id="name_field"
+                      className="form-control"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      fullWidth
+                      sx={{ marginBottom: "10px" }}
+                    />
+                  </div>
 
-                <div className="form-group">
-                  <label htmlFor="price_field">Price:</label>
-
-                  <input
-                    type="text"
-                    id="price_field"
-                    className="form-control"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
-                </div>
+                  <div className="form-group">
+                    <label htmlFor="price_field">Price:</label>
+                    <TextField
+                      id="price_field"
+                      className="form-control"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      fullWidth
+                      sx={{ marginBottom: "10px" }}
+                    />
+                  </div>
+                </Box>
 
                 <div className="form-group">
                   <label htmlFor="description_field">Description:</label>

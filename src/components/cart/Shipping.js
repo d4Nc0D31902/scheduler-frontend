@@ -5,6 +5,17 @@ import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingInfo } from "../../actions/cartActions";
+import {
+  Container,
+  Grid,
+  Card,
+  Typography,
+  TextField,
+  InputLabel,
+  Box,
+  Button,
+} from "@mui/material";
+import InputMask from "react-input-mask"; // Import InputMask
 
 const Shipping = () => {
   const countriesList = Object.values(countries);
@@ -29,7 +40,7 @@ const Shipping = () => {
 
   const validatePhoneNumber = (phoneNo) => {
     // Philippine phone number format validation
-    if (!/^(09|\+639)\d{9}$/.test(phoneNo)) {
+    if (!/^\(\+63\)\d{2}-\d{4}-\d{4}$/.test(phoneNo)) {
       setPhoneNoError("Please enter a valid phone number.");
       return false;
     }
@@ -56,77 +67,98 @@ const Shipping = () => {
     <Fragment>
       <MetaData title={"Shipping Info"} />
       <CheckoutSteps shipping />
-      <div className="container mt-5">
-        <div className="row justify-content-center">
-          <div className="col-lg-6">
-            <div className="card p-4 shadow border-0 rounded">
-              <h2 className="text-center mb-4">Your Information</h2>
+      <Container className="mt-5">
+        <Grid container justifyContent="center">
+          <Grid item xs={12} lg={6}>
+            <Card className="p-4 shadow border-0 rounded">
+              <Typography variant="h2" align="center" gutterBottom>
+                Your Information
+              </Typography>
               <form onSubmit={submitHandler}>
-                <div className="mb-3">
-                  <label htmlFor="address_field" className="form-label">Address</label>
-                  <input
-                    type="text"
+                <Box mb={3}>
+                  <InputLabel htmlFor="address_field">Address</InputLabel>
+                  <TextField
                     id="address_field"
-                    className="form-control"
+                    variant="outlined"
+                    fullWidth
                     placeholder="Enter your address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     required
                   />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="city_field" className="form-label">City</label>
-                  <input
-                    type="text"
+                </Box>
+                <Box mb={3}>
+                  <InputLabel htmlFor="city_field">City</InputLabel>
+                  <TextField
                     id="city_field"
-                    className="form-control"
+                    variant="outlined"
+                    fullWidth
                     placeholder="Enter your city"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     required
                   />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="phone_field" className="form-label">Mobile Number</label>
-                  <input
-                    type="tel"
-                    id="phone_field"
-                    className={`form-control ${phoneNoError ? "border border-danger" : ""}`}
-                    placeholder="Enter your phone number (e.g. 09123456789)"
+                </Box>
+                <Box mb={3}>
+                  <InputLabel htmlFor="phone_field">Mobile Number</InputLabel>
+                  <InputMask
+                    mask="(+63)99-9999-9999"
+                    maskChar="_"
                     value={phoneNo}
                     onChange={(e) => setPhoneNo(e.target.value)}
-                    required
-                  />
-                  {phoneNoError && <div className="text-danger">{phoneNoError}</div>}
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="postal_code_field" className="form-label">Postal Code</label>
-                  <input
-                    type="text"
+                    placeholder="(+63)__-____-____"
+                  >
+                    {(inputProps) => (
+                      <TextField
+                        {...inputProps}
+                        id="phone_field"
+                        variant="outlined"
+                        fullWidth
+                        error={phoneNoError ? true : false}
+                        helperText={phoneNoError}
+                        required
+                      />
+                    )}
+                  </InputMask>
+                </Box>
+
+                <Box mb={3}>
+                  <InputLabel htmlFor="postal_code_field">
+                    Postal Code
+                  </InputLabel>
+                  <TextField
                     id="postal_code_field"
-                    className="form-control"
+                    variant="outlined"
+                    fullWidth
                     placeholder="Enter your postal code"
                     value={postalCode}
                     onChange={(e) => setPostalCode(e.target.value)}
                     required
                   />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="country_field" className="form-label">Country</label>
-                  <input
-                    type="text"
+                </Box>
+                <Box mb={3}>
+                  <InputLabel htmlFor="country_field">Country</InputLabel>
+                  <TextField
                     id="country_field"
-                    className="form-control"
+                    variant="outlined"
+                    fullWidth
                     value={country}
                     readOnly
                   />
-                </div>
-                <button type="submit" className="btn btn-primary btn-block">CONTINUE</button>
+                </Box>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  CONTINUE
+                </Button>
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
     </Fragment>
   );
 };

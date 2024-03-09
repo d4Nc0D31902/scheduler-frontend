@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus, faPlus, faTimes, faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -68,11 +70,11 @@ const Cart = () => {
                                 </div>
                                 <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
                                   <button className="btn btn-link px-2" onClick={() => decreaseQty(item.product, item.quantity)}>
-                                    <i className="fas fa-minus"></i>
+                                    <FontAwesomeIcon icon={faMinus} />
                                   </button>
                                   <input id="form1" min="0" name="quantity" value={item.quantity} type="number" className="form-control form-control-sm" />
                                   <button className="btn btn-link px-2" onClick={() => increaseQty(item.product, item.quantity, item.stock)}>
-                                    <i className="far fa-plus-circle"></i>
+                                    <FontAwesomeIcon icon={faPlus} />
                                   </button>
                                 </div>
                                 <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
@@ -80,7 +82,7 @@ const Cart = () => {
                                 </div>
                                 <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                                   <a href="#!" className="text-muted" onClick={() => removeCartItemHandler(item.product)}>
-                                    <i className="fas fa-times"></i>
+                                    <FontAwesomeIcon icon={faTimes} />
                                   </a>
                                 </div>
                               </div>
@@ -88,7 +90,7 @@ const Cart = () => {
                             </Fragment>
                           ))}
                           <div className="pt-5">
-                            <h6 className="mb-0"><Link to="/store" className="text-body"><i className="fas fa-long-arrow-alt-left me-2"></i>Back to shop</Link></h6>
+                            <h6 className="mb-0"><Link to="/store" className="text-body"><FontAwesomeIcon icon={faLongArrowAltLeft} className="me-2" />Back to shop</Link></h6>
                           </div>
                         </>
                       )}

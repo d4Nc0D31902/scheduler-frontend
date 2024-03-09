@@ -607,7 +607,7 @@ footer {
   margin-right: 0.3rem;
 }
 
-#sidebar ul li.active > a,
+#sidebar ul li.active>a,
 a[aria-expanded="true"] {
   color: #fff;
   background: gray;
@@ -746,15 +746,16 @@ ul.CTAs a {
 }
 
 /* Add this style to center the input and button in the form group */
-.input-group > input,
-.input-group > .input-group-append {
+.input-group>input,
+.input-group>.input-group-append {
   display: inline-block;
 }
 
 /* Add this style for responsiveness */
 @media (max-width: 576px) {
-  .input-group > input,
-  .input-group > .input-group-append {
+
+  .input-group>input,
+  .input-group>.input-group-append {
     display: block;
     width: 100%;
   }
@@ -849,7 +850,7 @@ ul.CTAs a {
     background-color: gray;
   }
 
-  .burger-icon.active + .nav-links {
+  .burger-icon.active+.nav-links {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -980,4 +981,33 @@ ul.CTAs a {
 
 .header-section p {
   color: #6c757d;
+}
+
+
+.registration-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.registration-form {
+  width: 650px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  font-family: sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-subtitle {
+  background-color: maroon;
+  padding: 10px;
+  border-radius: 2px;
+  color: white;
+  text-align: center;
 }

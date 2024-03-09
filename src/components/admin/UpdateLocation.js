@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { TextField } from "@mui/material";
 import {
   updateLocation,
   getLocationDetails,
@@ -80,6 +81,10 @@ const UpdateLocation = () => {
     // Navigate to "/admin/locations"
     navigate("/admin/locations");
   };
+  const inputStyle = {
+    marginBottom: "10px",
+    width: "100%",
+  };
 
   return (
     <Fragment>
@@ -101,14 +106,13 @@ const UpdateLocation = () => {
               <h1 className="mb-4 text-center" style={{ backgroundColor: "maroon", padding: "10px", borderRadius: "20px", color: "white" }}>Update Location Name</h1>
 
               <div className="form-group">
-
                 <label htmlFor="name_field">Name of the Location:</label>
-                <input
-                  type="text"
+                <TextField
                   id="name_field"
-                  className="form-control"
+                  variant="outlined"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  style={inputStyle}
                 />
               </div>
 

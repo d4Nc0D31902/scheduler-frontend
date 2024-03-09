@@ -216,24 +216,24 @@ function MyCalendar() {
 
       {selectedAppointment && (
         <div className="modal active">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <h2>{selectedAppointment.title}</h2>
-            <p>
-              {selectedAppointment.status === "PE Class"
-                ? "Professor"
-                : "Requester"}
-              : {selectedAppointment.requester}
-            </p>
-            <p>Location: {selectedAppointment.location}</p>
-            <p>Start Time: {formatTime(selectedAppointment.timeStart)}</p>
-            <p>End Time: {formatTime(selectedAppointment.timeEnd)}</p>
+          <div className="modal-content" style={{ backgroundColor: "#800000" }}>
+            <span className="close" onClick={handleCloseModal}>&times;</span>
+            <h3 className="card-title text-center" style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px", marginTop: "20px", color: "#fff", textTransform: "uppercase" }}>
+              <img src="/images/tupt_logo.png" style={{ width: "60px", height: "60px", marginRight: "10px", verticalAlign: "middle" }} alt="Logo" />
+              TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES
+            </h3>
+            <hr style={{ borderColor: "white" }} />
+            <h2 style={{ fontFamily: "Georgia, serif", fontSize: "24px", fontWeight: "bold", color: "#fff", textAlign: "center", textTransform: "uppercase" }}>{selectedAppointment.title}</h2>
+            <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", }}>{selectedAppointment.status === "PE Class" ? "Professor" : "Requester"}: {selectedAppointment.requester}</p>
+            <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", }}>Location: {selectedAppointment.location}</p>
+            <div className="time-container">
+              <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", textAlign: "center" }}>Start Time: {formatTime(selectedAppointment.timeStart)}</p>
+              <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", }}>End Time: {formatTime(selectedAppointment.timeEnd)}</p>
+            </div>
             {selectedAppointment.status !== "PE Class" && (
               <>
-                <p>Attendees:</p>
-                <ul>
+                <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", textAlign: "center" }}>Attendees:</p>
+                <ul className="attendees-list" style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", textAlign: "center", listStyle: "none", padding: "0" }}>
                   {selectedAppointment.attendees.map((attendee, index) => (
                     <li key={index}>{attendee}</li>
                   ))}
@@ -241,21 +241,24 @@ function MyCalendar() {
                 {isAuthenticated && (
                   <>
                     <div className="key-input-container">
-                      {/* <label htmlFor="keyInput">Enter Key:</label>
+                      <label htmlFor="keyInput" style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", marginRight: "10px" }}>Enter Key:</label>
                       <input
                         type="text"
                         id="keyInput"
                         value={keyInput}
                         onChange={handleKeyInputChange}
-                      /> */}
-                      {/* <button
+                        style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#333", padding: "5px" }}
+                        placeholder="Enter here the key(EX.ASDA123)"
+                      />
+                      <button
                         className="btn btn-primary button-join"
                         onClick={handleKeySubmit}
+                        style={{ fontFamily: "Arial, sans-serif", fontSize: "16px", color: "#fff", backgroundColor: "#333", border: "none", borderRadius: "5px", padding: "5px 20px", cursor: "pointer" }}
                       >
                         Join
-                      </button> */}
+                      </button>
                     </div>
-                    {keyError && <p className="key-error">{keyError}</p>}
+                    {keyError && <p className="key-error" style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "red", textAlign: "center", marginTop: "10px" }}>{keyError}</p>}
                   </>
                 )}
               </>

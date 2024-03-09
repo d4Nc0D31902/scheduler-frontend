@@ -7,6 +7,8 @@ import {
   addItemToBorrowCart,
   removeItemFromBorrowCart,
 } from "../../actions/borrowCartActions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus, faPlus, faTimes, faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 
 const BorrowCart = () => {
   const dispatch = useDispatch();
@@ -65,18 +67,20 @@ const BorrowCart = () => {
                             </div>
                             <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
                               <button className="btn btn-link px-2" onClick={() => decreaseQty(item.equipment, item.quantity)}>
-                                <i className="fas fa-minus"></i>
+                                <FontAwesomeIcon icon={faMinus} />
                               </button>
 
-                              <input id="form1" min="0" name="quantity" value="1" type="number" className="form-control form-control-sm" />
+                              <input id="form1" min="0" name="quantity" value={item.quantity} type="number" className="form-control form-control-sm" />
 
                               <button className="btn btn-link px-2" onClick={() => increaseQty(item.equipment, item.quantity, item.stock)}>
-                                <i className="fas fa-plus"></i>
+                                <FontAwesomeIcon icon={faPlus} />
                               </button>
                             </div>
 
                             <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                              <a href="#!" className="text-muted"><i className="fas fa-times"></i></a>
+                              <a href="#!" className="text-muted" onClick={() => removeBorrowCartItemHandler(item.equipment)}>
+                                <FontAwesomeIcon icon={faTimes} />
+                              </a>
                             </div>
                           </div>
                           <hr className="my-4" />
@@ -85,7 +89,7 @@ const BorrowCart = () => {
 
 
                       <div className="pt-5">
-                        <h6 className="mb-0"><a href="#!" className="text-body"><i className="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                        <h6 className="mb-0"><a href="#!" className="text-body"><FontAwesomeIcon icon={faLongArrowAltLeft} />Back to shop</a></h6>
                       </div>
                     </div>
                   </div>

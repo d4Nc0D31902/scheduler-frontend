@@ -103,7 +103,7 @@ const Payment = () => {
     <Fragment>
       <MetaData title={"Payment"} />
       <CheckoutSteps shipping confirmOrder payment />
-      
+
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
           <div className="mt-3">
@@ -115,13 +115,18 @@ const Payment = () => {
                 </p>
                 <ul className="mb-0">
                   <li>
-                    Please ensure to bring a printed copy of the receipt or have the email notification readily available on your electronic device when visiting our organization's office.
+                    Please ensure to bring a printed copy of the receipt or have
+                    the email notification readily available on your electronic
+                    device when visiting our organization's office.
                   </li>
                   <li>
-                    Upon arrival, kindly present the receipt or email notification to the authorized personnel at the office reception.
+                    Upon arrival, kindly present the receipt or email
+                    notification to the authorized personnel at the office
+                    reception.
                   </li>
                   <li>
-                    Payment for your order should be made in cash at the office. Our staff will guide you through the payment process.
+                    Payment for your order should be made in cash at the office.
+                    Our staff will guide you through the payment process.
                   </li>
                 </ul>
               </div>
@@ -133,16 +138,21 @@ const Payment = () => {
                 </p>
                 <ul className="mb-0">
                   <li>
-                    To proceed with GCash payment, kindly utilize your GCash mobile application to scan the provided QR code.
+                    To proceed with GCash payment, kindly utilize your GCash
+                    mobile application to scan the provided QR code.
                   </li>
                   <li>
-                    After scanning the QR code, complete the transaction by following the prompts on your GCash application.
+                    After scanning the QR code, complete the transaction by
+                    following the prompts on your GCash application.
                   </li>
                   <li>
-                    Upon successful completion of the transaction, you are required to upload a screenshot of the transaction confirmation as proof of payment.
+                    Upon successful completion of the transaction, you are
+                    required to upload a screenshot of the transaction
+                    confirmation as proof of payment.
                   </li>
                   <li>
-                    Additionally, please provide the reference number associated with the transaction to facilitate order processing.
+                    Additionally, please provide the reference number associated
+                    with the transaction to facilitate order processing.
                   </li>
                 </ul>
               </div>
@@ -231,8 +241,9 @@ const Payment = () => {
                 <input
                   type="text"
                   id="referenceNum"
-                  className={`form-control ${referenceNumError ? "is-invalid" : ""
-                    }`}
+                  className={`form-control ${
+                    referenceNumError ? "is-invalid" : ""
+                  }`}
                   value={referenceNum}
                   onChange={(e) => setReferenceNum(e.target.value)}
                   onBlur={validateReferenceNum}
@@ -246,10 +257,15 @@ const Payment = () => {
               </div>
             )}
             <button id="pay_btn" type="submit" className="btn btn-block py-3">
-              ORDER {` - ₱${orderInfo && orderInfo.totalPrice}`}
+              ORDER{" "}
+              {` - ₱${
+                orderInfo &&
+                orderInfo.totalPrice.toLocaleString("en-PH", {
+                  maximumFractionDigits: 2,
+                })
+              }`}
             </button>
           </form>
-          
         </div>
       </div>
     </Fragment>

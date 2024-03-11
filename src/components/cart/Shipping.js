@@ -144,6 +144,7 @@ const Shipping = () => {
                     fullWidth
                     value={country}
                     readOnly
+                    disabled
                   />
                 </Box>
                 <Button

@@ -57,6 +57,7 @@ const Header = () => {
       );
 
       dispatch(updateNotifications("read"));
+      dispatch(allNotifications);
     }
 
     setUnreadCount(0);

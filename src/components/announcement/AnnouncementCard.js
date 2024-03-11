@@ -90,7 +90,7 @@ const AnnouncementCard = ({ announcement, onDelete }) => {
         )} */}
       </div>
 
-      <div className="announcement-buttons">
+      {/* <div className="announcement-buttons">
         {isAdmin ||
           (user && user.role === "officer" && (
             <>
@@ -108,6 +108,24 @@ const AnnouncementCard = ({ announcement, onDelete }) => {
               </button>
             </>
           ))}
+      </div> */}
+      <div className="announcement-buttons">
+        {(isAdmin || isOfficer) && (
+          <>
+            <Link
+              to={`/admin/announcement/${announcement._id}`}
+              className="btn btn-primary py-1 px-2"
+            >
+              Edit
+            </Link>
+            <button
+              onClick={deleteAnnouncementHandler}
+              className="btn btn-danger py-1 px-2 ml-2"
+            >
+              Delete
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

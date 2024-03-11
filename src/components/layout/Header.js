@@ -1,20 +1,40 @@
-import React, { Fragment, useState } from "react";
-import "../../App.css";
-import Search from "./Search";
-import { Link, useLocation } from "react-router-dom";
+import React, { Fragment, useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  allNotifications,
+  updateNotifications,
+} from "../../actions/notificationActions"; // Import updateNotifications action
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
   const { borrowCartItems } = useSelector((state) => state.borrowCart);
+  const { notifications } = useSelector((state) => state.allNotifications);
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (user) {
+      dispatch(allNotifications(user._id));
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    const unreadNotifications = notifications.filter(
+      (notification) => notification.status === "unread"
+    );
+    setUnreadCount(unreadNotifications.length);
+  }, [notifications]);
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -24,6 +44,23 @@ const Header = () => {
       .catch((error) => {
         toast.error("Logout failed");
       });
+  };
+
+  const handleBellClick = async () => {
+    const unreadNotifications = notifications.filter(
+      (notification) => notification.status === "unread"
+    );
+
+    if (unreadNotifications.length > 0) {
+      const notificationIds = unreadNotifications.map(
+        (notification) => notification._id
+      );
+
+      dispatch(updateNotifications("read"));
+    }
+
+    setUnreadCount(0);
+    setShowNotifications(!showNotifications);
   };
 
   const isHomePage = location.pathname === "/";
@@ -58,10 +95,6 @@ const Header = () => {
           </div>
         </div>
 
-
-
-
-
         <div className=" col-md-6   text-center">
           <div
             className="d-flex align-items-center justify-content-end"
@@ -74,8 +107,6 @@ const Header = () => {
             >
               <i className="fa fa-bars"></i>
             </div>
-
-
 
             <div className="nav-links">
               {!isHomePage && (
@@ -143,7 +174,33 @@ const Header = () => {
               )}
             </div>
 
-
+            <div className="ml-4">
+              <FontAwesomeIcon
+                icon={faBell}
+                style={{ color: "white", cursor: "pointer" }}
+                onClick={handleBellClick}
+              />
+              {notifications.filter(
+                (notification) => notification.status === "unread"
+              ).length > 0 && (
+                <span className="badge badge-danger">
+                  {
+                    notifications.filter(
+                      (notification) => notification.status === "unread"
+                    ).length
+                  }
+                </span>
+              )}
+              {showNotifications && (
+                <div className="notification-dropdown">
+                  {notifications.map((notification) => (
+                    <div key={notification._id} className="notification-item">
+                      {notification.message}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {user ? (
               <div className="ml-4 dropdown d-inline">

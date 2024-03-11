@@ -96,7 +96,7 @@ import NewCategory from "./components/admin/NewCategory.js";
 import UpdateCategory from "./components/admin/UpdateCategory.js";
 
 import HomePage from "./components/homepage/HomePage.js";
-
+import Notification from "./components/notification/Notification.js";
 
 function App() {
   useEffect(() => {
@@ -123,6 +123,7 @@ function App() {
         <Route path="/search/:keyword" element={<Home />} exact="true" />
         <Route path="/login" element={<Login />} exact="true" />
         <Route path="/register" element={<Register />} exact="true" />
+        <Route path="/notifications" element={<Notification />} exact="true" />
         <Route
           path="/password/forgot"
           element={<ForgotPassword />}

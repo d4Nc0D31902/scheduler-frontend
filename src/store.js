@@ -27,6 +27,13 @@ import {
 import { cartReducer } from "./reducers/cartReducers";
 import { borrowCartReducer } from "./reducers/borrowCartReducers";
 import {
+  newNotificationReducer, // Updated import
+  myNotificationsReducer, // Updated import
+  notificationDetailsReducer, // Updated import
+  allNotificationsReducer, // Updated import
+  notificationReducer, // Updated import
+} from "./reducers/notificationReducers"; // Updated import
+import {
   newOrderReducer,
   myOrdersReducer,
   orderDetailsReducer,
@@ -149,6 +156,11 @@ const reducer = combineReducers({
   announcementReducer: announcementReducer,
   borrowReducer: borrowReducer,
   equipmentReducer: equipmentReducer,
+  newNotification: newNotificationReducer, // Add new notification reducer
+  myNotifications: myNotificationsReducer, // Add my notifications reducer
+  notificationDetails: notificationDetailsReducer, // Add notification details reducer
+  allNotifications: allNotificationsReducer, // Add all notifications reducer
+  notificationReducer: notificationReducer, // Add notification reducer
 });
 
 let initialState = {

@@ -112,12 +112,7 @@ const UpdateAppointment = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (
-      !override &&
-      (status === "Approved" || status === "Denied" || status === "Overdued")
-    ) {
-      errMsg("Cannot update appointment with status: " + status);
-    } else {
+   
       const updatedAppointment = {
         title,
         description,
@@ -131,7 +126,6 @@ const UpdateAppointment = () => {
         professor,
       };
       dispatch(updateAppointment(appointment._id, updatedAppointment));
-    }
   };
 
   const generateRandomKey = () => {
@@ -280,13 +274,6 @@ const UpdateAppointment = () => {
                   id="status_field"
                   className="form-control"
                   value={status}
-                  disabled={
-                    (status === "Approved" ||
-                      status === "Denied" ||
-                      status === "Overdued" ||
-                      status === "Moved") &&
-                    !override
-                  }
                   onChange={(e) => {
                     setStatus(e.target.value);
                     handleStatusChange(e.target.value);
@@ -305,13 +292,6 @@ const UpdateAppointment = () => {
                   id="reason_field"
                   className="form-control"
                   value={reason}
-                  disabled={
-                    (status === "Approved" ||
-                      status === "Denied" ||
-                      status === "Overdued" ||
-                      status === "Moved") &&
-                    !override
-                  }
                   onChange={(e) => setReason(e.target.value)}
                 >
                   <option value="" disabled selected>
@@ -372,30 +352,16 @@ const UpdateAppointment = () => {
                     className="form-control"
                     value={key}
                     onChange={(e) => setKey(e.target.value)}
-                    // disabled={!override}
                     disabled
                   />
                   <div className="input-group-append">
-                    {!override &&
-                      (status === "Approved" ||
-                        status === "Denied" ||
-                        status === "Overdued" ||
-                        status === "Moved") && (
-                        <button
-                          className="btn btn-outline-secondary"
-                          type="button"
-                          onClick={generateRandomKey}
-                          disabled={
-                            (status === "Approved" ||
-                              status === "Denied" ||
-                              status === "Overdued" ||
-                              status === "Moved") &&
-                            !override
-                          }
-                        >
-                          Generate
-                        </button>
-                      )}
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      onClick={generateRandomKey}
+                    >
+                      Generate
+                    </button>
                   </div>
                 </div>
               </div>
@@ -404,13 +370,6 @@ const UpdateAppointment = () => {
                 id="login_button"
                 type="submit"
                 className="btn btn-block py-3"
-                disabled={
-                  (status === "Approved" ||
-                    status === "Denied" ||
-                    status === "Overdued" ||
-                    status === "Moved") &&
-                  !override
-                }
               >
                 UPDATE
               </button>

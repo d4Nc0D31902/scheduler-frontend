@@ -1,0 +1,38 @@
+.notification-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    min-width: 250px;
+    margin: 10px 40px;
+}
+
+.badge {
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-item {
+    display: flex;
+
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    justify-content: flex-start;
+
+}
+
+.notification-item:hover {
+    background-color: gray;
+    padding: 10px;
+
+}
+
+p {
+
+    font-size: 14px;
+    
+
+}

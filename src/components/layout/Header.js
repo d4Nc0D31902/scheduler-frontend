@@ -10,6 +10,7 @@ import {
 } from "../../actions/notificationActions"; // Import updateNotifications action
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
+import "./header.css";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -58,9 +59,9 @@ const Header = () => {
 
       dispatch(updateNotifications("read"));
       dispatch(allNotifications);
+      setUnreadCount(0); // Set unread count to zero when notifications are viewed
     }
 
-    setUnreadCount(0);
     setShowNotifications(!showNotifications);
   };
 
@@ -70,6 +71,7 @@ const Header = () => {
   return (
     <Fragment>
       <ToastContainer />
+
       <nav className="navbar row">
         <div className="col-lg-1 col-md-5 ">
           <div className="navbar-brand ">
@@ -194,11 +196,29 @@ const Header = () => {
               )}
               {showNotifications && (
                 <div className="notification-dropdown">
-                  {notifications.map((notification) => (
-                    <div key={notification._id} className="notification-item">
-                      {notification.message}
-                    </div>
-                  ))}
+                  {notifications
+                    .slice()
+                    .reverse()
+                    .map(
+                      (
+                        notification // Reverse the array here
+                      ) => (
+                        <div
+                          key={notification._id}
+                          className="notification-item"
+                        >
+                          <p>
+                            {" "}
+                            <img
+                              src="/images/tupt_logo.png"
+                              style={{ width: "40px", height: "40px" }}
+                              alt="Logo"
+                            />{" "}
+                            {notification.message}{" "}
+                          </p>
+                        </div>
+                      )
+                    )}
                 </div>
               )}
             </div>

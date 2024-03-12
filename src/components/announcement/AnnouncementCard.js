@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -15,8 +15,6 @@ const AnnouncementCard = ({ announcement, onDelete }) => {
     try {
       await onDelete(_id);
       toast.success("Announcement deleted successfully");
-      // Reload the site after deletion
-      window.location.reload();
     } catch (error) {
       console.error("Error deleting announcement:", error);
       toast.error("Failed to delete announcement");
@@ -24,7 +22,11 @@ const AnnouncementCard = ({ announcement, onDelete }) => {
   };
 
   return (
+    <Fragment>
+    
+      
     <div className="announcement-card">
+     
       <div className="announcement-details">
         {images.length > 0 && (
           <div className="image-container">
@@ -52,82 +54,45 @@ const AnnouncementCard = ({ announcement, onDelete }) => {
                   />
                 )}
               <div>
-                {/* <p className="user-name">
+                <p className="user-name">
                   {announcement.user && announcement.user.name}
-                </p> */}
-                {/* {announcement.user && announcement.user.role && <p className="user-role">{announcement.user.role}</p>} */}
+                </p>
               </div>
             </div>
           </div>
         )}
-        <h3>{title} </h3>
-        <p className="user-name">
-          {announcement.user && announcement.user.name}
-        </p>
+        <h3>{title}</h3>
         <p>
           {new Date(createdAt).toLocaleDateString("en-US", {
-            // weekday: "long",
             month: "long",
             day: "numeric",
             year: "numeric",
           })}
         </p>
-
-        {/* <p>Date: {new Date(createdAt).toLocaleDateString()}</p> */}
         <p>{body}</p>
-
-        {/* {images.length > 0 && (
-          <div className="image-container">
-            {images.map((image, index) => (
-              <img
-                key={index}
-                src={image.url}
-                alt={`${title}'s Image ${index + 1}`}
-                className="resized-image"
-              />
-            ))}
+          <div className="announcement-buttons">
+            {(isAdmin || isOfficer) && (
+              <>
+                <Link
+                  to={`/admin/announcement/${_id}`}
+                  className="btn btn-primary"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={deleteAnnouncementHandler}
+                  className="btn btn-danger"
+                >
+                  Delete
+                </button>
+              </>
+            )}
           </div>
-        )} */}
       </div>
-
-      {/* <div className="announcement-buttons">
-        {isAdmin ||
-          (user && user.role === "officer" && (
-            <>
-              <Link
-                to={`/admin/announcement/${announcement._id}`}
-                className="btn btn-primary py-1 px-2"
-              >
-                Edit
-              </Link>
-              <button
-                onClick={deleteAnnouncementHandler}
-                className="btn btn-danger py-1 px-2 ml-2"
-              >
-                Delete
-              </button>
-            </>
-          ))}
-      </div> */}
-      <div className="announcement-buttons">
-        {(isAdmin || isOfficer) && (
-          <>
-            <Link
-              to={`/admin/announcement/${announcement._id}`}
-              className="btn btn-primary py-1 px-2"
-            >
-              Edit
-            </Link>
-            <button
-              onClick={deleteAnnouncementHandler}
-              className="btn btn-danger py-1 px-2 ml-2"
-            >
-              Delete
-            </button>
-          </>
-        )}
-      </div>
+      
     </div>
+     
+    </Fragment>
   );
 };
 

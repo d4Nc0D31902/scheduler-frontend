@@ -36,7 +36,8 @@ const NewAppointment = () => {
     (state) => state.newAppointment
   );
 
-  const user = useSelector((state) => state.auth.user);
+  // const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user) || {};
 
   const message = (message = "") =>
     toast.success(message, {
@@ -69,7 +70,6 @@ const NewAppointment = () => {
     fetchSettings();
   }, []);
 
-  
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
@@ -175,15 +175,79 @@ const NewAppointment = () => {
     });
   };
 
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+
+  //   if (validateForm()) {
+  //     if (screenShot.length === 0) {
+  //       const isAdmin = user && user.role === "admin";
+  //       // Check if any file has been selected
+  //       toast.error("Please select a file.");
+  //       return;
+  //     }
+  //     const isDateValid = isDateAvailable(timeStart, timeEnd);
+  //     const isTimeValid = isTimeAvailable(timeStart, timeEnd);
+
+  //     if (!isDateValid) {
+  //       toast.error("Selected date is not available");
+  //       return;
+  //     }
+
+  //     if (!isTimeValid) {
+  //       toast.error("Selected time is not available");
+  //       return;
+  //     }
+
+  //     // Set appointment status based on user role
+  //     let status = selectedRadio === "PE Class" ? "PE Class" : "Pending";
+  //     if (isAdmin) {
+  //       status = "Approved";
+  //     }
+
+  //     const reason = "N/A";
+  //     const key = " ";
+
+  //     const appointmentData = {
+  //       userId: user._id,
+  //       attendees: attendees,
+  //       location: location,
+  //       title: title,
+  //       description: description,
+  //       timeStart: timeStart,
+  //       timeEnd: timeEnd,
+  //       professor: professor,
+  //       status: status, // Update appointment status here
+  //       reason: reason,
+  //       key: key,
+  //       appointmentType: selectedRadio, // Add appointment type to data
+  //       screenShot: screenShot,
+  //     };
+
+  //     try {
+  //       await dispatch(createAppointment(appointmentData));
+  //       navigate("/calendar");
+  //       toast.success("Appointment requested successfully");
+  //     } catch (error) {
+  //       console.error("Error creating appointment:", error);
+  //       toast.error("Failed to request appointment");
+  //     }
+  //   }
+  // };
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       if (screenShot.length === 0) {
+        const isAdmin = user && user.role === "admin";
         // Check if any file has been selected
         toast.error("Please select a file.");
         return;
       }
+
+      // Define isAdmin here
+      const isAdmin = user && user.role === "admin";
+
       const isDateValid = isDateAvailable(timeStart, timeEnd);
       const isTimeValid = isTimeAvailable(timeStart, timeEnd);
 
@@ -199,7 +263,7 @@ const NewAppointment = () => {
 
       // Set appointment status based on user role
       let status = selectedRadio === "PE Class" ? "PE Class" : "Pending";
-      if (user.role === "admin") {
+      if (isAdmin) {
         status = "Approved";
       }
 
@@ -233,8 +297,23 @@ const NewAppointment = () => {
     }
   };
 
+  // const isDateAvailable = (startTime, endTime) => {
+  //   if (user.role === "admin") {
+  //     return true; // All dates are available for admin
+  //   }
+
+  //   const startDay = new Date(startTime).toLocaleDateString("en-US", {
+  //     weekday: "long",
+  //   });
+  //   const endDay = new Date(endTime).toLocaleDateString("en-US", {
+  //     weekday: "long",
+  //   });
+
+  //   return settingsData.day_schedule.includes(startDay);
+  // };
+
   const isDateAvailable = (startTime, endTime) => {
-    if (user.role === "admin") {
+    if (user && user.role === "admin") {
       return true; // All dates are available for admin
     }
 
@@ -333,7 +412,7 @@ const NewAppointment = () => {
             <label htmlFor="title_field">Title:</label>
             <input
               type="text"
-              placeholder="Title ex.Practice Basketball, etc..."
+              placeholder="Basketball Game"
               id="title_field"
               className={`form-control ${errors.title && "is-invalid"}`}
               value={title}
@@ -347,10 +426,11 @@ const NewAppointment = () => {
           <div className="form-group">
             <label htmlFor="body_field">Description</label>
             <textarea
-              className={`form-control ${descriptionError && "is-invalid"
-                }hide-on-print`}
+              className={`form-control ${
+                descriptionError && "is-invalid"
+              }hide-on-print`}
               id="body_field"
-              placeholder="Describe the event..."
+              placeholder="Description of the Request"
               rows="8"
               value={description}
               onChange={handleDescriptionChange}
@@ -365,8 +445,9 @@ const NewAppointment = () => {
             <label htmlFor="location_field">Location:</label>
             <select
               id="location_field"
-              className={`form-control ${errors.location && "is-invalid"
-                }hide-on-print`}
+              className={`form-control ${
+                errors.location && "is-invalid"
+              }hide-on-print`}
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             >

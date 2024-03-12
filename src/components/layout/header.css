@@ -9,6 +9,10 @@
     margin: 10px 40px;
 }
 
+
+.text-muted{
+    margin: 10px;
+}
 .badge {
     position: relative;
     cursor: pointer;
@@ -16,11 +20,11 @@
 
 .notification-item {
     display: flex;
-
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
     justify-content: flex-start;
+   
 
 }
 
@@ -29,9 +33,13 @@
     padding: 10px;
 
 }
+hr{
+    border-color: black !important;
+    border-width: 20px !important;
+}
 
 p {
-
+    margin-top: 20px !important;
     font-size: 14px;
     
 

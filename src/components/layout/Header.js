@@ -199,26 +199,25 @@ const Header = () => {
                   {notifications
                     .slice()
                     .reverse()
-                    .map(
-                      (
-                        notification // Reverse the array here
-                      ) => (
-                        <div
-                          key={notification._id}
-                          className="notification-item"
-                        >
-                          <p>
-                            {" "}
-                            <img
-                              src="/images/tupt_logo.png"
-                              style={{ width: "40px", height: "40px" }}
-                              alt="Logo"
-                            />{" "}
-                            {notification.message}{" "}
-                          </p>
-                        </div>
-                      )
-                    )}
+                    .map((notification) => (
+                      <div key={notification._id} className="notification-item">
+                        <p>
+                          <img
+                            src="/images/tupt_logo.png"
+                            style={{ width: "40px", height: "40px",marginRight:"10px",}}
+                            alt="Logo"
+                          />
+                          {notification.message}
+                          <small className="text-muted">
+                         {new Date(notification.createdAt).toLocaleString()}
+                       </small>
+                        </p>
+                       
+                        
+                      </div>
+                    
+                    ))}
+             
                 </div>
               )}
             </div>

@@ -10,6 +10,8 @@ import {
 import { NEW_ANNOUNCEMENT_RESET } from "../../constants/announcementConstants";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
 
 const NewAnnouncement = () => {
   const [title, setTitle] = useState("");
@@ -142,7 +144,7 @@ const NewAnnouncement = () => {
               <div className="form-group">
                 <label htmlFor="title_field">Title:</label>
                 <input
-                  placeholder="Put title ex.(ACSO WEEK HAPPENINGS) etc."
+                  placeholder="Put title here."
                   type="text"
                   id="title_field"
                   className={`form-control ${errors.title ? "is-invalid" : ""}`}
@@ -157,7 +159,7 @@ const NewAnnouncement = () => {
               <div className="form-group">
                 <label htmlFor="body_field">Caption:</label>
                 <textarea
-                  placeholder="Add a caption here"
+                  placeholder="Add caption here"
                   className={`form-control ${errors.body ? "is-invalid" : ""}`}
                   id="body_field"
                   rows="8"

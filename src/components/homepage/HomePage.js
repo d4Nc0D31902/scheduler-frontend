@@ -1042,7 +1042,7 @@ const Homepage = () => {
               >
                 Maracris Lappay
               </h5>
-              <p>Developer's Advicer</p>
+              <p>Developers' Advicer</p>
             </div>
           </div>
         </div>

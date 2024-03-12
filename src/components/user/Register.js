@@ -46,7 +46,13 @@ const Register = () => {
 
     // Name validation
     if (!name.trim()) {
-      newErrors = { ...newErrors, name: "Name is required" };
+      newErrors = { ...newErrors, name: "Full Name is required" };
+      isValid = false;
+    } else if (!/^[a-zA-Z]+(\s[a-zA-Z]+)+$/.test(name)) {
+      newErrors = {
+        ...newErrors,
+        name: "Please enter a valid Full Name format (e.g., John Doe)",
+      };
       isValid = false;
     }
 
@@ -64,10 +70,12 @@ const Register = () => {
     }
 
     // Password validation
-    if (password.length < 6) {
+    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (password.length < 6 || !passwordPattern.test(password)) {
       newErrors = {
         ...newErrors,
-        password: "Password must be at least 6 characters long",
+        password:
+          "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one digit",
       };
       isValid = false;
     }
@@ -170,7 +178,7 @@ const Register = () => {
   // };
 
   const coursesByDepartment = {
-    "N/A": ["N/A"],
+    // "N/A": ["N/A"],
     "BS Engineering Program": ["N/A", "BSCE", "BSEE", "BSEcE", "BSME"],
     "BS Degree Program": ["N/A", "BSIT", "BSES"],
     "BTVTED Program": [
@@ -181,7 +189,7 @@ const Register = () => {
       "BTVTEDICT-CH",
     ],
     "BET Program": [
-      "N/A",
+      // "N/A",
       "BETAT",
       "BETCHT",
       "BETCT",
@@ -202,7 +210,7 @@ const Register = () => {
   // const years = ["1st Year", " 2nd Year", "3rd Year", "4th Year", "Alumni"];
 
   const years = [
-    "N/A",
+    // "N/A",
     "1st Year",
     "2nd Year",
     "3rd Year",
@@ -375,7 +383,7 @@ const Register = () => {
             </div>
             {/* End of Dropdowns */}
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="avatar_upload">Profile:</label>
               <div className="d-flex align-items-center">
                 <div>
@@ -401,7 +409,7 @@ const Register = () => {
                   </label>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <button
               id="register_button"

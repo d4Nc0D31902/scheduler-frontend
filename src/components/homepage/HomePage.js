@@ -42,10 +42,9 @@ const Homepage = () => {
     "/images/2.jpg",
     "/images/3.jpg",
     "/images/4.jpg",
-   
+
     "/images/6.jpg",
     "/images/9.jpg",
-    
   ];
 
   return (
@@ -227,7 +226,7 @@ const Homepage = () => {
         style={{
           padding: "100px",
           textAlign: "center",
-          color: "white",
+          color: "white", 
           backgroundColor: "maroon",
           textAlign: "justify",
           marginBottom: "50px",
@@ -246,12 +245,12 @@ const Homepage = () => {
             textStrokePosition: "0.3em", // Adjust to move the stroke to the left
             letterSpacing: "2px", // Optional: Adjust letter spacing for better visibility
           }}
-          className="text-center"
+          className="text-center "
         >
           HAVE FUN USING THE SCHEDULER
         </h2>
-        <div className="row">
-          <div className="col-lg-4 col-md-4 mb-4">
+        <div className="row ">
+          <div className="col-lg-4 col-md-4 mb-4 col-sm-12">
             <div
               className="card h-100 border-0 shadow-sm"
               style={{ borderRadius: "15px" }}
@@ -299,7 +298,7 @@ const Homepage = () => {
             </div>
           </div>
 
-          <div className="col-lg-4 col-md-4 mb-4">
+          <div className="col-lg-4 col-md-4 mb-4 col-sm-12">
             <div
               className="card h-100 border-0 shadow-sm"
               style={{ borderRadius: "15px" }}
@@ -703,124 +702,216 @@ const Homepage = () => {
         <h4
           style={{
             color: "#333",
-            marginBottom: "20px",
+            marginBottom: "50px",
             marginTop: "50px",
+            textAlign: "center",
             fontFamily: "Arial, sans-serif",
             fontWeight: "bold",
+            fontSize: "2.5rem",
+            textTransform: "uppercase",
+            letterSpacing: "2px",
+            borderBottom: "3px solid #333",
+            paddingBottom: "10px",
           }}
         >
-          OFFICERS
+          EXECUTIVE OFFICERS
         </h4>
-        <div className="row officers">
-          <div className="col-lg-4 col-md-6 mb-4">
+
+        <div className="row officers ">
+          <div className="col-lg-4 col-md-6 mb-4 ">
             <div
-              className="card shadow"
+              className="card shadow h-100"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+                color: "black",
+              }}
+            >
+              <div className="card-body text-center h-100">
+                <img
+                  src="/images/100.jpg"
+                  alt="Officer"
+                  style={{
+                    width: "80%",
+                    height: "100%",
+                    marginBottom: "20px",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-md-6 mb-4  ">
+            <div
+              className="card shadow h-100"
               style={{
                 borderRadius: "10px",
                 overflow: "hidden",
                 border: "none",
               }}
             >
-              <div className="card-body text-center">
+              <div className="card-body text-center  h-100">
                 <img
-                  src="/images/m.jpg"
+                  src="/images/111.jpg"
                   alt="Officer"
                   style={{
-                    width: "225px",
-                    height: "225px",
-                    borderRadius: "50%",
+                    width: "80%",
+                    height: "100%",
+
                     marginBottom: "20px",
                   }}
                 />
-                <h5
-                  className="card-title"
-                  style={{
-                    color: "#333",
-                    fontFamily: "Arial, sans-serif",
-                    fontWeight: "bold",
-                    marginBottom: "0",
-                  }}
-                >
-                  Officer 1
-                </h5>
-                <p
-                  style={{
-                    color: "#666",
-                    fontFamily: "Arial, sans-serif",
-                    fontSize: "14px",
-                    margin: "5px 0",
-                  }}
-                >
-                  Full Name
-                  <br />
-                  Year - Position
-                </p>
               </div>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
             <div
-              className="card shadow"
+              className="card shadow h-100"
               style={{
                 borderRadius: "10px",
                 overflow: "hidden",
                 border: "none",
               }}
             >
-              <div className="card-body text-center">
+              <div className="card-body text-center h-100">
                 <img
-                  src="/images/m.jpg"
+                  src="/images/12.jpg"
                   alt="Officer"
                   style={{
-                    width: "225px",
-                    height: "225px",
-                    borderRadius: "50%",
+                    width: "80%",
+                    height: "100%",
                     marginBottom: "20px",
                   }}
                 />
-                <h5
-                  className="card-title"
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-4 col-md-6 mb-4 ">
+          <div
+            className="card shadow h-100"
+            style={{
+              borderRadius: "10px",
+              overflow: "hidden",
+              border: "none",
+            }}
+          >
+            <div className="card-body text-center h-100">
+              <img
+                src="/images/13.jpg"
+                alt="Officer"
+                style={{
+                  width: "80%",
+                  height: "100%",
+                  marginBottom: "20px",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="row officers ">
+          <div className="col-lg-4 col-md-6 mb-4  ">
+            <div
+              className="card shadow h-100"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+              }}
+            >
+              <div className="card-body text-center  h-100">
+                <img
+                  src="/images/14.jpg"
+                  alt="Officer"
                   style={{
-                    color: "#333",
-                    fontFamily: "Arial, sans-serif",
-                    fontWeight: "bold",
-                    marginBottom: "0",
+                    width: "80%",
+                    height: "100%",
+
+                    marginBottom: "20px",
                   }}
-                >
-                  Officer 2
-                </h5>
-                <p
-                  style={{
-                    color: "#666",
-                    fontFamily: "Arial, sans-serif",
-                    fontSize: "14px",
-                    margin: "5px 0",
-                  }}
-                >
-                  Full Name
-                  <br />
-                  Year - Position
-                </p>
+                />
               </div>
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4">
             <div
-              className="card shadow"
+              className="card shadow h-100"
               style={{
                 borderRadius: "10px",
                 overflow: "hidden",
                 border: "none",
               }}
             >
-              <div className="card-body text-center">
+              <div className="card-body text-center h-100">
                 <img
-                  src="/images/m.jpg"
+                  src="/images/15.jpg"
+                  alt="Officer"
+                  style={{
+                    width: "80%",
+                    height: "100%",
+                    marginBottom: "20px",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-md-6 mb-4">
+            <div
+              className="card shadow h-100"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+              }}
+            >
+              <div className="card-body text-center h-100">
+                <img
+                  src="/images/16.jpg"
+                  alt="Officer"
+                  style={{
+                    width: "80%",
+                    height: "100%",
+                    marginBottom: "20px",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <h4
+          style={{
+            color: "#333",
+            marginBottom: "50px",
+            marginTop: "50px",
+            textAlign: "center",
+            fontFamily: "Arial, sans-serif",
+            fontWeight: "bold",
+            fontSize: "2.5rem",
+            textTransform: "uppercase",
+            letterSpacing: "2px",
+            borderBottom: "3px solid #333",
+            paddingBottom: "10px",
+          }}
+        >
+          MEET THE DEVELOPERS TEAM
+        </h4>
+        <div className="row officers ">
+          <div className="col-lg-4 col-md-6 mb-4 ">
+            <div
+              className="card shadow h-100"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+              }}
+            >
+              <div className="card-body text-center h-100">
+                <img
+                  src="/images/dan.jpg"
                   alt="Officer"
                   style={{
                     width: "225px",
                     height: "225px",
-                    borderRadius: "50%",
                     marginBottom: "20px",
                   }}
                 />
@@ -833,7 +924,7 @@ const Homepage = () => {
                     marginBottom: "0",
                   }}
                 >
-                  Officer 3
+                  Daniel Angelo Rodriguez
                 </h5>
                 <p
                   style={{
@@ -843,11 +934,114 @@ const Homepage = () => {
                     margin: "5px 0",
                   }}
                 >
-                  Full Name
-                  <br />
-                  Year - Position
+                  WEB DEVELOPER
                 </p>
               </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-md-6 mb-4  ">
+            <div
+              className="card shadow h-100"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+              }}
+            >
+              <div className="card-body text-center  h-100">
+                <img
+                  src="/images/ner.jpg"
+                  alt="Officer"
+                  style={{
+                    width: "225px",
+                    height: "225px",
+
+                    marginBottom: "20px",
+                  }}
+                />
+                <h5
+                  className="card-title"
+                  style={{
+                    color: "#333",
+                    fontFamily: "Arial, sans-serif",
+                    fontWeight: "bold",
+                    marginBottom: "0",
+                  }}
+                >
+                  {" "}
+                  John Neri Escobella
+                </h5>
+                <p>Frontend Developer</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-md-6 mb-4">
+            <div
+              className="card shadow h-100"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+              }}
+            >
+              <div className="card-body text-center h-100">
+                <img
+                  src="/images/jem.jpg"
+                  alt="Officer"
+                  style={{
+                    width: "225px",
+                    height: "225px",
+                    marginBottom: "20px",
+                  }}
+                />
+                <h5
+                  className="card-title"
+                  style={{
+                    color: "#333",
+                    fontFamily: "Arial, sans-serif",
+                    fontWeight: "bold",
+                    marginBottom: "0",
+                  }}
+                >
+                  Jeremy Cabudbud
+                </h5>
+                <p>Mobile Developer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-lg-3 col-md-6 mb-4">
+          <div
+            className="card shadow h-100"
+            style={{
+              borderRadius: "10px",
+              overflow: "hidden",
+              border: "none",
+            }}
+          >
+            <div className="card-body text-center h-100">
+              <img
+                src="/images/mara.png"
+                alt="Officer"
+                style={{
+                  width: "225px",
+                  height: "225px",
+                  marginBottom: "20px",
+                }}
+              />
+              <h5
+                className="card-title"
+                style={{
+                  color: "#333",
+                  fontFamily: "Arial, sans-serif",
+                  fontWeight: "bold",
+                  marginBottom: "0",
+                }}
+              >
+                Maracris Lappay
+              </h5>
+              <p>Developers Advicer</p>
             </div>
           </div>
         </div>

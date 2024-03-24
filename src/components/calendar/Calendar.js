@@ -20,9 +20,50 @@ function MyCalendar() {
   const isAdmin = isAuthenticated && user.role === "admin";
   const isOfficer = isAuthenticated && user.role === "officer";
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${process.env.REACT_APP_API}/api/v1/appointments`
+  //       );
+  //       if (response.ok) {
+  //         const data = await response.json();
+
+  //         const approvedAppointments = data.appointments
+  //           .filter(
+  //             (appointment) =>
+  //               appointment.status === "Approved" ||
+  //               appointment.status === "PE Class" ||
+  //               appointment.status === "Moved"
+  //           )
+  //           .map((appointment) => ({
+  //             title: appointment.title,
+  //             start: appointment.timeStart,
+  //             end: appointment.timeEnd,
+  //             id: appointment._id,
+  //             details: {
+  //               ...appointment,
+  //               requester:
+  //                 appointment.status === "PE Class"
+  //                   ? appointment.requester
+  //                   : appointment.requester,
+  //             },
+  //           }));
+
+  //         setAppointments(approvedAppointments);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching appointments: ", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch data from your API
         const response = await fetch(
           `${process.env.REACT_APP_API}/api/v1/appointments`
         );
@@ -50,7 +91,45 @@ function MyCalendar() {
               },
             }));
 
-          setAppointments(approvedAppointments);
+          // Fetch data from the external API
+          const externalResponse = await fetch(
+            "http://calendash.online/api/getAllCalendars"
+          );
+          if (externalResponse.ok) {
+            const externalData = await externalResponse.json();
+
+            // Combine both sets of data
+            const combinedAppointments = [...approvedAppointments];
+
+            externalData.forEach((entry) => {
+              const {
+                organization,
+                department,
+                status,
+                event_name,
+                start,
+                end,
+                venueName,
+              } = entry;
+              combinedAppointments.push({
+                title: event_name,
+                start: start,
+                end: end,
+                id: organization + department, // You can use a unique identifier here
+                details: {
+                  organization: organization,
+                  department: department,
+                  status: status,
+                  venueName: venueName,
+                  // Include any other details you need
+                },
+              });
+            });
+
+            setAppointments(combinedAppointments);
+          } else {
+            console.error("Error fetching external data");
+          }
         }
       } catch (error) {
         console.error("Error fetching appointments: ", error);
@@ -114,7 +193,6 @@ function MyCalendar() {
     color: "#333",
     width: "100%",
     padding: "5px",
-
   };
 
   const buttonStyle = {
@@ -246,23 +324,109 @@ function MyCalendar() {
       {selectedAppointment && (
         <div className="modal active">
           <div className="modal-content" style={{ backgroundColor: "#800000" }}>
-            <span className="close" onClick={handleCloseModal}>&times;</span>
-            <h3 className="card-title text-center" style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px", marginTop: "20px", color: "#fff", textTransform: "uppercase" }}>
-              <img src="/images/tupt_logo.png" style={{ width: "60px", height: "60px", marginRight: "10px", verticalAlign: "middle" }} alt="Logo" />
+            <span className="close" onClick={handleCloseModal}>
+              &times;
+            </span>
+            <h3
+              className="card-title text-center"
+              style={{
+                fontSize: "18px",
+                fontWeight: "bold",
+                marginBottom: "10px",
+                marginTop: "20px",
+                color: "#fff",
+                textTransform: "uppercase",
+              }}
+            >
+              <img
+                src="/images/tupt_logo.png"
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  marginRight: "10px",
+                  verticalAlign: "middle",
+                }}
+                alt="Logo"
+              />
               TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES
             </h3>
             <hr style={{ borderColor: "white" }} />
-            <h2 style={{ fontFamily: "Georgia, serif", fontSize: "24px", fontWeight: "bold", color: "#fff", textAlign: "center", textTransform: "uppercase" }}>{selectedAppointment.title}</h2>
-            <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", }}>{selectedAppointment.status === "PE Class" ? "Professor" : "Requester"}: {selectedAppointment.requester}</p>
-            <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", }}>Location: {selectedAppointment.location}</p>
+            <h2
+              style={{
+                fontFamily: "Georgia, serif",
+                fontSize: "24px",
+                fontWeight: "bold",
+                color: "#fff",
+                textAlign: "center",
+                textTransform: "uppercase",
+              }}
+            >
+              {selectedAppointment.title}
+            </h2>
+            <p
+              style={{
+                fontFamily: "Verdana, sans-serif",
+                fontSize: "16px",
+                color: "#fff",
+              }}
+            >
+              {selectedAppointment.status === "PE Class"
+                ? "Professor"
+                : "Requester"}
+              : {selectedAppointment.requester}
+            </p>
+            <p
+              style={{
+                fontFamily: "Verdana, sans-serif",
+                fontSize: "16px",
+                color: "#fff",
+              }}
+            >
+              Location: {selectedAppointment.location}
+            </p>
             <div className="time-container " style={{ display: "flex" }}>
-              <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", marginRight: "5px" }}>Scheduled time: {formatTime(selectedAppointment.timeStart)}</p>
-              <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", }}>to {formatTime(selectedAppointment.timeEnd)}</p>
+              <p
+                style={{
+                  fontFamily: "Verdana, sans-serif",
+                  fontSize: "16px",
+                  color: "#fff",
+                  marginRight: "5px",
+                }}
+              >
+                Scheduled time: {formatTime(selectedAppointment.timeStart)}
+              </p>
+              <p
+                style={{
+                  fontFamily: "Verdana, sans-serif",
+                  fontSize: "16px",
+                  color: "#fff",
+                }}
+              >
+                to {formatTime(selectedAppointment.timeEnd)}
+              </p>
             </div>
             {selectedAppointment.status !== "PE Class" && (
               <>
-                <p style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff" }}>Attendees:</p>
-                <ul className="attendees-list" style={{ fontFamily: "Verdana, sans-serif", fontSize: "16px", color: "#fff", textAlign: "center", listStyle: "none", padding: "0" }}>
+                <p
+                  style={{
+                    fontFamily: "Verdana, sans-serif",
+                    fontSize: "16px",
+                    color: "#fff",
+                  }}
+                >
+                  Attendees:
+                </p>
+                <ul
+                  className="attendees-list"
+                  style={{
+                    fontFamily: "Verdana, sans-serif",
+                    fontSize: "16px",
+                    color: "#fff",
+                    textAlign: "center",
+                    listStyle: "none",
+                    padding: "0",
+                  }}
+                >
                   {selectedAppointment.attendees.map((attendee, index) => (
                     <li key={index}>{attendee}</li>
                   ))}
@@ -300,7 +464,6 @@ function MyCalendar() {
           </div>
         </div>
       )}
-
 
       {showConfirmationModal && (
         <div className="modal active">

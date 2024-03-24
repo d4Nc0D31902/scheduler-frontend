@@ -19,6 +19,7 @@ const Footer = () => {
           backgroundColor: "black",
         }}
         className="wave-background"
+        style={{ marginTop: "250px" }}
       >
         <defs>
           <linearGradient id="gradient" gradientTransform="rotate(90)">

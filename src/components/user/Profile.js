@@ -91,7 +91,7 @@ const Profile = () => {
 
   
   `}</style>
-            <div className="container py-5 h-100">
+            <div className="container py-5 h-100" >
               <div className="row d-flex justify-content-center align-items-center h-100" >
                 <div className="col col-lg-8 mb-0 mb-lg-0">
 

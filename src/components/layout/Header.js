@@ -10,6 +10,7 @@ import {
 } from "../../actions/notificationActions"; // Import updateNotifications action
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
+import "./header.css";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -58,9 +59,9 @@ const Header = () => {
 
       dispatch(updateNotifications("read"));
       dispatch(allNotifications);
+      setUnreadCount(0); // Set unread count to zero when notifications are viewed
     }
 
-    setUnreadCount(0);
     setShowNotifications(!showNotifications);
   };
 
@@ -70,6 +71,7 @@ const Header = () => {
   return (
     <Fragment>
       <ToastContainer />
+
       <nav className="navbar row">
         <div className="col-lg-1 col-md-5 ">
           <div className="navbar-brand ">
@@ -184,21 +186,33 @@ const Header = () => {
               {notifications.filter(
                 (notification) => notification.status === "unread"
               ).length > 0 && (
-                <span className="badge badge-danger">
-                  {
-                    notifications.filter(
-                      (notification) => notification.status === "unread"
-                    ).length
-                  }
-                </span>
-              )}
+                  <span className="badge badge-danger">
+                    {
+                      notifications.filter(
+                        (notification) => notification.status === "unread"
+                      ).length
+                    }
+                  </span>
+                )}
               {showNotifications && (
                 <div className="notification-dropdown">
                   {notifications.map((notification) => (
                     <div key={notification._id} className="notification-item">
-                      {notification.message}
+
+
+                      <p> <img
+                        src="/images/tupt_logo.png"
+                        style={{ width: "40px", height: "40px" }}
+                        alt="Logo"
+                      />  {notification.message} </p>
+
+
+
                     </div>
+
+
                   ))}
+
                 </div>
               )}
             </div>
@@ -273,7 +287,9 @@ const Header = () => {
               )
             )}
           </div>
+
         </div>
+
       </nav>
     </Fragment>
   );

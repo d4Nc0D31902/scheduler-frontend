@@ -20,16 +20,57 @@ function MyCalendar() {
   const isAdmin = isAuthenticated && user.role === "admin";
   const isOfficer = isAuthenticated && user.role === "officer";
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${process.env.REACT_APP_API}/api/v1/appointments`
+  //       );
+  //       if (response.ok) {
+  //         const data = await response.json();
+
+  //         const approvedAppointments = data.appointments
+  //           .filter(
+  //             (appointment) =>
+  //               appointment.status === "Approved" ||
+  //               appointment.status === "PE Class" ||
+  //               appointment.status === "Moved"
+  //           )
+  //           .map((appointment) => ({
+  //             title: appointment.title,
+  //             start: appointment.timeStart,
+  //             end: appointment.timeEnd,
+  //             id: appointment._id,
+  //             details: {
+  //               ...appointment,
+  //               requester:
+  //                 appointment.status === "PE Class"
+  //                   ? appointment.requester
+  //                   : appointment.requester,
+  //             },
+  //           }));
+
+  //         setAppointments(approvedAppointments);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching appointments: ", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
+        // Fetch appointments from your API
+        const appointmentsResponse = await fetch(
           `${process.env.REACT_APP_API}/api/v1/appointments`
         );
-        if (response.ok) {
-          const data = await response.json();
+        if (appointmentsResponse.ok) {
+          const appointmentsData = await appointmentsResponse.json();
 
-          const approvedAppointments = data.appointments
+          const approvedAppointments = appointmentsData.appointments
             .filter(
               (appointment) =>
                 appointment.status === "Approved" ||
@@ -50,10 +91,51 @@ function MyCalendar() {
               },
             }));
 
-          setAppointments(approvedAppointments);
+          // Fetch calendars from the provided API
+          const calendarsResponse = await fetch(
+            "http://calendash.online/api/getAllCalendars"
+          );
+          if (calendarsResponse.ok) {
+            const calendarsData = await calendarsResponse.json();
+
+            // Process the calendar data to match the format of appointments
+            const calendarAppointments = calendarsData.map((calendarItem) => ({
+              title: calendarItem.event_name,
+              start: calendarItem.start,
+              end: calendarItem.end,
+              id: calendarItem.event_name, // You can set this to a unique identifier from calendar data
+              details: {
+                organization: calendarItem.organization,
+                department: calendarItem.department,
+                status: calendarItem.status,
+                venueName: calendarItem.venueName,
+                role: calendarItem.role,
+                eventOrganizerName: calendarItem.eventOrganizerName,
+                name: calendarItem.name,
+              },
+            }));
+
+            // Combine appointments and calendar data
+            const combinedAppointments = [
+              ...approvedAppointments,
+              ...calendarAppointments,
+            ];
+
+            setAppointments(combinedAppointments);
+          } else {
+            console.error(
+              "Error fetching calendars: ",
+              calendarsResponse.status
+            );
+          }
+        } else {
+          console.error(
+            "Error fetching appointments: ",
+            appointmentsResponse.status
+          );
         }
       } catch (error) {
-        console.error("Error fetching appointments: ", error);
+        console.error("Error fetching data: ", error);
       }
     };
 

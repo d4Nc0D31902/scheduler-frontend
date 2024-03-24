@@ -98,27 +98,29 @@ function MyCalendar() {
           if (calendarsResponse.ok) {
             const calendarsData = await calendarsResponse.json();
 
-            // Process the calendar data to match the format of appointments
-            const calendarAppointments = calendarsData.map((calendarItem) => ({
-              title: calendarItem.event_name,
-              start: calendarItem.start,
-              end: calendarItem.end,
-              id: calendarItem.event_name, // You can set this to a unique identifier from calendar data
-              details: {
-                organization: calendarItem.organization,
-                department: calendarItem.department,
-                status: calendarItem.status,
-                venueName: calendarItem.venueName,
-                role: calendarItem.role,
-                eventOrganizerName: calendarItem.eventOrganizerName,
-                name: calendarItem.name,
-              },
-            }));
+            // Filter calendar items to include only "APPROVED" events
+            const approvedCalendarAppointments = calendarsData
+              .filter((calendarItem) => calendarItem.status === "APPROVED")
+              .map((calendarItem) => ({
+                title: calendarItem.event_name,
+                start: calendarItem.start,
+                end: calendarItem.end,
+                id: calendarItem.event_name, // You can set this to a unique identifier from calendar data
+                details: {
+                  organization: calendarItem.organization,
+                  department: calendarItem.department,
+                  status: calendarItem.status,
+                  venueName: calendarItem.venueName,
+                  role: calendarItem.role,
+                  eventOrganizerName: calendarItem.eventOrganizerName,
+                  name: calendarItem.name,
+                },
+              }));
 
-            // Combine appointments and calendar data
+            // Combine approved appointments and calendar data
             const combinedAppointments = [
               ...approvedAppointments,
-              ...calendarAppointments,
+              ...approvedCalendarAppointments,
             ];
 
             setAppointments(combinedAppointments);

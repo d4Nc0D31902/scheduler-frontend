@@ -1,62 +1,38 @@
 .notification-dropdown {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    background-color: #ffffff;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    min-width: 250px;
-    margin: 10px 40px;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 250px;
+  margin: 10px 40px;
 }
 
-<<<<<<< HEAD
-=======
-
-.text-muted{
-    margin: 10px;
-}
->>>>>>> c7584822b111d921fd61a9dd34ede90294ad777f
 .badge {
-    position: relative;
-    cursor: pointer;
+  position: relative;
+  cursor: pointer;
 }
 
 .notification-item {
-    display: flex;
-<<<<<<< HEAD
-
-=======
->>>>>>> c7584822b111d921fd61a9dd34ede90294ad777f
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    justify-content: flex-start;
-<<<<<<< HEAD
-=======
-   
->>>>>>> c7584822b111d921fd61a9dd34ede90294ad777f
-
+  display: flex;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: flex-start;
 }
 
 .notification-item:hover {
-    background-color: gray;
-    padding: 10px;
-
+  background-color: gray;
+  padding: 10px;
 }
-<<<<<<< HEAD
-
-p {
-
-=======
-hr{
-    border-color: black !important;
-    border-width: 20px !important;
+hr {
+  border-color: black !important;
+  border-width: 20px !important;
 }
 
 p {
-    margin-top: 20px !important;
->>>>>>> c7584822b111d921fd61a9dd34ede90294ad777f
-    font-size: 14px;
-    
+  margin-top: 20px !important;
 
+  font-size: 14px;
 }

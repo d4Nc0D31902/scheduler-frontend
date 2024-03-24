@@ -198,21 +198,9 @@ const Header = () => {
                 <div className="notification-dropdown">
                   {notifications.map((notification) => (
                     <div key={notification._id} className="notification-item">
-
-
-                      <p> <img
-                        src="/images/tupt_logo.png"
-                        style={{ width: "40px", height: "40px" }}
-                        alt="Logo"
-                      />  {notification.message} </p>
-
-
-
+                      {notification.message}
                     </div>
-
-
                   ))}
-
                 </div>
               )}
             </div>

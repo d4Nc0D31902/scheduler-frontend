@@ -60,7 +60,10 @@ const EquipmentContainer = () => {
             <div className="col-lg-10">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <button className="nav-link btn btn-link" onClick={() => handleSportClick(null)}>
+                  <button
+                    className="nav-link btn btn-link"
+                    onClick={() => handleSportClick(null)}
+                  >
                     All Sports
                   </button>
                 </li>
@@ -68,7 +71,10 @@ const EquipmentContainer = () => {
                   <Fragment key={sport._id}>
                     {sport.status === "active" && (
                       <li className="nav-item">
-                        <button className="nav-link btn btn-link" onClick={() => handleSportClick(sport.name)}>
+                        <button
+                          className="nav-link btn btn-link"
+                          onClick={() => handleSportClick(sport.name)}
+                        >
                           {sport.name}
                         </button>
                       </li>
@@ -91,7 +97,9 @@ const EquipmentContainer = () => {
             equipments
               .filter(
                 (equipment) =>
-                  selectedSport === null || equipment.sport === selectedSport
+                  (selectedSport === null ||
+                    equipment.sport === selectedSport) &&
+                  equipment.status === "active"
               )
               .map((equipment) => (
                 <div key={equipment._id} className="col-md-4 mb-4">

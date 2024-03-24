@@ -74,7 +74,11 @@
 .announcement-buttons {
   display: flex;
   align-items: center;
+<<<<<<< HEAD
   padding: 20px 40px;
+=======
+  
+>>>>>>> c7584822b111d921fd61a9dd34ede90294ad777f
 
 }
 

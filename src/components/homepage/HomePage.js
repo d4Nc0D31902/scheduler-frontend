@@ -1042,7 +1042,6 @@ const Homepage = () => {
               >
                 Maracris Lappay
               </h5>
-<<<<<<< HEAD
               <p
                 style={{
                   color: "#666",
@@ -1294,9 +1293,7 @@ const Homepage = () => {
                   WEB DEVELOPER
                 </p>
               </div>
-=======
               <p>Developers' Advicer</p>
->>>>>>> c7584822b111d921fd61a9dd34ede90294ad777f
             </div>
           </div>
           <div className="col-lg-4 col-md-6 mb-4  ">

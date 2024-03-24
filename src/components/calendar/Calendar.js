@@ -20,50 +20,9 @@ function MyCalendar() {
   const isAdmin = isAuthenticated && user.role === "admin";
   const isOfficer = isAuthenticated && user.role === "officer";
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `${process.env.REACT_APP_API}/api/v1/appointments`
-  //       );
-  //       if (response.ok) {
-  //         const data = await response.json();
-
-  //         const approvedAppointments = data.appointments
-  //           .filter(
-  //             (appointment) =>
-  //               appointment.status === "Approved" ||
-  //               appointment.status === "PE Class" ||
-  //               appointment.status === "Moved"
-  //           )
-  //           .map((appointment) => ({
-  //             title: appointment.title,
-  //             start: appointment.timeStart,
-  //             end: appointment.timeEnd,
-  //             id: appointment._id,
-  //             details: {
-  //               ...appointment,
-  //               requester:
-  //                 appointment.status === "PE Class"
-  //                   ? appointment.requester
-  //                   : appointment.requester,
-  //             },
-  //           }));
-
-  //         setAppointments(approvedAppointments);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching appointments: ", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch data from your API
         const response = await fetch(
           `${process.env.REACT_APP_API}/api/v1/appointments`
         );
@@ -91,45 +50,7 @@ function MyCalendar() {
               },
             }));
 
-          // Fetch data from the external API
-          const externalResponse = await fetch(
-            "http://calendash.online/api/getAllCalendars"
-          );
-          if (externalResponse.ok) {
-            const externalData = await externalResponse.json();
-
-            // Combine both sets of data
-            const combinedAppointments = [...approvedAppointments];
-
-            externalData.forEach((entry) => {
-              const {
-                organization,
-                department,
-                status,
-                event_name,
-                start,
-                end,
-                venueName,
-              } = entry;
-              combinedAppointments.push({
-                title: event_name,
-                start: start,
-                end: end,
-                id: organization + department, // You can use a unique identifier here
-                details: {
-                  organization: organization,
-                  department: department,
-                  status: status,
-                  venueName: venueName,
-                  // Include any other details you need
-                },
-              });
-            });
-
-            setAppointments(combinedAppointments);
-          } else {
-            console.error("Error fetching external data");
-          }
+          setAppointments(approvedAppointments);
         }
       } catch (error) {
         console.error("Error fetching appointments: ", error);

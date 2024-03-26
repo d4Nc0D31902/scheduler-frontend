@@ -4,8 +4,10 @@ import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { getBorrowDetails, clearErrors } from "../../actions/borrowActions";
-import ReactToPrint from "react-to-print"; // Import ReactToPrint
-import PrintableBorrowDetails from "./PrintableBorrowDetails"; // Import PrintableBorrowDetails
+import ReactToPrint from "react-to-print";
+import PrintableBorrowDetails from "./PrintableBorrowDetails";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 const BorrowDetails = () => {
   const dispatch = useDispatch();
@@ -56,7 +58,22 @@ const BorrowDetails = () => {
       borrowingInfo.reason_borrow
     }`;
 
-  const componentRef = useRef(); // Create a ref for the component to be printed
+  const componentRef = useRef();
+
+  const handleDownloadPDF = () => {
+    if (!componentRef.current) return;
+
+    html2canvas(componentRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "PNG", 0, 0);
+      pdf.save("borrow-slip.pdf");
+    });
+  };
+
+  const handleDownloadButtonClick = () => {
+    handleDownloadPDF();
+  };
 
   return (
     <Fragment>
@@ -66,7 +83,7 @@ const BorrowDetails = () => {
         <Loader />
       ) : borrow && borrowingInfo ? (
         <div className="row" style={{ marginTop: "30px" }}>
-          <div className="col-12 col-lg-7 borrow-details">
+          <div className="col-12 col-lg-7 borrow-details" ref={componentRef}>
             <h3
               className="card-title"
               style={{
@@ -143,12 +160,18 @@ const BorrowDetails = () => {
             </p>
 
             <div style={{ textAlign: "center", margin: "20px 0" }}>
-              <ReactToPrint
+              {/* <ReactToPrint
                 trigger={() => (
                   <button className="btn btn-primary">Print</button>
-                )} // Button to trigger printing
-                content={() => componentRef.current} // Content to be printed
-              />
+                )}
+                content={() => componentRef.current}
+              /> */}
+              <button
+                className="btn btn-primary ml-2"
+                onClick={handleDownloadButtonClick}
+              >
+                Download Borrowing Slip
+              </button>
             </div>
           </div>
         </div>
@@ -156,10 +179,9 @@ const BorrowDetails = () => {
         <p>No borrow details available.</p>
       )}
 
-      {/* Printable component */}
       <div style={{ display: "none" }}>
         <PrintableBorrowDetails
-          ref={componentRef} // Assign the ref to the printable component
+          ref={componentRef}
           borrow={borrow}
           borrowingInfo={borrowingInfo}
           borrowItems={borrowItems}

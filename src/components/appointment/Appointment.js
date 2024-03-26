@@ -583,8 +583,9 @@ const NewAppointment = () => {
 
           <div className="text-center">
             <button
+              type="button" // Change type to button
               className="btn btn-secondary ml-3 hide-on-print"
-              onClick={() => window.print()}
+              onClick={() => window.print()} 
               style={{ padding: "12px 24px" }}
             >
               Print Letter and Waiver

@@ -55,11 +55,13 @@ const PrintableLetter = ({ appointment }) => {
                 alt="Logo"
               />
               TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES TAGUIG CITY
-              <p style={{ fontSize: "16px", marginTop: "14px", padding: "20px" }}>
+              <p
+                style={{ fontSize: "16px", marginTop: "14px", padding: "20px" }}
+              >
                 The Technological University of the Philippines shall be premier
                 state university and the model of excellence in technology
-                education in the country in a knowledge-based economy of the 21st
-                century.
+                education in the country in a knowledge-based economy of the
+                21st century.
               </p>
               <h4
                 className="my-4 text-center"
@@ -74,8 +76,8 @@ const PrintableLetter = ({ appointment }) => {
               <p>
                 We are writing to inform you about your upcoming appointment
                 titled (INPUT TITLE HERE) scheduled on (INPUT TIME START) at{" "}
-                (INPUT TIME END). That will also be player or will occur on (INPUT
-                LOCATION)
+                (INPUT TIME END). That will also be player or will occur on
+                (INPUT LOCATION)
               </p>
               {/* <p>Location: {appointment.location}</p> */}
               <p>
@@ -87,9 +89,7 @@ const PrintableLetter = ({ appointment }) => {
 
               <p>(SECTION HEAD)</p>
 
-
               <hr></hr>
-
 
               <div className="letter ">
                 <h6
@@ -114,11 +114,17 @@ const PrintableLetter = ({ appointment }) => {
                     alt="Logo"
                   />
                   TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES TAGUIG CITY
-                  <p style={{ fontSize: "16px", marginTop: "14px", padding: "20px" }}>
-                    The Technological University of the Philippines shall be premier
-                    state university and the model of excellence in technology
-                    education in the country in a knowledge-based economy of the 21st
-                    century.
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      marginTop: "14px",
+                      padding: "20px",
+                    }}
+                  >
+                    The Technological University of the Philippines shall be
+                    premier state university and the model of excellence in
+                    technology education in the country in a knowledge-based
+                    economy of the 21st century.
                   </p>
                   <h4
                     className="my-4 text-center"
@@ -131,23 +137,16 @@ const PrintableLetter = ({ appointment }) => {
                 <div className=" " style={{ padding: "40px" }}>
                   <p>{waiverText}</p>
                   <p>
-                    By signing below, you acknowledge that you have read, understood,
-                    and agreed to the terms and conditions outlined in this waiver.
+                    By signing below, you acknowledge that you have read,
+                    understood, and agreed to the terms and conditions outlined
+                    in this waiver.
                   </p>
                 </div>
               </div>
-
-
-
-
             </div>
           </div>
-
         </div>
-
       </div>
-
-
     </Fragment>
   );
 };

@@ -91,21 +91,19 @@ function MyCalendar() {
               },
             }));
 
-          // Fetch calendars from the provided API
           const calendarsResponse = await fetch(
             "https://calendash.online/api/getAllCalendars"
           );
           if (calendarsResponse.ok) {
             const calendarsData = await calendarsResponse.json();
 
-            // Filter calendar items to include only "APPROVED" events
             const approvedCalendarAppointments = calendarsData
               .filter((calendarItem) => calendarItem.status === "APPROVED")
               .map((calendarItem) => ({
                 title: calendarItem.event_name,
                 start: calendarItem.start,
                 end: calendarItem.end,
-                id: calendarItem.event_name, // You can set this to a unique identifier from calendar data
+                id: calendarItem.event_name, 
                 details: {
                   organization: calendarItem.organization,
                   department: calendarItem.department,
@@ -117,7 +115,6 @@ function MyCalendar() {
                 },
               }));
 
-            // Combine approved appointments and calendar data
             const combinedAppointments = [
               ...approvedAppointments,
               ...approvedCalendarAppointments,

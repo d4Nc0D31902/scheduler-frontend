@@ -110,7 +110,14 @@ const NewEquipment = () => {
       formData.append("images", image);
     });
 
-    dispatch(newEquipment(formData));
+    dispatch(newEquipment(formData))
+      .then(() => {
+        navigate("/admin/equipments");
+        message("Equipment created successfully");
+      })
+      .catch((error) => {
+        console.error("Error creating location:", error);
+      });
   };
 
   const onChange = (e) => {
@@ -215,7 +222,7 @@ const NewEquipment = () => {
                   )}
                 </div>
 
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label htmlFor="sport_field">Sport</label>
                   <select
                     id="sport_field"
@@ -231,6 +238,29 @@ const NewEquipment = () => {
                         {sport.name}
                       </option>
                     ))}
+                  </select>
+                  {errors.sport && (
+                    <div className="invalid-feedback">{errors.sport}</div>
+                  )}
+                </div> */}
+                <div className="form-group">
+                  <label htmlFor="sport_field">Category</label>
+                  <select
+                    id="sport_field"
+                    className={`form-control ${
+                      errors.sport ? "is-invalid" : ""
+                    }`}
+                    value={sport}
+                    onChange={(e) => setSport(e.target.value)}
+                  >
+                    <option value="">Select Category</option>
+                    {sports
+                      .filter((sport) => sport.status !== "inactive")
+                      .map((sport) => (
+                        <option key={sport._id} value={sport.name}>
+                          {sport.name}
+                        </option>
+                      ))}
                   </select>
                   {errors.sport && (
                     <div className="invalid-feedback">{errors.sport}</div>

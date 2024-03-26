@@ -60,12 +60,10 @@ const NewLocation = () => {
 
     dispatch(newLocation(locationData))
       .then(() => {
-        // This block will execute if the dispatch is successful
         navigate("/admin/locations");
         message("Location created successfully");
       })
       .catch((error) => {
-        // Handle error if needed
         console.error("Error creating location:", error);
       });
   };

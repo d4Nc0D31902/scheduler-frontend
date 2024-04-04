@@ -59,7 +59,7 @@ const Header = () => {
 
       dispatch(updateNotifications("read"));
       dispatch(allNotifications);
-      setUnreadCount(0); // Set unread count to zero when notifications are viewed
+      setUnreadCount(0);
     }
 
     setShowNotifications(!showNotifications);

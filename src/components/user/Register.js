@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { register, clearErrors } from "../../actions/userActions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -17,7 +19,7 @@ const Register = () => {
   });
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/images/user.png");
-
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
 
   const { name, email, password, department, course, year } = user;
@@ -28,6 +30,12 @@ const Register = () => {
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth
   );
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const togglePasswordButtonIcon = showPassword ? faEyeSlash : faEye;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -294,7 +302,7 @@ const Register = () => {
               )}
             </div>
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="password_field">Password:</label>
               <input
                 type="password"
@@ -305,6 +313,33 @@ const Register = () => {
                 placeholder="Enter Password"
                 onChange={onChange}
               />
+              {errors.password && (
+                <div className="invalid-feedback">{errors.password}</div>
+              )}
+            </div> */}
+
+            <div className="form-group">
+              <label htmlFor="password_field">Password:</label>
+              <div className="input-group">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password_field"
+                  className={`form-control ${errors.password && "is-invalid"}`}
+                  name="password"
+                  value={password}
+                  placeholder="Enter Password"
+                  onChange={onChange}
+                />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={toggleShowPassword}
+                  >
+                    <FontAwesomeIcon icon={togglePasswordButtonIcon} />
+                  </button>
+                </div>
+              </div>
               {errors.password && (
                 <div className="invalid-feedback">{errors.password}</div>
               )}

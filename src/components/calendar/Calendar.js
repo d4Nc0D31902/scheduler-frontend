@@ -7,6 +7,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import { Link } from "react-router-dom";
 import "../../Calendar.css";
 import { TextField, Button } from "@mui/material";
+
 function MyCalendar() {
   const [appointments, setAppointments] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -19,46 +20,6 @@ function MyCalendar() {
   const isAuthenticated = !!user;
   const isAdmin = isAuthenticated && user.role === "admin";
   const isOfficer = isAuthenticated && user.role === "officer";
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `${process.env.REACT_APP_API}/api/v1/appointments`
-  //       );
-  //       if (response.ok) {
-  //         const data = await response.json();
-
-  //         const approvedAppointments = data.appointments
-  //           .filter(
-  //             (appointment) =>
-  //               appointment.status === "Approved" ||
-  //               appointment.status === "PE Class" ||
-  //               appointment.status === "Moved"
-  //           )
-  //           .map((appointment) => ({
-  //             title: appointment.title,
-  //             start: appointment.timeStart,
-  //             end: appointment.timeEnd,
-  //             id: appointment._id,
-  //             details: {
-  //               ...appointment,
-  //               requester:
-  //                 appointment.status === "PE Class"
-  //                   ? appointment.requester
-  //                   : appointment.requester,
-  //             },
-  //           }));
-
-  //         setAppointments(approvedAppointments);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching appointments: ", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -103,12 +64,16 @@ function MyCalendar() {
                 title: calendarItem.event_name,
                 start: calendarItem.start,
                 end: calendarItem.end,
-                id: calendarItem.event_name, 
+                id: calendarItem.event_name,
                 details: {
                   organization: calendarItem.organization,
                   department: calendarItem.department,
                   status: calendarItem.status,
-                  venueName: calendarItem.venueName,
+                  title: calendarItem.event_name,
+                  requester: calendarItem.organization, // Changed this line
+                  location: calendarItem.venueName, // Changed this line
+                  timeStart: calendarItem.start, // Changed this line
+                  timeEnd: calendarItem.end, // Changed this line
                   role: calendarItem.role,
                   eventOrganizerName: calendarItem.eventOrganizerName,
                   name: calendarItem.name,
@@ -365,6 +330,19 @@ function MyCalendar() {
             >
               {selectedAppointment.title}
             </h2>
+            <h3
+              style={{
+                fontFamily: "Georgia, serif",
+                fontSize: "20px",
+                fontWeight: "bold",
+                color: "#fff",
+                textAlign: "center",
+                textTransform: "uppercase",
+              }}
+            >
+              {selectedAppointment.event_name} {/* Add this line */}
+            </h3>
+
             <p
               style={{
                 fontFamily: "Verdana, sans-serif",
@@ -407,62 +385,63 @@ function MyCalendar() {
                 to {formatTime(selectedAppointment.timeEnd)}
               </p>
             </div>
-            {selectedAppointment.status !== "PE Class" && (
-              <>
-                <p
-                  style={{
-                    fontFamily: "Verdana, sans-serif",
-                    fontSize: "16px",
-                    color: "#fff",
-                  }}
-                >
-                  Attendees:
-                </p>
-                <ul
-                  className="attendees-list"
-                  style={{
-                    fontFamily: "Verdana, sans-serif",
-                    fontSize: "16px",
-                    color: "#fff",
-                    textAlign: "center",
-                    listStyle: "none",
-                    padding: "0",
-                  }}
-                >
-                  {selectedAppointment.attendees.map((attendee, index) => (
-                    <li key={index}>{attendee}</li>
-                  ))}
-                </ul>
-                {isAuthenticated && (
-                  <>
-                    <div className="key-input-container">
-                      <TextField
-                        id="keyInput"
-                        label="Enter Key"
-                        variant="outlined"
-                        value={keyInput}
-                        onChange={handleKeyInputChange}
-                        placeholder="Enter here the key (e.g. ASDA123)"
-                        style={inputStyle}
-                      />
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleKeySubmit}
-                        style={buttonStyle}
-                      >
-                        Join
-                      </Button>
-                      {keyError && (
-                        <p className="key-error" style={errorTextStyle}>
-                          {keyError}
-                        </p>
-                      )}
-                    </div>
-                  </>
-                )}
-              </>
-            )}
+            {selectedAppointment.status !== "PE Class" &&
+              selectedAppointment.attendees && (
+                <>
+                  <p
+                    style={{
+                      fontFamily: "Verdana, sans-serif",
+                      fontSize: "16px",
+                      color: "#fff",
+                    }}
+                  >
+                    Attendees:
+                  </p>
+                  <ul
+                    className="attendees-list"
+                    style={{
+                      fontFamily: "Verdana, sans-serif",
+                      fontSize: "16px",
+                      color: "#fff",
+                      textAlign: "center",
+                      listStyle: "none",
+                      padding: "0",
+                    }}
+                  >
+                    {selectedAppointment.attendees.map((attendee, index) => (
+                      <li key={index}>{attendee}</li>
+                    ))}
+                  </ul>
+                  {isAuthenticated && (
+                    <>
+                      <div className="key-input-container">
+                        <TextField
+                          id="keyInput"
+                          label="Enter Key"
+                          variant="outlined"
+                          value={keyInput}
+                          onChange={handleKeyInputChange}
+                          placeholder="Enter here the key (e.g. ASDA123)"
+                          style={inputStyle}
+                        />
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleKeySubmit}
+                          style={buttonStyle}
+                        >
+                          Join
+                        </Button>
+                        {keyError && (
+                          <p className="key-error" style={errorTextStyle}>
+                            {keyError}
+                          </p>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
           </div>
         </div>
       )}

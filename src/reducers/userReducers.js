@@ -51,6 +51,9 @@ import {
   REACTIVATE_USER_REQUEST,
   REACTIVATE_USER_SUCCESS,
   REACTIVATE_USER_FAIL,
+  ADD_USER_REQUEST, // Add this import statement
+  ADD_USER_SUCCESS, // Add this import statement
+  ADD_USER_FAIL, // Add this import statement
 } from "../constants/userConstants";
 
 export const authReducer = (state = { user: {} }, action) => {
@@ -328,6 +331,30 @@ export const googleLoginReducer = (state = {}, action) => {
     case LOGIN_WITH_GOOGLE_FAIL:
       return { loading: false, error: action.payload };
 
+    default:
+      return state;
+  }
+};
+
+export const addUserReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADD_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADD_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: action.payload,
+      };
+    case ADD_USER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     default:
       return state;
   }

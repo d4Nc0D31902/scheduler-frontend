@@ -48,6 +48,9 @@ import {
   REACTIVATE_USER_REQUEST,
   REACTIVATE_USER_SUCCESS,
   REACTIVATE_USER_FAIL,
+  ADD_USER_REQUEST, // Add this import statement
+  ADD_USER_SUCCESS, // Add this import statement
+  ADD_USER_FAIL, // Add this import statement
 } from "../constants/userConstants";
 
 export const login = (email, password) => async (dispatch) => {
@@ -481,6 +484,39 @@ export const loginWithGoogle = (tokenId) => async (dispatch) => {
     console.error(error.response);
     dispatch({
       type: LOGIN_WITH_GOOGLE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const addUser = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: ADD_USER_REQUEST });
+    const formData = new FormData();
+    // Append user data to the formData object
+    for (const key in userData) {
+      formData.append(key, userData[key]);
+    }
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      withCredentials: true,
+    };
+    console.log("User data before sending:", formData); // Add console log here
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/api/v1/admin/new/user`,
+      formData,
+      config
+    );
+    console.log("Response data:", data); // Add console log here
+    dispatch({
+      type: ADD_USER_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_USER_FAIL,
       payload: error.response.data.message,
     });
   }

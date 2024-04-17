@@ -10,10 +10,12 @@ import ProductSalesChart from "./ProductSalesChart";
 import { getAdminProducts } from "../../actions/productActions";
 import { allOrders } from "../../actions/orderActions";
 import { allUsers, userSales } from "../../actions/userActions";
+import { allAppointments } from "../../actions/appointmentActions";
 import {
   monthlySalesChart,
   productSalesChart,
 } from "../../actions/chartActions";
+import AppointmentLocationsChart from "./AppointmentLocationsChart";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ const Dashboard = () => {
   const { customerSales } = useSelector((state) => state.customerSales);
   const { salesPerMonth } = useSelector((state) => state.salesPerMonth);
   const { productSales } = useSelector((state) => state.productSales);
+  const { appointments } = useSelector((state) => state.allAppointments);
 
   // Calculate out of stock products
   const outOfStock = products.filter((product) => product.stock === 0).length;
@@ -36,6 +39,7 @@ const Dashboard = () => {
     dispatch(userSales());
     dispatch(monthlySalesChart());
     dispatch(productSalesChart());
+    dispatch(allAppointments());
   }, [dispatch]);
 
   return (
@@ -83,6 +87,11 @@ const Dashboard = () => {
                     <div className="card-body">
                       <div className="chart-area">
                         <ProductSalesChart data={productSales} />
+                      </div>
+
+                      <div className="chart-area">
+                        <AppointmentLocationsChart appointments={appointments} />{" "}
+                        {/* Pass appointments data as prop */}
                       </div>
 
                       <div className="row">

@@ -111,71 +111,7 @@ const Header = () => {
               <i className="fa fa-bars"></i>
             </div>
 
-            <div className="nav-links">
-              {!isHomePage && (
-                <>
-                  <Link
-                    to="/cart"
-                    style={{ textDecoration: "none", marginLeft: "10px" }}
-                  >
-                    <span id="cart">
-                      <i className="fa fa-shopping-basket"></i> Cart
-                      <span className="ml-1" id="cart_count">
-                        {cartItems.length}
-                      </span>
-                    </span>
-                  </Link>
-
-                  <Link
-                    to="/borrowCart"
-                    style={{ textDecoration: "none", marginLeft: "10px" }}
-                  >
-                    <span id="cart">
-                      <i className="fa fa-briefcase"></i> Items
-                      <span className="ml-1" id="cart_count">
-                        {borrowCartItems.length}
-                      </span>
-                    </span>
-                  </Link>
-
-                  <Link
-                    to="/announcements"
-                    style={{ textDecoration: "none", marginLeft: "10px" }}
-                  >
-                    <span id="cart">
-                      <i className="fa fa-bullhorn"></i> Announcements
-                    </span>
-                  </Link>
-
-                  <Link
-                    to="/calendar"
-                    style={{ textDecoration: "none", marginLeft: "10px" }}
-                  >
-                    <span id="cart">
-                      <i className="fa fa-calendar"></i> Schedules
-                    </span>
-                  </Link>
-
-                  <Link
-                    to="/store"
-                    style={{ textDecoration: "none", marginLeft: "10px" }}
-                  >
-                    <span id="cart">
-                      <i className="fa fa-product-hunt"></i> Merch
-                    </span>
-                  </Link>
-
-                  <Link
-                    to="/equipmentz"
-                    style={{ textDecoration: "none", marginLeft: "10px" }}
-                  >
-                    <span id="cart">
-                      <i className="fa fa-wrench"></i> Equipments
-                    </span>
-                  </Link>
-                </>
-              )}
-            </div>
+            <div className="nav-links">{!isHomePage && <>{/* Links */}</>}</div>
 
             <div className="ml-4">
               <FontAwesomeIcon
@@ -186,21 +122,29 @@ const Header = () => {
               {notifications.filter(
                 (notification) => notification.status === "unread"
               ).length > 0 && (
-                  <span className="badge badge-danger">
-                    {
-                      notifications.filter(
-                        (notification) => notification.status === "unread"
-                      ).length
-                    }
-                  </span>
-                )}
+                <span className="badge badge-danger">
+                  {
+                    notifications.filter(
+                      (notification) => notification.status === "unread"
+                    ).length
+                  }
+                </span>
+              )}
               {showNotifications && (
                 <div className="notification-dropdown">
-                  {notifications.map((notification) => (
-                    <div key={notification._id} className="notification-item">
-                      {notification.message}
-                    </div>
-                  ))}
+                  <div className="notification-item latest">
+                    Latest Messages
+                  </div>
+                  <div className="notification-scroll">
+                    {notifications.slice(0, 5).map((notification) => (
+                      <div key={notification._id} className="notification-item">
+                        {notification.message.substring(0, 50) + "..."}
+                      </div>
+                    ))}
+                  </div>
+                  {/* <div className="notification-item oldest">
+                    Oldest Messages
+                  </div> */}
                 </div>
               )}
             </div>
@@ -275,9 +219,7 @@ const Header = () => {
               )
             )}
           </div>
-
         </div>
-
       </nav>
     </Fragment>
   );

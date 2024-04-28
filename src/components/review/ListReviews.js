@@ -9,10 +9,12 @@ const ListReviews = ({ reviews }) => {
 
   const handleShowReview = (reviewId) => {
     dispatch(showReview(reviewId));
+    window.location.reload(); 
   };
 
   const handleHideReview = (reviewId) => {
     dispatch(hideReview(reviewId));
+    window.location.reload(); 
   };
 
   return (
@@ -21,15 +23,10 @@ const ListReviews = ({ reviews }) => {
       <hr />
       {reviews &&
         reviews.map((review) => {
-          // Check if the review should be displayed
           const shouldDisplayReview = isAdmin || review.status === "show";
-
-          // If shouldDisplayReview is false, return null to skip rendering this review
           if (!shouldDisplayReview) {
             return null;
           }
-
-          // Render the review
           return (
             <div key={review._id} className="review-card my-3">
               <div className="rating-outer">

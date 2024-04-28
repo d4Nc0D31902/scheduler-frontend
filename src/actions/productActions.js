@@ -35,6 +35,12 @@ import {
   REACTIVATE_PRODUCT_REQUEST,
   REACTIVATE_PRODUCT_SUCCESS,
   REACTIVATE_PRODUCT_FAIL,
+  SHOW_REVIEW_REQUEST,
+  SHOW_REVIEW_SUCCESS,
+  SHOW_REVIEW_FAIL,
+  HIDE_REVIEW_REQUEST,
+  HIDE_REVIEW_SUCCESS,
+  HIDE_REVIEW_FAIL,
 } from "../constants/productConstants";
 
 export const getProducts =
@@ -352,4 +358,44 @@ export const clearErrors = () => async (dispatch) => {
   dispatch({
     type: CLEAR_ERRORS,
   });
+};
+
+export const showReview = (reviewId) => async (dispatch) => {
+  try {
+    dispatch({ type: SHOW_REVIEW_REQUEST });
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_API}/api/v1/reviews/show/${reviewId}`,
+      null,
+      { withCredentials: true }
+    );
+    dispatch({
+      type: SHOW_REVIEW_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: SHOW_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const hideReview = (reviewId) => async (dispatch) => {
+  try {
+    dispatch({ type: HIDE_REVIEW_REQUEST });
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_API}/api/v1/reviews/hide/${reviewId}`,
+      null,
+      { withCredentials: true }
+    );
+    dispatch({
+      type: HIDE_REVIEW_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: HIDE_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
 };

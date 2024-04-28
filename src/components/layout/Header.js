@@ -58,10 +58,9 @@ const Header = () => {
       );
 
       dispatch(updateNotifications("read"));
-      dispatch(allNotifications);
       setUnreadCount(0);
     }
-
+    dispatch(allNotifications);
     setShowNotifications(!showNotifications);
   };
 
@@ -111,7 +110,71 @@ const Header = () => {
               <i className="fa fa-bars"></i>
             </div>
 
-            <div className="nav-links">{!isHomePage && <>{/* Links */}</>}</div>
+            <div className="nav-links">
+              {!isHomePage && (
+                <>
+                  <Link
+                    to="/cart"
+                    style={{ textDecoration: "none", marginLeft: "10px" }}
+                  >
+                    <span id="cart">
+                      <i className="fa fa-shopping-basket"></i> Cart
+                      <span className="ml-1" id="cart_count">
+                        {cartItems.length}
+                      </span>
+                    </span>
+                  </Link>
+
+                  <Link
+                    to="/borrowCart"
+                    style={{ textDecoration: "none", marginLeft: "10px" }}
+                  >
+                    <span id="cart">
+                      <i className="fa fa-briefcase"></i> Items
+                      <span className="ml-1" id="cart_count">
+                        {borrowCartItems.length}
+                      </span>
+                    </span>
+                  </Link>
+
+                  <Link
+                    to="/announcements"
+                    style={{ textDecoration: "none", marginLeft: "10px" }}
+                  >
+                    <span id="cart">
+                      <i className="fa fa-bullhorn"></i> Announcements
+                    </span>
+                  </Link>
+
+                  <Link
+                    to="/calendar"
+                    style={{ textDecoration: "none", marginLeft: "10px" }}
+                  >
+                    <span id="cart">
+                      <i className="fa fa-calendar"></i> Schedules
+                    </span>
+                  </Link>
+
+                  <Link
+                    to="/store"
+                    style={{ textDecoration: "none", marginLeft: "10px" }}
+                  >
+                    <span id="cart">
+                      <i className="fa fa-product-hunt"></i> Merch
+                    </span>
+                  </Link>
+
+                  <Link
+                    to="/equipmentz"
+                    style={{ textDecoration: "none", marginLeft: "10px" }}
+                  >
+                    <span id="cart">
+                      <i className="fa fa-wrench"></i> Equipments
+                    </span>
+                  </Link>
+                </>
+              )}
+            </div>
 
             <div className="ml-4">
               <FontAwesomeIcon

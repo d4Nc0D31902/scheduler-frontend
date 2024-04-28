@@ -38,6 +38,12 @@ import {
   REACTIVATE_PRODUCT_REQUEST,
   REACTIVATE_PRODUCT_SUCCESS,
   REACTIVATE_PRODUCT_FAIL,
+  SHOW_REVIEW_FAIL,
+  SHOW_REVIEW_REQUEST,
+  SHOW_REVIEW_SUCCESS,
+  HIDE_REVIEW_FAIL,
+  HIDE_REVIEW_REQUEST,
+  HIDE_REVIEW_SUCCESS,
 } from "../constants/productConstants";
 
 export const productsReducer = (state = { products: [] }, action) => {
@@ -277,6 +283,28 @@ export const productReviewsReducer = (state = { review: [] }, action) => {
       };
 
     case GET_REVIEWS_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
+    case SHOW_REVIEW_REQUEST:
+    case HIDE_REVIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case SHOW_REVIEW_SUCCESS:
+    case HIDE_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: action.payload,
+      };
+
+    case SHOW_REVIEW_FAIL:
+    case HIDE_REVIEW_FAIL:
       return {
         ...state,
         error: action.payload,

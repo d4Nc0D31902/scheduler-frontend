@@ -82,103 +82,112 @@ const BorrowDetails = () => {
       {loading ? (
         <Loader />
       ) : borrow && borrowingInfo ? (
-        <div className="row" style={{ marginTop: "30px" }}>
-          <div className="col-12 col-lg-7 borrow-details" ref={componentRef}>
-            <h3
-              className="card-title"
-              style={{
-                fontFamily: "sans-serif",
-                textAlign: "center",
-                marginBottom: "10px",
-                margin: "20px",
-                backgroundColor: "maroon",
-                color: "white",
-                padding: "20px",
-              }}
+        <div className="" style={{ marginLeft: "270px", marginRight: "140px" }}>
+          <div className="row" style={{ marginTop: "30px" }}>
+            <div
+              className="col-12 col-lg-7 borrow-details"
+              ref={componentRef}
+              style={{ marginRight: "10px", border: "solid" }}
             >
-              <img
-                src="/images/tupt_logo.png"
+              <h3
+                className="card-title"
                 style={{
-                  width: "100px",
-                  height: "100px",
-                  marginRight: "25px",
+                  fontFamily: "sans-serif",
+                  textAlign: "center",
+                  marginBottom: "10px",
+
+                  backgroundColor: "maroon",
+                  color: "white",
+                  padding: "20px",
                 }}
-                alt="Logo"
-              />
-              TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES
-            </h3>
-            <h4 className="my-4 text-center">BORROWING INFORMATION</h4>
+              >
+                <img
+                  src="/images/tupt_logo.png"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    marginRight: "25px",
+                  }}
+                  alt="Logo"
+                />
+                TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES
+              </h3>
+              <h4 className="my-4 text-center">BORROWING INFORMATION</h4>
 
-            <div className="cart-item my-1">
-              {borrowItems.length > 0 &&
-                borrowItems.map((item) => (
-                  <div key={item._id} className="row my-5">
-                    <div className="col-4 col-lg-2">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        height="45"
-                        width="65"
-                      />
+              <div className="cart-item my-1">
+                {borrowItems.length > 0 &&
+                  borrowItems.map((item) => (
+                    <div key={item._id} className="row my-5">
+                      <div className="col-4 col-lg-2">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          height="45"
+                          width="65"
+                        />
+                      </div>
+
+                      <div className="col-5 col-lg-5">
+                        <Link to={`/product/${item.equipment}`}>
+                          {item.name}
+                        </Link>
+                      </div>
+
+                      <div className="col-4 col-lg-2 mt-4 mt-lg-0">
+                        <p>Quantity: {item.quantity}</p>
+                      </div>
                     </div>
+                  ))}
+              </div>
+              <h4 className="mb-4 text-center">BORROW DETAILS</h4>
 
-                    <div className="col-5 col-lg-5">
-                      <Link to={`/product/${item.equipment}`}>{item.name}</Link>
-                    </div>
+              <p>
+                <b>Requester:</b> {user}
+              </p>
 
-                    <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                      <p>Quantity: {item.quantity}</p>
-                    </div>
-                  </div>
-                ))}
-            </div>
-            <h4 className="mb-4 text-center">BORROW DETAILS</h4>
+              <p className="mb-4">
+                <b>Request Info:</b> {borrowingDetails || "N/A"}
+              </p>
 
-            <p>
-              <b>Requester:</b> {user}
-            </p>
+              <p>
+                <b>Date Returned:</b>{" "}
+                {date_return ? date_return : "Not returned yet"}
+              </p>
 
-            <p className="mb-4">
-              <b>Request Info:</b> {borrowingDetails || "N/A"}
-            </p>
+              <p>
+                <b>Issue:</b> {issue}
+              </p>
 
-            <p>
-              <b>Date Returned:</b>{" "}
-              {date_return ? date_return : "Not returned yet"}
-            </p>
+              <p>
+                <b>Status:</b> {status}
+              </p>
 
-            <p>
-              <b>Issue:</b> {issue}
-            </p>
+              <p>
+                <b>Reason Status:</b> {reason_status}
+              </p>
 
-            <p>
-              <b>Status:</b> {status}
-            </p>
-
-            <p>
-              <b>Reason Status:</b> {reason_status}
-            </p>
-
-            <div style={{ textAlign: "center", margin: "20px 0" }}>
-              {/* <ReactToPrint
+              <div style={{ textAlign: "center", margin: "20px 0" }}>
+                {/* <ReactToPrint
                 trigger={() => (
                   <button className="btn btn-primary">Print</button>
                 )}
                 content={() => componentRef.current}
               /> */}
-              <button
-                className="btn btn-primary ml-2"
-                onClick={handleDownloadButtonClick}
-              >
-                Download Borrowing Slip
-              </button>
+              </div>
             </div>
           </div>
         </div>
       ) : (
         <p>No borrow details available.</p>
       )}
-
+      <div style={{ marginLeft: "470px", marginTop: "30px" }}>
+        <button
+          className="btn btn-primary ml-2"
+          onClick={handleDownloadButtonClick}
+        >
+          Download Borrowing Slip
+        </button>
+      </div>
       <div style={{ display: "none" }}>
         <PrintableBorrowDetails
           ref={componentRef}

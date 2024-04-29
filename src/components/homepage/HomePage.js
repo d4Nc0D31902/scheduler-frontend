@@ -226,7 +226,7 @@ const Homepage = () => {
         style={{
           padding: "100px",
           textAlign: "center",
-          color: "white", 
+          color: "white",
           backgroundColor: "maroon",
           textAlign: "justify",
           marginBottom: "50px",
@@ -673,7 +673,7 @@ const Homepage = () => {
                   height: "250px",
                   borderRadius: "50%",
                   marginBottom: "20px",
-                  border: "solid"
+                  border: "solid",
                 }}
               />
               <h5
@@ -685,7 +685,7 @@ const Homepage = () => {
                   marginBottom: "0",
                 }}
               >
-                Admin. Officer IV-Sports & Welfare Development  
+                Admin. Officer IV-Sports & Welfare Development
               </h5>
               <p
                 style={{
@@ -787,31 +787,7 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-lg-4 col-md-6 mb-4 ">
-          <div
-            className="card shadow h-100"
-            style={{
-              borderRadius: "10px",
-              overflow: "hidden",
-              border: "none",
-            }}
-          >
-            <div className="card-body text-center h-100">
-              <img
-                src="/images/13.jpg"
-                alt="Officer"
-                style={{
-                  width: "80%",
-                  height: "100%",
-                  marginBottom: "20px",
-                }}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="row officers ">
-          <div className="col-lg-4 col-md-6 mb-4  ">
+          <div className="col-lg-4 col-md-6 mb-4 ">
             <div
               className="card shadow h-100"
               style={{
@@ -820,21 +796,42 @@ const Homepage = () => {
                 border: "none",
               }}
             >
-              <div className="card-body text-center  h-100">
+              <div className="card-body text-center h-100">
                 <img
-                  src="/images/14.jpg"
+                  src="/images/13.jpg"
                   alt="Officer"
                   style={{
                     width: "80%",
                     height: "100%",
-
                     marginBottom: "20px",
                   }}
                 />
               </div>
             </div>
           </div>
-          <div className="col-lg-4 col-md-6 mb-4">
+          <div className="col-lg-4 col-md-6 mb-4 ">
+            <div
+              className="card shadow h-100"
+              style={{
+                borderRadius: "10px",
+                overflow: "hidden",
+                border: "none",
+              }}
+            >
+              <div className="card-body text-center h-100">
+                <img
+                  src="/images/14.jpg"
+                  alt="Officer"
+                  style={{
+                    width: "80%",
+                    height: "100%",
+                    marginBottom: "20px",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-md-6 mb-4 ">
             <div
               className="card shadow h-100"
               style={{
@@ -856,7 +853,7 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-4 col-md-6 mb-4">
+          <div className="col-lg-4 col-md-6 mb-4 ">
             <div
               className="card shadow h-100"
               style={{
@@ -972,7 +969,7 @@ const Homepage = () => {
                   {" "}
                   John Neri Escobella
                 </h5>
-                <p>Frontend Developer</p>
+                <p>UI/UX Designer</p>
               </div>
             </div>
           </div>
@@ -1054,6 +1051,131 @@ const Homepage = () => {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+      <h4
+        style={{
+          color: "#333",
+          marginBottom: "50px",
+          marginTop: "50px",
+          textAlign: "center",
+          fontFamily: "Arial, sans-serif",
+          fontWeight: "bold",
+          fontSize: "2.5rem",
+          textTransform: "uppercase",
+          letterSpacing: "2px",
+          borderBottom: "3px solid #333",
+          paddingBottom: "10px",
+        }}
+      >
+        LOCATION GUIDE
+      </h4>
+
+      <div className="col-lg-12 col-md-4 text-center ">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!4v1714364151307!6m8!1m7!1s5OA2JFJJk6xoBImgXtuklQ!2m2!1d14.50831393812132!2d121.0350815452465!3f269.3387188907917!4f0!5f0.7820865974627469"
+          width="600"
+          height="450"
+          style={{ border: "0", margin: "20px" }}
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.4117213714807!2d121.03471167479934!3d14.508351399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cf00664007db%3A0x7785013f15f7f45e!2sTechnological%20University%20of%20the%20Philippines%20-%20Taguig%20Campus!5e0!3m2!1sen!2sph!4v1714364398567!5m2!1sen!2sph"
+          width="600"
+          height="450"
+          style={{ border: "0", margin: "20px" }}
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <div
+        className="col-lg-12 col-md-4  "
+        style={{ display: "flex", marginLeft: "80px" }}
+      >
+        <div className="text-center" style={{ margin: "20px" }}>
+          <img
+            src="/images/gif.gif"
+            alt="Officer"
+            title=" Gymnasium"
+            style={{
+              width: "400px",
+              height: "400px",
+              marginBottom: "20px",
+              transition: "transform 0.3s ease", // Add transition for smooth scaling
+              cursor: "pointer",
+            }}
+            onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")} // Scale up on hover
+            onMouseOut={(e) => (e.target.style.transform = "scale(1)")} // Scale back to normal on hover out
+          />
+          <p
+            style={{
+              fontSize: "18px", // Adjust the font size
+              fontWeight: "bold", // Make the text bold
+              lineHeight: "1.5", // Increase the line height for better spacing
+              color: "#333", // Set the text color to a dark shade
+              marginBottom: "20px", // Add space below the paragraph
+            }}
+          >
+            GYMNASIUM LOCATION GUIDE
+          </p>
+        </div>
+        <div className="text-center" style={{ margin: "20px" }}>
+          <img
+            src="/images/giff.gif"
+            alt="Officer"
+            title="outer court"
+            style={{
+              width: "400px",
+              height: "400px",
+              marginBottom: "20px",
+              transition: "transform 0.3s ease", // Add transition for smooth scaling
+              cursor: "pointer",
+            }}
+            onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")} // Scale up on hover
+            onMouseOut={(e) => (e.target.style.transform = "scale(1)")} // Scale back to normal on hover out
+          />
+          <p
+            style={{
+              fontSize: "18px", // Adjust the font size
+              fontWeight: "bold", // Make the text bold
+              lineHeight: "1.5", // Increase the line height for better spacing
+              color: "#333", // Set the text color to a dark shade
+              marginBottom: "20px", // Add space below the paragraph
+            }}
+          >
+            Outer Court LOCATION GUIDE
+          </p>
+        </div>
+        <div className="text-center" style={{ margin: "20px" }}>
+          <img
+            src="/images/gifff.gif"
+            alt="Officer"
+            title="Multipurpose Hall"
+            style={{
+              width: "400px",
+              height: "400px",
+              marginBottom: "20px",
+              transition: "transform 0.3s ease", // Add transition for smooth scaling
+              cursor: "pointer",
+            }}
+            onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")} // Scale up on hover
+            onMouseOut={(e) => (e.target.style.transform = "scale(1)")} // Scale back to normal on hover out
+          />
+
+          <p
+            style={{
+              fontSize: "18px", // Adjust the font size
+              fontWeight: "bold", // Make the text bold
+              lineHeight: "1.5", // Increase the line height for better spacing
+              color: "#333", // Set the text color to a dark shade
+              marginBottom: "20px", // Add space below the paragraph
+            }}
+          >
+            Multipurpose Hall LOCATION GUIDE
+          </p>
         </div>
       </div>
     </Fragment>

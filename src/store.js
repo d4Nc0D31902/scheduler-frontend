@@ -23,7 +23,6 @@ import {
   userDetailsReducer,
   customerSalesReducer,
   googleLoginReducer,
-  addUserReducer,
 } from "./reducers/userReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import { borrowCartReducer } from "./reducers/borrowCartReducers";
@@ -162,7 +161,6 @@ const reducer = combineReducers({
   notificationDetails: notificationDetailsReducer, // Add notification details reducer
   allNotifications: allNotificationsReducer, // Add all notifications reducer
   notificationReducer: notificationReducer, // Add notification reducer
-  addUser: addUserReducer,
 });
 
 let initialState = {

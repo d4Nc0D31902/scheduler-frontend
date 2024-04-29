@@ -60,7 +60,7 @@ const Header = () => {
       dispatch(updateNotifications("read"));
       setUnreadCount(0);
     }
-    dispatch(allNotifications);
+    dispatch(allNotifications(user._id));
     setShowNotifications(!showNotifications);
   };
 

@@ -42,7 +42,6 @@ import UsersList from "./components/admin/UsersList";
 import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
 import ProductStockLogs from "./components/admin/ProductStockLogs.js";
-import NewUser from "./components/admin/NewUser.js";
 
 import { loadUser } from "./actions/userActions";
 import { useSelector } from "react-redux";
@@ -607,15 +606,6 @@ function App() {
           element={
             <ProtectedRoute isAdmin={true} isOfficer={true}>
               <ProductReviews />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/admin/newUser"
-          element={
-            <ProtectedRoute isAdmin={true} isOfficer={true}>
-              <NewUser />
             </ProtectedRoute>
           }
         />

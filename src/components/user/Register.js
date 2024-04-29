@@ -151,6 +151,13 @@ const Register = () => {
     }
   };
 
+  // const departments = [
+  //   "BS Engineering Program",
+  //   "BS Degree Program",
+  //   "BTVTED Program",
+  //   "BET Program",
+  // ];
+
   const departments = [
     "BS Engineering Program",
     "BS Degree Program",
@@ -158,8 +165,28 @@ const Register = () => {
     "BET Program",
   ];
 
+  // const coursesByDepartment = {
+  //   "BS Engineering Program": ["BSCE", "BSEE", "BSEcE", "BSME"],
+  //   "BS Degree Program": ["BSIT", "BSES"],
+  //   "BTVTED Program": ["BTVTEDET", "BTVTEDELXT", "BETVTEDICT", "BTVTEDICT-CH"],
+  //   "BET Program": [
+  //     "BETAT",
+  //     "BETCHT",
+  //     "BETCT",
+  //     "BETET",
+  //     "BETELXT",
+  //     "BETHVAC/RT",
+  //     "BETMT",
+  //     "BETMECT",
+  //     "BETNDT",
+  //     "BETDMT",
+  //     "BETEMT",
+  //     "BETICT",
+  //   ],
+  // };
 
   const coursesByDepartment = {
+    // "N/A": ["N/A"],
     "BS Engineering Program": ["N/A", "BSCE", "BSEE", "BSEcE", "BSME"],
     "BS Degree Program": ["N/A", "BSIT", "BSES"],
     "BTVTED Program": [
@@ -170,6 +197,7 @@ const Register = () => {
       "BTVTEDICT-CH",
     ],
     "BET Program": [
+      // "N/A",
       "BETAT",
       "BETCHT",
       "BETCT",
@@ -187,7 +215,10 @@ const Register = () => {
 
   const courses = coursesByDepartment[department] || [];
 
+  // const years = ["1st Year", " 2nd Year", "3rd Year", "4th Year", "Alumni"];
+
   const years = [
+    // "N/A",
     "1st Year",
     "2nd Year",
     "3rd Year",
@@ -270,6 +301,23 @@ const Register = () => {
                 <div className="invalid-feedback">{errors.email}</div>
               )}
             </div>
+
+            {/* <div className="form-group">
+              <label htmlFor="password_field">Password:</label>
+              <input
+                type="password"
+                id="password_field"
+                className={`form-control ${errors.password && "is-invalid"}`}
+                name="password"
+                value={password}
+                placeholder="Enter Password"
+                onChange={onChange}
+              />
+              {errors.password && (
+                <div className="invalid-feedback">{errors.password}</div>
+              )}
+            </div> */}
+
             <div className="form-group">
               <label htmlFor="password_field">Password:</label>
               <div className="input-group">
@@ -371,7 +419,7 @@ const Register = () => {
             {/* End of Dropdowns */}
 
             <div className="form-group">
-              <label htmlFor="avatar_upload">Avatar</label>
+              <label htmlFor="avatar_upload">Profile:</label>
               <div className="d-flex align-items-center">
                 <div>
                   <figure className="avatar mr-3 item-rtl">

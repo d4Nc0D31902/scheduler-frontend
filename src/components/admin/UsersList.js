@@ -166,9 +166,6 @@ const UsersList = () => {
           <Fragment>
             <h1 className="my-5">All Users</h1>
             <div>
-              <Link to="/admin/newUser">
-                <button>Add User</button>
-              </Link>
               <label htmlFor="roleFilter">Filter by Role:</label>
               <select
                 value={filter}

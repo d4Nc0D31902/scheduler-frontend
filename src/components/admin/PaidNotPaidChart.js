@@ -7,48 +7,32 @@ import {
   Cell,
 } from "recharts";
 
-export default function LocationSalesChart({ appointments }) {
-  // Count the occurrences of each location
-  const locationCounts = {};
-  appointments.forEach((appointment) => {
-    const location = appointment.location;
-    locationCounts[location] = (locationCounts[location] || 0) + 1;
+export default function OrderStatusChart({ orders }) {
+  // Count the occurrences of each order status dynamically
+  const statusCounts = {};
+  orders.forEach((order) => {
+    const status = order.orderStatus;
+    statusCounts[status] = (statusCounts[status] || 0) + 1;
   });
 
-  // Sort the locations by count in descending order
-  const sortedLocations = Object.keys(locationCounts).sort(
-    (a, b) => locationCounts[b] - locationCounts[a]
-  );
-
-  // Extract the most requested location
-  const mostRequestedLocation = sortedLocations[0];
-
   // Prepare data for the chart
-  const data = sortedLocations.map((location) => ({
-    name: location,
-    percent: (locationCounts[location] / appointments.length) * 100,
+  const data = Object.keys(statusCounts).map((status) => ({
+    name: status,
+    value: statusCounts[status],
   }));
 
+  // Set colors for the pie chart
   const pieColors = [
-    "#4793AF",
-    "#FFC470",
-    "#DD5746",
-    "#8B322C",
-    "#00B3E6",
-    "#E6B333",
-    "#3366E6",
-    "#999966",
-    "#809980",
-    "#E6FF80",
-    "#1AFF33",
-    "#999933",
-    "#FF3380",
-    "#CCCC00",
-    "#66E64D",
-    "#4D80CC",
-    "#FF4D4D",
-    "#99E6E6",
-    "#6666FF",
+    "#FF204E",
+    "#FF3EA5",
+    "#E26EE5",
+    "#FF8C00",
+    "#00CED1",
+    "#6495ED",
+    "#32CD32",
+    "#FFD700",
+    "#FF6347",
+    "#87CEEB",
   ];
 
   const RADIAN = Math.PI / 180;
@@ -80,11 +64,11 @@ export default function LocationSalesChart({ appointments }) {
 
   return (
     <div style={{ width: "100%", height: "500px", textAlign: "center" }}>
-      <h2>Most Requested Location: {mostRequestedLocation}</h2>
+      {/* <h2>Order Status Distribution</h2> */}
       <ResponsiveContainer>
         <PieChart>
           <Pie
-            dataKey="percent"
+            dataKey="value"
             nameKey="name"
             data={data}
             cx="50%"

@@ -27,6 +27,7 @@ import StarHalfIcon from "@mui/icons-material/StarHalf";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import StorefrontIcon from "@mui/icons-material/Storefront";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const [openSchedules, setOpenSchedules] = useState(false);
@@ -246,16 +247,16 @@ const Sidebar = () => {
           </Collapse>
           <ListItemButton component={Link} to="/dashboard">
             <ListItemIcon>
-              <CelebrationIcon />
+              <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Merchandise DashBoard" />
+            <ListItemText primary="DashBoard" />
           </ListItemButton>
 
           <ListItemButton component={Link} to="/admin/orders">
             <ListItemIcon>
               <BookmarkBorderIcon />
             </ListItemIcon>
-            <ListItemText primary="Merchandise PreOrdered" />
+            <ListItemText primary="Orders" />
           </ListItemButton>
 
           {/* Reviews */}

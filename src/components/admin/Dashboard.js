@@ -16,7 +16,8 @@ import {
   productSalesChart,
 } from "../../actions/chartActions";
 import AppointmentLocationsChart from "./AppointmentLocationsChart";
-
+import PaidNotPaidChart from "./PaidNotPaidChart";
+import PaymentMethodChart from "./PaymentMethodChart";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
@@ -88,12 +89,12 @@ const Dashboard = () => {
                       <div className="chart-area">
                         <ProductSalesChart data={productSales} />
                       </div>
-
                       <div className="chart-area">
-                        <AppointmentLocationsChart appointments={appointments} />{" "}
-                        {/* Pass appointments data as prop */}
+                        <PaidNotPaidChart orders={orders} />
                       </div>
-
+                      <div className="chart-area">
+                        <PaymentMethodChart orders={orders} />
+                      </div>
                       <div className="row">
                         <div className="col-lg-6 mb-4">
                           <div className="card shadow">
@@ -216,6 +217,26 @@ const Dashboard = () => {
                             </div>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-xl-8 col-lg-7">
+                  <div className="card shadow mb-4">
+                    <div className="card-header py-3">
+                      <h6 className="m-0 font-weight-bold text-primary">
+                        Appointments Overview
+                      </h6>
+                    </div>
+                    <div className="card-body">
+                      <div className="chart-area">
+                        <AppointmentLocationsChart
+                          appointments={appointments}
+                        />{" "}
+                        {/* Pass appointments data as prop */}
                       </div>
                     </div>
                   </div>

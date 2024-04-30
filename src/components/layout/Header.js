@@ -201,7 +201,8 @@ const Header = () => {
                   <div className="notification-scroll">
                     {notifications.slice(0, 5).map((notification) => (
                       <div key={notification._id} className="notification-item">
-                        {notification.message.substring(0, 50) + "..."}
+                        {notification.message}
+                        {/* {notification.message.substring(0, 50) + "..."} */}
                       </div>
                     ))}
                   </div>

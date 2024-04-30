@@ -1,11 +1,12 @@
 .notification-dropdown {
   position: absolute;
   top: 100%;
-  right: 0;
+
+  right: 22%;
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 250px;
+  width: 400px;
   padding: 10px;
   z-index: 999;
 }
@@ -33,6 +34,8 @@
   cursor: pointer;
   transition: background-color 0.3s;
   justify-content: flex-start;
+  border-bottom: 1px solid black;
+
 }
 
 .notification-item:hover {

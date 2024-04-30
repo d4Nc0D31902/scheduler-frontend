@@ -175,6 +175,19 @@ const NewAppointment = () => {
     });
   };
 
+  const fetchUserAppointments = async (userId) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/appointments/me`,
+        { withCredentials: true }
+      );
+      return response.data.appointments;
+    } catch (error) {
+      console.error("Error fetching user appointments:", error);
+      return [];
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -185,8 +198,6 @@ const NewAppointment = () => {
         toast.error("Please select a file.");
         return;
       }
-
-      // Define isAdmin here
       const isAdmin = user && user.role === "admin";
 
       const isDateValid = isDateAvailable(timeStart, timeEnd);
@@ -226,6 +237,57 @@ const NewAppointment = () => {
         appointmentType: selectedRadio, // Add appointment type to data
         screenShot: screenShot,
       };
+
+      // Fetch all appointments of the logged-in user
+      const userAppointments = await fetchUserAppointments(user._id);
+
+      // Condition 1: User can only create an appointment once per day
+      const hasAppointmentOnSameDay = userAppointments.some((appointment) => {
+        const appointmentDate = new Date(
+          appointment.createdAt
+        ).toLocaleDateString();
+        const currentDate = new Date("05-04-2024").toLocaleDateString();
+        return appointmentDate === currentDate;
+      });
+      if (hasAppointmentOnSameDay) {
+        toast.error("You can only create one appointment per day.");
+        return;
+      }
+
+      // Condition 2: User can only have three Approved appointments per week
+      const approvedAppointmentsThisWeek = userAppointments.filter(
+        (appointment) => {
+          const appointmentDate = new Date(appointment.createdAt);
+          const currentDate = new Date();
+          const diffTime = Math.abs(currentDate - appointmentDate);
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          return diffDays <= 7 && appointment.status === "Pending";
+        }
+      );
+      if (
+        approvedAppointmentsThisWeek.length >= 3 &&
+        selectedRadio !== "PE Class"
+      ) {
+        toast.error("You can only have three Approved appointments per week.");
+        return;
+      }
+
+      // Condition 3: User cannot create an appointment with the same timeStart, timeEnd, and location
+      const hasOverlappingAppointment = userAppointments.some((appointment) => {
+        return (
+          appointment.location === location &&
+          ((new Date(appointment.timeStart) <= new Date(timeStart) &&
+            new Date(timeStart) <= new Date(appointment.timeEnd)) ||
+            (new Date(appointment.timeStart) <= new Date(timeEnd) &&
+              new Date(timeEnd) <= new Date(appointment.timeEnd)))
+        );
+      });
+      if (hasOverlappingAppointment) {
+        toast.error(
+          "You already have an appointment with the same time and location."
+        );
+        return;
+      }
 
       try {
         await dispatch(createAppointment(appointmentData));
@@ -511,7 +573,7 @@ const NewAppointment = () => {
             <button
               type="button" // Change type to button
               className="btn btn-secondary ml-3 hide-on-print"
-              onClick={() => window.print()} 
+              onClick={() => window.print()}
               style={{ padding: "12px 24px" }}
             >
               Print Letter and Waiver

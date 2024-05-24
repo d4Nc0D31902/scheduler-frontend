@@ -267,7 +267,7 @@ const ProcessOrder = () => {
                     disabled={
                       order.orderStatus === "Sold" ||
                       order.orderStatus === "Denied" ||
-                      order.orderStatus === "Overdued"
+                      order.orderStatus === "On Process"
                     }
                   >
                     Update Status

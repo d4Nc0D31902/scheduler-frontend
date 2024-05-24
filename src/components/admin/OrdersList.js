@@ -63,8 +63,8 @@ const OrdersList = () => {
       if (filter === "Denied") {
         return order.orderStatus === "Denied";
       }
-      if (filter === "Overdued") {
-        return order.orderStatus === "Overdued";
+      if (filter === "On Process") {
+        return order.orderStatus === "On Process";
       }
       if (filter === "Paid") {
         return order.orderStatus === "Paid";
@@ -159,7 +159,7 @@ const OrdersList = () => {
                 <option value="Pending">Pending</option>
                 <option value="For Pickup">For Pickup</option>
                 <option value="Sold">Sold</option>
-                <option value="Overdued">Overdued</option>
+                <option value="On Process">On Process</option>
                 <option value="Denied">Denied</option>
                 <option value="Paid">Paid</option>
               </select>

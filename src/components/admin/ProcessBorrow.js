@@ -47,7 +47,7 @@ const BorrowDetails = () => {
         return "text-primary";
       case "Pending":
         return "text-warning";
-      case "Overdued":
+      case "On Process":
         return "text-danger";
       default:
         return "";
@@ -348,7 +348,7 @@ const BorrowDetails = () => {
                     disabled={
                       borrow.status === "Returned" ||
                       borrow.status === "Denied" ||
-                      borrow.status === "Overdued"
+                      borrow.status === "On Process"
                     }
                   >
                     UPDATE STATUS

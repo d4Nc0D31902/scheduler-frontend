@@ -40,7 +40,7 @@ const MyBorrow = () => {
         return "orange";
       case "Denied":
         return "red";
-      case "Overdued":
+      case "On Process":
         return "red";
       case "Borrowed":
         return "orange";
@@ -138,7 +138,7 @@ const MyBorrow = () => {
           <option value="Pending">Pending</option>
           <option value="Borrowed">Borrowed</option>
           <option value="Returned">Returned</option>
-          <option value="Overdued">Overdued</option>
+          <option value="On Process">On Process</option>
         </select>
       </div>
       {loading ? (

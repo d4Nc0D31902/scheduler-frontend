@@ -52,7 +52,7 @@ const Homepage = () => {
       <header className="header-section py-5">
         <div className="container text-center">
           <h1 className="display-4 text-uppercase font-weight-bold text-dark mb-4">
-            Welcome to TUP-T Scheduler
+            Welcome to the Scheduler
           </h1>
           <p className="lead">
             Effortlessly manage your sports and activities with our
@@ -614,7 +614,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div
+      {/* <div
         className="AboutMaam"
         style={{
           padding: "20px",
@@ -1052,8 +1052,8 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-      </div>
-      <h4
+      </div> */}
+      {/* <h4
         style={{
           color: "#333",
           marginBottom: "50px",
@@ -1177,7 +1177,7 @@ const Homepage = () => {
             Multipurpose Hall LOCATION GUIDE
           </p>
         </div>
-      </div>
+      </div> */}
     </Fragment>
   );
 };
